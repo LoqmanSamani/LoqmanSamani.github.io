@@ -5442,7 +5442,7 @@ body.search-is-visible {
     }
 }
 
-
+/*logo size*/
 .s-header__logo img {
     height: 300px; /* adjust this as needed */
     width: auto;
