@@ -5444,7 +5444,7 @@ body.search-is-visible {
 
 
 .s-header__logo img {
-    height: 50px; /* adjust this as needed */
+    height: 100px; /* adjust this as needed */
     width: auto;
     display: block;
 }
