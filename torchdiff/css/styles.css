@@ -5441,3 +5441,10 @@ body.search-is-visible {
         padding-top: var(--vspace-1);
     }
 }
+
+
+.s-header__logo img {
+    height: 50px; /* adjust this as needed */
+    width: auto;
+    display: block;
+}
