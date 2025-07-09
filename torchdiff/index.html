@@ -48,33 +48,35 @@
         <div class="row">
 
             <div class="s-header__logo">
-                <a href="index.html">
-                    <img src="images/logo.svg" alt="Homepage">
+                <a href="index.html" title="TorchDiff Homepage">
+                    <img src="images/icons/tdl_.svg" 
+                        srcset="images/icons/tdl_.svg 1x, 
+                                images/icons/tdl_@2x.svg 2x" 
+                        alt="TorchDiff Logo">
                 </a>
             </div>
 
             <nav class="s-header__nav">
                 <ul>
-                    <li class="current"><a class="smoothscroll" href="#home">Home</a></li>
-                    <li><a class="smoothscroll" href="#models">Models</a></li>
-                    <li><a class="smoothscroll" href="#examples">Examples</a></li>
-                    <li><a class="smoothscroll" href="#blog">Blog</a></li>
-                    <li><a class="smoothscroll" href="#about">About TorchDiff</a></li>
-                    <li><a class="smoothscroll" href="#contact">Contact</a></li>
+                    <li class="current"><a class="smoothscroll" href="#home" title="Home">Home</a></li>
+                    <li><a class="smoothscroll" href="#models" title="Models">Models</a></li>
+                    <li><a class="smoothscroll" href="#examples" title="Examples">Examples</a></li>
+                    <li><a class="smoothscroll" href="#blog" title="Journal">Journal</a></li>
+                    <li><a class="smoothscroll" href="#about" title="About TorchDiff">About</a></li>
+                    <li><a class="smoothscroll" href="#contact" title="Contact">Contact</a></li>
                 </ul>
             </nav>
 
-            <a class="s-header__menu-toggle" href="#0" title="Menu">
+            <a class="s-header__menu-toggle" href="#0" title="Toggle Menu">
                 <span class="s-header__menu-icon"></span>
             </a>
 
         </div> <!-- end row -->
     </header> <!-- end s-header -->
 
-
     <!-- home
-    ================================================== -->
-    <section id="home" class="s-home target-section" data-parallax="scroll" data-image-src="images/hero-bg.jpg" data-natural-width="3000" data-natural-height="2000">
+        ================================================== -->
+    <section id="home" class="s-home target-section" data-parallax="scroll" data-image-src="images/hero-diffusion.jpg" data-natural-width="3000" data-natural-height="2000">
 
         <div class="s-home__content">
 
@@ -84,28 +86,13 @@
                     <div class="row">
                         <div class="column large-12 s-home__slide-text">
                             <h2>
-                            <span>TorchDiff<span> is a PyTorch-based library for building diffusion models,
-                            inspired by original research papers.
+                                Welcome to <span>TorchDiff</span>
                             </h2>
                             <p>
-                            The first release, TorchDiff 1.0.0, includes four model families:
-                            DDPM, DDIM, SDE, and LDM. These models support both conditional 
-                            (e.g., text-prompt-based) and unconditional generation.
-                            </p>
-                        </div>
-                    </div>
-                </div> <!-- end s-home__slide -->
-
-                <div class="s-home__slide s-home__slide--2">
-                    <div class="row">
-                        <div class="column large-12 s-home__slider-text">
-                            <h2>
-                                Read the <a href="https://torchdiff.readthedocs.io/en/latest/index.html" title="">documentation</a> of the TorchDiff
-                                library or <a href="https://github.com/LoqmanSamani/TorchDiff" title="">visit the main GitHub repository</a> to learn more.
-                            </h2>
-                            <p>
-                                Explore the official API reference on Read the Docs to understand TorchDiff's functionality.
-                                Check out the GitHub repository for source code, contributions, and community support.
+                                TorchDiff is an open-source PyTorch library 
+                                for diffusion models like DDPM, DDIM, SDE, and LDM. 
+                                Designed for researchers, it enables image synthesis, text-to-image generation. Explore the <a href="https://torchdiff.readthedocs.io/en/latest/index.html" title="TorchDiff Documentation">documentation</a> 
+                                or <a href="https://github.com/LoqmanSamani/TorchDiff" title="TorchDiff GitHub">contribute on GitHub</a> to join the community!
                             </p>
                         </div>
                     </div>
