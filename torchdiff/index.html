@@ -129,22 +129,23 @@
     </section> <!-- end s-home -->
 
 
-    <!-- services
+    <!-- models
     ================================================== -->
-    <section id="services" class="s-services target-section s-dark">
+    <section id="models" class="s-services target-section s-dark">
 
         <div class="row section-head">
             <div class="column large-3 medium-12" data-aos="fade-up">
-                <h2>Services</h2>
-                <p class="desc">Our list of awesome services.</p>
+                <h2>Models</h2>
+                <p class="desc">Explore our collection of diffusion models.</p>
             </div>
 
             <div class="column large-8 medium-12 align-x-right" data-aos="fade-up">
                 <p class="lead">
-                At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis 
-                praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias 
-                excepturi sint occaecati cupiditate. At vero eos et accusamus et iusto odio 
-                dignissimos ducimus qui blanditiis praesentium.
+                    TorchDiff is a comprehensive library offering a suite of advanced diffusion models for generative tasks, 
+                    particularly image synthesis. Built on PyTorch, it provides modular implementations of foundational and 
+                    cutting-edge models, enabling both unconditional and conditional generation with text prompts. 
+                    From classic denoising approaches to efficient latent-space techniques, TorchDiff empowers researchers 
+                    and developers to explore and innovate in generative AI with flexible, high-performance tools.
                 </p>
             </div>
         </div> <!-- end section-head -->
@@ -152,67 +153,72 @@
         <div class="row block-large-1-3 block-medium-1-2 block-tab-full services-list">
 
             <div class="column services-item" data-aos="fade-up">
-                <h5>Branding</h5>
+                <h5><a href="https://torchdiff.readthedocs.io/en/latest/ddpm.html" title="">DDPM</a> (completed)</h5>
                 <p>
-                Ea sint cum. Ullam consectetur nostrum 
-                voluptatem fugiat et dolor non totam sed. Et quia sit aliquam et.
-                Voluptatibus sit facere aperiam tempore est nam et cupiditate. Necessitatibus 
-                nisi dolorem enim sit aut earum et praesentium. Impedit recusandae consequatur 
-                beatae deleniti impedit non et. Eos consequuntur alias. Rerum sit est est 
-                tenetur soluta.
+                    Denoising Diffusion Probabilistic Models (DDPM), pioneered by Ho et al. in 2020, form the cornerstone of 
+                    diffusion-based generative modeling. This approach generates high-fidelity images by iteratively reversing a 
+                    noise-adding process. DDPM employs a Markov chain to gradually corrupt data in the forward process and learns 
+                    to reconstruct it in the reverse process. TorchDiff's implementation supports both unconditional image 
+                    generation and text-conditioned synthesis, offering modular components for customizable training and sampling.
                 </p>
             </div> <!-- end services-item -->
 
             <div class="column services-item" data-aos="fade-up">
-                <h5>Product Design</h5>
+                <h5><a href="https://torchdiff.readthedocs.io/en/latest/ddim.html" title="">DDIM</a> (completed)</h5>
                 <p>
-                In aspernatur autem enim maxime mollitia. Debitis rerum alias. Facilis qui est qui 
-                impedit. Dolorum fuga provident. Debitis eum non odit facilis ut quibusdam porro 
-                ipsa. Optio aut similique vero dolore sunt laudantium et autem quo. Earum eligendi dolorem 
-                aut quae modi. Cumque impedit voluptatem molestiae a. Perspiciatis at tempora 
-                dicta molestiae iure dolore.
+                    Denoising Diffusion Implicit Models (DDIM), introduced by Song et al., enhance DDPM by accelerating the 
+                    image generation process. By using a non-Markovian process, DDIM reduces the number of denoising steps 
+                    while preserving image quality. This makes it ideal for efficient inference. TorchDiff's DDIM implementation 
+                    integrates seamlessly with the same noise prediction architecture as DDPM, supporting both text-guided and 
+                    unconditional generation with optimized performance.
                 </p>
             </div> <!-- end services-item -->
 
             <div class="column services-item" data-aos="fade-up">
-                <h5>UX Research</h5>
+                <h5><a href="https://torchdiff.readthedocs.io/en/latest/sde.html" title="">SDE</a> (completed)</h5>
                 <p>
-                Repellat commodi numquam hic odit voluptatem saepe praesentium. Delectus itaque nemo 
-                aut ipsam similique et veniam. Assumenda rerum ut ea soluta distinctio beatae consectetur 
-                omnis libero. Ratione ipsum sapiente suscipit. Dolorem id doloremque. Nihil cupiditate 
-                sed molestiae quia dolorem sit iure doloremque. Rerum ea officia pariatur. 
+                    Score-Based Generative Models through Stochastic Differential Equations (SDE), developed by Song et al., 
+                    provide a robust framework for modeling diffusion using continuous-time processes. This approach allows 
+                    flexible noise manipulation and generation. TorchDiff includes four SDE variants: Variance Exploding (VE), 
+                    Variance Preserving (VP), sub-Variance Preserving (sub-VP), and a deterministic ODE solver, enabling both 
+                    conditional and unconditional generation with adaptable noise schedules.
                 </p>
             </div> <!-- end services-item -->
 
             <div class="column services-item" data-aos="fade-up">
-                <h5>Frontend Development</h5>
+                <h5><a href="https://torchdiff.readthedocs.io/en/latest/ldm.html" title="">LDM</a> (completed)</h5>
                 <p>
-                Ea sint cum. Ullam consectetur nostrum 
-                voluptatem fugiat et dolor non totam sed. Et quia sit aliquam et.
-                Voluptatibus sit facere aperiam tempore est nam et cupiditate. Necessitatibus 
-                nisi dolorem enim sit aut earum et praesentium. Impedit recusandae consequatur 
-                beatae deleniti impedit non et. Eos consequuntur alias. Rerum sit est est 
-                tenetur soluta.
+                    Latent Diffusion Models (LDM), proposed by Rombach et al., revolutionize diffusion by operating in a 
+                    compressed latent space, significantly reducing computational demands. Using a variational autoencoder (VAE), 
+                    LDM encodes images into compact representations and applies diffusion processes there, decoding results back 
+                    to pixel space. TorchDiff's LDM implementation supports DDPM, DDIM, or SDE as backbones, with training 
+                    enhanced by perceptual and adversarial losses for superior image quality.
                 </p>
             </div> <!-- end services-item -->
 
             <div class="column services-item" data-aos="fade-up">
-                <h5>E-Commerce</h5>
+                <h5><a href="#" title="">unCLIP</a> (under development)</h5>
                 <p>
-                Dolorem fugit similique. In sed expedita consequuntur quos dolor eos iusto. Quisquam sint harum nam aut.
-                Fuga aspernatur dolor est. Aliquid odit nostrum et eum reiciendis fugit est consequatur. Rerum eaque 
-                eligendi doloribus quidem iure error voluptatem velit. Veritatis molestiae fuga. Voluptatem 
-                odit voluptatem doloremque nobis. Non hic ipsa illum.
+                    unCLIP, a key component of OpenAI’s DALL-E 2, is a text-to-image diffusion model leveraging CLIP embeddings 
+                    for robust text-image alignment, as detailed in "Hierarchical Text-Conditional Image Generation with CLIP 
+                    Latents" by Ramesh et al. (2022). It operates in two stages: a prior generates CLIP image embeddings from 
+                    text prompts, and a diffusion-based decoder transforms these into high-quality images. TorchDiff’s upcoming 
+                    unCLIP implementation will enable text-guided image synthesis in pixel space, offering flexibility for 
+                    creative applications. (Paper: <a href="[replace_with_actual_arXiv_or_paper_URL]">arXiv</a>, Implementation: 
+                    <a href="[replace_with_actual_implementation_URL]">Hugging Face Diffusers</a>)
                 </p>
             </div> <!-- end services-item -->
 
             <div class="column services-item" data-aos="fade-up">
-                <h5>Illustration</h5>
+                <h5><a href="#" title="">Kandinsky</a> (under development)</h5>
                 <p>
-                Est nesciunt et rerum sapiente. Ullam impedit labore magni qui. Consequuntur fugiat vel id explicabo. 
-                Inventore suscipit sint totam accusamus aperiam distinctio. Rerum nihil maxime non maiores. Praesentium modi facilis ex.
-                Velit officiis id. Voluptates id cupiditate sit eligendi at nemo rerum rem non. Quae rem quia dignissimos ex 
-                laudantium distinctio ipsam. 
+                    Kandinsky, developed by Sber AI, is a text-to-image diffusion model combining latent diffusion with an image 
+                    prior, as described in "Kandinsky: an Improved Text-to-Image Synthesis with Image Prior and Latent Diffusion" 
+                    by Razzhigaev et al. (2023). Kandinsky 2.0 uses a prior to map text to image embeddings, followed by latent 
+                    diffusion for efficient, high-quality image generation. TorchDiff’s forthcoming Kandinsky implementation will 
+                    support text-guided generation with enhanced text understanding, leveraging its modular architecture for 
+                    seamless integration. (Paper: <a href="[replace_with_actual_arXiv_or_paper_URL]">arXiv</a>, Implementation: 
+                    <a href="[replace_with_actual_implementation_URL]">GitHub</a>)
                 </p>
             </div> <!-- end services-item -->
 
@@ -220,7 +226,7 @@
 
     </section> <!-- end s-services -->
 
-
+    
     <!-- portfolio
     ================================================== -->
     <section id="portfolio" class="s-portfolio target-section">
