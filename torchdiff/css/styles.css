@@ -5449,3 +5449,61 @@ body.search-is-visible {
     display: block;
 }
 
+
+/* Add this to your stylesheet (e.g., style.css) */
+
+/* Style the header row to use flexbox for layout */
+.row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Logo on left, nav on right, toggle on far right */
+    padding: 10px 20px; /* Adjust padding as needed */
+    background-color: #1a1a1a; /* Match the dark background from the image */
+}
+
+/* Style the logo container */
+.s-header__logo {
+    margin-right: 20px; /* Space between logo and nav */
+}
+
+/* Style the logo image */
+.torchdiff-logo {
+    height: 40px; /* Adjust size to match the flame icon in the image */
+    width: auto; /* Maintain aspect ratio */
+    /* If the SVG isn't rendering as a flame, ensure the SVG file (tdl_.svg) is correct */
+    /* Alternatively, use border-radius for a circular shape if intended */
+    border-radius: 50%; /* Uncomment if you want a circular logo */
+}
+
+/* Style the navigation */
+.s-header__nav {
+    flex-grow: 1; /* Allow nav to take available space */
+}
+
+.s-header__nav ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    justify-content: center; /* Center the nav items */
+}
+
+.s-header__nav ul li {
+    margin: 0 15px;
+}
+
+.s-header__nav ul li a {
+    color: #fff; /* Match text color from the image */
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.s-header__nav ul li.current a,
+.s-header__nav ul li a:hover {
+    color: #00c4cc; /* Match the cyan color of the "Home" button */
+}
+
+/* Style the menu toggle (optional, adjust as per your design) */
+.s-header__menu-toggle {
+    color: #fff;
+}
