@@ -5448,3 +5448,69 @@ body.search-is-visible {
     width: auto;
     display: block;
 }
+
+
+/*after here*/
+
+.torchdiff-logo {
+    max-width: 150px; /* Adjust size as needed */
+    height: auto;
+    margin-top: 20px; /* Space below the desc text */
+    display: block;
+}
+
+.team-block {
+    max-width: 100%;
+}
+
+.team-member {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px; /* Space between photo and text */
+}
+
+.team-member__pic {
+    flex: 0 0 auto;
+}
+
+.team-member__pic img {
+    max-width: 100px; /* Adjust photo size */
+    height: auto;
+    border-radius: 50%; /* Optional: circular photo */
+}
+
+.team-member__info {
+    flex: 1;
+}
+
+.team-member__bio {
+    font-size: 1.6rem;
+    line-height: 1.8;
+    margin-top: 10px;
+    color: #333; /* Adjust to match your theme */
+}
+
+@media only screen and (max-width: 800px) {
+    .torchdiff-logo {
+        max-width: 120px; /* Smaller logo for tablets */
+    }
+
+    .team-member {
+        flex-direction: column; /* Stack photo and text on smaller screens */
+        align-items: center;
+    }
+
+    .team-member__pic img {
+        max-width: 80px; /* Smaller photo for tablets */
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .torchdiff-logo {
+        max-width: 100px; /* Smaller logo for mobile */
+    }
+
+    .team-member__pic img {
+        max-width: 60px; /* Smaller photo for mobile */
+    }
+}
