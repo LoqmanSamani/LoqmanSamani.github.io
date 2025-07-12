@@ -3134,7 +3134,7 @@ input::-moz-focus-inner {
     -webkit-transition: all .3s;
     transition: all .3s;
     position: absolute;
-    top: 20%; /* Align to the top */
+    top: 10%; /* Align to the top */
     right: 0; /* Align to the right */
 }
 
