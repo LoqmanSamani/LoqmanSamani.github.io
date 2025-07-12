@@ -3103,6 +3103,15 @@ input::-moz-focus-inner {
     justify-content: flex-start;
 }
 
+
+
+
+
+
+
+
+
+
 /* -------------------------------------------------------------------
  * ## header logo
  * ------------------------------------------------------------------- */
@@ -3113,6 +3122,7 @@ input::-moz-focus-inner {
     width: var(--logo-width);
     margin-right: 4rem;
     position: relative;
+    float: right; /* Move logo to the right */
 }
 
 .s-header__logo a {
@@ -3123,19 +3133,20 @@ input::-moz-focus-inner {
     border: none;
     -webkit-transition: all .3s;
     transition: all .3s;
-    -webkit-transform: translateY(-50%);
-    transform: translateY(-50%);
     position: absolute;
-    top: 50%;
-    left: 0;
+    top: 0; /* Align to the top */
+    right: 0; /* Align to the right */
 }
 
-.s-header__logo img {
-    vertical-align: top;
-    width: var(--logo-width);
-    height: var(--logo-height);
-    margin: 0;
-}
+
+
+
+
+
+
+
+
+
 
 /* -------------------------------------------------------------------
  * ## header nav
