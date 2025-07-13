@@ -3642,6 +3642,33 @@ body.search-is-visible {
     margin-left: auto;
 }
 
+
+
+
+.s-home__attribution {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    font-size: 12px; /* Small font size */
+    color: #ffffff; /* White text for visibility; adjust based on your background */
+    text-align: right;
+    z-index: 10; /* Ensure it appears above other elements */
+    opacity: 0.8; /* Slightly transparent for subtlety */
+}
+
+.s-home__attribution a {
+    color: #ffffff; /* Match link color to text */
+    text-decoration: none; /* Remove underline from links */
+}
+
+.s-home__attribution a:hover {
+    text-decoration: underline; /* Add underline on hover for usability */
+}
+
+
+
+
+
 /* slider nav buttons
  * ------------------------------------------------------ */
 [class*="s-home__arrow-"] {
