@@ -100,19 +100,16 @@
 <br>
 
 <p class="text">
-    I built **CppNet**, a modular C++ library designed for the simulation, analysis, and modeling of biochemical reaction networks and systems biology workflows.
-    The library supports multiple formalisms—such as ordinary differential equations (ODEs), stochastic simulations, and discrete‐event / Petri‐net-style modeling—allowing flexible modeling of biochemical systems across deterministic and stochastic regimes.
-    Key features include: efficient solvers, automatic conversion between representations, parameter sweeping, support for simulation reproducibility, logging / tracing of reaction events, and tools for analyzing network structure (e.g. reaction dependencies, steady states, etc.).
-    Implemented in modern C++ with emphasis on high performance, extensibility, and numerical accuracy. The library includes unit‐tests, example biological models (e.g. enzyme kinetics, gene regulatory networks), and documentation for users to integrate custom species, reactions, and kinetic laws.
+    CppNet is a high-performance C++ deep learning library for building and training neural networks from scratch.
+    Designed for speed and flexibility, CppNet combines Eigen for efficient tensor operations, OpenMP for CPU parallelism, and CUDA for GPU acceleration.
+    The library features a clean modular API with clearly separated components for layers, losses, optimizers, metrics, and regularizations, making it easy to extend with custom modules.
 
-    This project reflects my commitment to bridging computational biology and software engineering: combining rigorous modeling with clean, reusable, high-performance code.
+    The project follows a clear structure with <code>include/</code> headers (public API), <code>src/</code> implementations, and <code>examples/</code> for practical demonstrations.
 
     <p class="text no-wrap">
         Explore the project on <a href="https://github.com/LoqmanSamani/CppNet" target="_blank"><strong>GitHub</strong></a>.
     </p>
 </p>
-
-
 
 
 
@@ -127,15 +124,20 @@
 <br>
 
 <p class="text">
-    In **TorchDiff**, I developed a comprehensive PyTorch-based library for building, experimenting with, and deploying diffusion models, drawing inspiration from recent advancements in generative AI.
-    The library currently implements **five major diffusion model families**:
-    * Denoising Diffusion Probabilistic Models (DDPM)
-    * Denoising Diffusion Implicit Models (DDIM)
-    * Score-based / SDE-driven diffusion processes
-    * Latent Diffusion Models (LDM)
-    * UnCLIP, the hierarchical text-conditional image-generation framework. :contentReference[oaicite:0]{index=0}
+    In TorchDiff, I developed a comprehensive PyTorch-based library for building, experimenting with, and deploying diffusion models, drawing inspiration from recent advancements in generative AI.
+    The library currently implements five major diffusion model families:
+      </p>
 
-    TorchDiff supports both **conditional** (e.g. text-to-image) and **unconditional** generation. It is built with modular components such as forward and reverse diffusion pipelines, variance schedulers, U-Net-style noise predictors with attention and time embedding, transformer-based encoders for text conditioning, and a rich evaluation suite (MSE, PSNR, SSIM, FID, LPIPS) for assessing output quality. :contentReference[oaicite:1]{index=1}
+
+    <ul style="margin: 0; padding-left: 20px; font-size: 1em;">
+    <li>Denoising Diffusion Probabilistic Models (DDPM)</li>
+    <li>Denoising Diffusion Implicit Models (DDIM)</li>
+    <li>Score-based / SDE-driven diffusion processes</li>
+    <li>Latent Diffusion Models (LDM)</li>
+    <li>UnCLIP, the hierarchical text-conditional image-generation framework</li>
+</ul>
+
+    TorchDiff supports both conditional (e.g. text-to-image) and unconditional generation. It is built with modular components such as forward and reverse diffusion pipelines, variance schedulers, U-Net-style noise predictors with attention and time embedding, transformer-based encoders for text conditioning, and a rich evaluation suite (MSE, PSNR, SSIM, FID, LPIPS) for assessing output quality.
 
     Designed for researcher and practitioner use, the library includes example notebooks demonstrating training & sampling workflows, utilities to customize model components, and infrastructure for efficient experimentation. The project emphasizes clarity, extensibility, and reproducibility.
 
