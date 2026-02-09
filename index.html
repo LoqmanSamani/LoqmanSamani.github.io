@@ -1,339 +1,923 @@
-<!doctype html>
-<html>
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <title>Loghman Samani</title>
-  <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
-  <link href="css/frame.css" media="screen" rel="stylesheet" type="text/css" />
-  <link href="css/controls.css" media="screen" rel="stylesheet" type="text/css" />
-  <link href="css/custom.css" media="screen" rel="stylesheet" type="text/css" />
-  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
-  <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700' rel='stylesheet' type='text/css'>
-  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700" rel="stylesheet">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="js/menu.js"></script>
-  <script>
-    (function (i, s, o, g, r, a, m) {
-      i['GoogleAnalyticsObject'] = r;
-      i[r] = i[r] || function () {
-        (i[r].q = i[r].q || []).push(arguments)
-      }, i[r].l = 1 * new Date();
-      a = s.createElement(o),
-        m = s.getElementsByTagName(o)[0];
-      a.async = 1;
-      a.src = g;
-      m.parentNode.insertBefore(a, m)
-    })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
-    ga('create', 'UA-103598896-1', 'auto');
-    ga('send', 'pageview');
-  </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Name | Computational Biologist</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;900&family=Roboto+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Matrix Palette */
+            --bg-dark: #000000;
+            --bg-card: #0a0a0a;
+            --bg-elevated: #121212;
+            --text-primary: #ffffff;
+            --text-secondary: #b0b0b0;
+            --text-muted: #666666;
+            --lime: #00ff41;
+            --lime-dark: #00cc33;
+            --lime-bright: #39ff14;
+            --blue: #00d9ff;
+            --blue-dark: #00a8cc;
+            --border-subtle: #1a1a1a;
+            --shadow-dark: rgba(0, 0, 0, 0.8);
+            --shadow-lime: rgba(0, 255, 65, 0.3);
+            --shadow-blue: rgba(0, 217, 255, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto Mono', monospace;
+            color: var(--text-primary);
+            background-color: var(--bg-dark);
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(0, 255, 65, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(0, 217, 255, 0.05) 0%, transparent 50%),
+                repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 255, 65, 0.02) 2px, rgba(0, 255, 65, 0.02) 4px);
+            background-attachment: fixed;
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* Animated background particles */
+        .bg-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            border-radius: 50%;
+            opacity: 0.4;
+            animation: float 25s infinite ease-in-out;
+        }
+
+        .particle:nth-child(odd) {
+            background: var(--lime);
+            box-shadow: 0 0 10px var(--lime);
+        }
+
+        .particle:nth-child(even) {
+            background: var(--blue);
+            box-shadow: 0 0 10px var(--blue);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.4; }
+            33% { transform: translate(40px, -40px) scale(1.5); opacity: 0.6; }
+            66% { transform: translate(-30px, 30px) scale(0.8); opacity: 0.3; }
+        }
+
+        .particle:nth-child(1) { left: 10%; top: 20%; animation-delay: 0s; }
+        .particle:nth-child(2) { left: 70%; top: 30%; animation-delay: -8s; }
+        .particle:nth-child(3) { left: 30%; top: 60%; animation-delay: -15s; }
+        .particle:nth-child(4) { left: 85%; top: 75%; animation-delay: -20s; }
+        .particle:nth-child(5) { left: 50%; top: 40%; animation-delay: -5s; }
+        .particle:nth-child(6) { left: 15%; top: 80%; animation-delay: -12s; }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Header */
+        header {
+            padding: 4rem 0 2rem;
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header-content {
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 2.5rem;
+            align-items: center;
+            padding: 2.5rem;
+            background: var(--bg-card);
+            border-radius: 0;
+            box-shadow: 0 4px 24px var(--shadow-dark), 0 0 30px var(--shadow-lime);
+            border: 1px solid var(--lime);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--lime), var(--blue), var(--lime));
+            animation: scanline 3s linear infinite;
+        }
+
+        @keyframes scanline {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .profile-photo {
+            width: 140px;
+            height: 140px;
+            border-radius: 0;
+            overflow: hidden;
+            border: 2px solid var(--lime);
+            box-shadow: 0 0 30px var(--shadow-lime), inset 0 0 20px rgba(0, 255, 65, 0.1);
+            position: relative;
+        }
+
+        .profile-photo::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 65, 0.4), transparent);
+            animation: photoScan 3s infinite;
+        }
+
+        @keyframes photoScan {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .profile-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            filter: brightness(0.9) contrast(1.1);
+        }
+
+        .header-info h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            letter-spacing: 0.05em;
+            line-height: 1.1;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 0 20px var(--shadow-lime);
+        }
+
+        .header-info h1 .accent {
+            color: var(--lime);
+            text-shadow: 0 0 30px var(--lime);
+        }
+
+        .subtitle {
+            font-size: 1rem;
+            color: var(--blue);
+            font-weight: 400;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 10px var(--blue);
+        }
+
+        .affiliation {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            font-weight: 300;
+            letter-spacing: 0.05em;
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            align-items: flex-end;
+        }
+
+        nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 0.85rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 0.5rem 1rem;
+            border: 1px solid transparent;
+        }
+
+        nav a::before {
+            content: '>';
+            position: absolute;
+            left: 0;
+            opacity: 0;
+            color: var(--lime);
+            transition: all 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--lime);
+            text-shadow: 0 0 10px var(--lime);
+            border-color: var(--lime);
+        }
+
+        nav a:hover::before {
+            opacity: 1;
+            left: 0.3rem;
+        }
+
+        /* Main Content */
+        main {
+            padding: 3rem 0;
+        }
+
+        section {
+            margin-bottom: 5rem;
+            animation: fadeInUp 0.8s ease-out;
+            animation-fill-mode: both;
+        }
+
+        section:nth-child(1) { animation-delay: 0.1s; }
+        section:nth-child(2) { animation-delay: 0.2s; }
+        section:nth-child(3) { animation-delay: 0.3s; }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-header {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.8rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 2.5rem;
+            position: relative;
+            display: inline-block;
+            letter-spacing: 0.05em;
+            text-shadow: 0 0 20px var(--shadow-lime);
+        }
+
+        .section-header::after {
+            content: '';
+            position: absolute;
+            bottom: -12px;
+            left: 0;
+            width: 60%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--lime), var(--blue));
+            box-shadow: 0 0 15px var(--lime);
+        }
+
+        .section-header::before {
+            content: '//';
+            position: absolute;
+            left: -2.5rem;
+            color: var(--blue);
+            font-size: 1.5rem;
+        }
+
+        /* About Section */
+        .about-content {
+            background: var(--bg-card);
+            padding: 3rem;
+            border-radius: 0;
+            box-shadow: 0 2px 16px var(--shadow-dark);
+            border: 1px solid var(--lime);
+            line-height: 1.9;
+            font-size: 1rem;
+            position: relative;
+        }
+
+        .about-content::before {
+            content: '<>';
+            position: absolute;
+            top: 1rem;
+            left: 1.5rem;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 5rem;
+            color: var(--lime);
+            opacity: 0.1;
+            line-height: 1;
+        }
+
+        .about-content p {
+            margin-bottom: 1.5rem;
+            color: var(--text-secondary);
+            position: relative;
+            z-index: 1;
+        }
+
+        .keywords {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .keyword {
+            padding: 0.6rem 1.5rem;
+            background: transparent;
+            border: 1px solid var(--lime);
+            color: var(--lime);
+            border-radius: 0;
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .keyword::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--lime);
+            transition: left 0.3s ease;
+            z-index: -1;
+        }
+
+        .keyword:hover {
+            color: var(--bg-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px var(--shadow-lime);
+            text-shadow: none;
+        }
+
+        .keyword:hover::before {
+            left: 0;
+        }
+
+        /* Projects Grid */
+        .research-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 2rem;
+        }
+
+        .research-card {
+            background: var(--bg-card);
+            padding: 2.5rem;
+            border-radius: 0;
+            box-shadow: 0 2px 12px var(--shadow-dark);
+            transition: all 0.4s ease;
+            border: 1px solid var(--border-subtle);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .research-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, transparent, rgba(0, 255, 65, 0.05), transparent);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .research-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 3px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--lime), var(--blue));
+            transform: scaleY(0);
+            transform-origin: top;
+            transition: transform 0.4s ease;
+        }
+
+        .research-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 32px var(--shadow-dark), 0 0 40px var(--shadow-lime);
+            border-color: var(--lime);
+        }
+
+        .research-card:hover::before {
+            opacity: 1;
+        }
+
+        .research-card:hover::after {
+            transform: scaleY(1);
+        }
+
+        .research-card h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            letter-spacing: 0.03em;
+        }
+
+        .research-card p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .research-meta {
+            font-size: 0.75rem;
+            color: var(--blue);
+            font-style: italic;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-top: 1.5rem;
+        }
+
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--lime);
+            text-decoration: none;
+            font-size: 0.8rem;
+            margin-top: 1rem;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 500;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .project-link:hover {
+            gap: 0.8rem;
+            text-shadow: 0 0 15px var(--lime);
+        }
+
+        /* Blog Posts */
+        .publication {
+            background: var(--bg-card);
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            border-radius: 0;
+            border-left: 3px solid var(--lime);
+            box-shadow: 0 2px 8px var(--shadow-dark);
+            border: 1px solid var(--border-subtle);
+            border-left: 3px solid var(--lime);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .publication::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background: linear-gradient(90deg, rgba(0, 255, 65, 0.1), transparent);
+            transition: width 0.3s ease;
+        }
+
+        .publication:hover {
+            transform: translateX(12px);
+            box-shadow: 0 4px 20px var(--shadow-dark), -8px 0 20px var(--shadow-lime);
+            border-left-color: var(--blue);
+        }
+
+        .publication:hover::before {
+            width: 100%;
+        }
+
+        .publication-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.6rem;
+            letter-spacing: 0.02em;
+        }
+
+        .publication-authors {
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .publication-venue {
+            color: var(--text-muted);
+            font-style: italic;
+            font-size: 0.8rem;
+        }
+
+        .blog-link {
+            color: var(--lime);
+            text-decoration: none;
+            font-size: 0.8rem;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            font-weight: 500;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .blog-link:hover {
+            text-shadow: 0 0 15px var(--lime);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-elevated);
+            color: var(--text-primary);
+            padding: 4rem 0;
+            margin-top: 6rem;
+            border-top: 2px solid var(--lime);
+            box-shadow: 0 -4px 24px var(--shadow-dark);
+            position: relative;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--lime), var(--blue), var(--lime));
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 4rem;
+        }
+
+        footer h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--lime);
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-shadow: 0 0 15px var(--lime);
+        }
+
+        .contact-links {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .contact-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            position: relative;
+            padding-left: 0;
+        }
+
+        .contact-links a::before {
+            content: '>';
+            position: absolute;
+            left: -15px;
+            opacity: 0;
+            color: var(--lime);
+            transition: all 0.3s ease;
+        }
+
+        .contact-links a:hover {
+            color: var(--lime);
+            padding-left: 10px;
+            text-shadow: 0 0 10px var(--lime);
+        }
+
+        .contact-links a:hover::before {
+            opacity: 1;
+            left: 0;
+        }
+
+        .footer-note {
+            grid-column: 1 / -1;
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-subtle);
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            letter-spacing: 0.08em;
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .header-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .profile-photo {
+                margin: 0 auto;
+            }
+
+            nav {
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+                flex-wrap: wrap;
+            }
+
+            .section-header::before {
+                display: none;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-info h1 {
+                font-size: 2.2rem;
+            }
+
+            .section-header {
+                font-size: 2rem;
+            }
+
+            .research-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-content {
+                padding: 2rem;
+            }
+        }
+
+        /* Matrix rain effect (subtle) */
+        .matrix-char {
+            position: fixed;
+            top: -20px;
+            color: var(--lime);
+            opacity: 0.05;
+            font-family: 'Roboto Mono', monospace;
+            font-size: 14px;
+            animation: rain linear infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes rain {
+            0% { transform: translateY(-20px); opacity: 0; }
+            10% { opacity: 0.05; }
+            90% { opacity: 0.05; }
+            100% { transform: translateY(100vh); opacity: 0; }
+        }
+
+        /* Scroll animations */
+        @media (prefers-reduced-motion: no-preference) {
+            .reveal {
+                opacity: 0;
+                transform: translateY(30px);
+                transition: all 0.6s ease-out;
+            }
+
+            .reveal.active {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
 </head>
-
 <body>
-  <div class="menu-container"></div>
-  <div class="content-container">
-    <div class="content">
-
-
-
-  <div class="content-table flex-column">
-        <div class="flex-row">
-
-
-       <div class="flex-item flex-column">
-    <img class="image" id="me" src="images/loq.jpg" style="width: 250px; height: auto;">
-   </div>
-
-
-          <div class="flex-item flex-column">
-    <h2>Loghman Samani</h2>
-    <p class="text">
-        I hold a master degree in Computational Biology from <a href="https://www.uni-stuttgart.de" target="_blank">the University of Stuttgart</a>.<br><br>
-
-        My background bridges molecular biology and deep learning, with a focus on generative models and their applications in structural biology.
-    </p>
+    <!-- Background particles -->
+    <div class="bg-particles">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
     </div>
-        </div>
-    
-  <h2>About Me</h2>  
-<hr>
-<p style="line-height: 1.6; margin-bottom: 15px;">
-  I recently completed my master’s thesis at the <a href="https://www.uni-stuttgart.de/en/" target="_blank">University of Stuttgart</a>, titled <a href="https://loqmansamani.github.io/grn-designer/" target="_blank">“Automated Design and Analysis of Gene Regulatory Networks (GRNs)”</a>. Through this work, I developed a hybrid optimization framework for designing Gene Regulatory Networks, combining evolutionary algorithms with gradient-based methods to simulate realistic biological systems. Currently, I am seeking a Ph.D. position in computational biology, with a focus on structural biology. My academic journey began with a B.Sc. in Cell and Molecular Biology at the <a href="http://www.uok.ac.ir" target="_blank">University of Kurdistan</a>, where I cultivated a strong foundation in biological sciences. Over time, I expanded my expertise by integrating computational tools and machine learning techniques to investigate molecular systems and unravel complex biological processes. Beyond my primary research interests, I have a keen fascination with artificial intelligence, particularly its applications in simplifying and accelerating the analysis of intricate biological systems. To further enhance my skills, I actively engage in side projects related to AI and machine learning. Recently, I have also delved into cognitive neuroscience, exploring its intersection with computational biology and gaining a deeper appreciation for understanding the brain and human cognition from a multidisciplinary perspective.
-</p>
 
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <div class="profile-photo">
+                    <!-- Replace this with your actual photo -->
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop" alt="Your Name">
+                </div>
+                <div class="header-info">
+                    <h1>YOUR <span class="accent">NAME</span></h1>
+                    <p class="subtitle">Computational Biologist</p>
+                    <p class="affiliation">Diffusion Models • Molecular Dynamics • Machine Learning</p>
+                </div>
+                <nav>
+                    <a href="#about">About</a>
+                    <a href="#projects">Projects</a>
+                    <a href="#writing">Writing</a>
+                    <a href="#contact">Contact</a>
+                </nav>
+            </div>
+        </header>
 
-      <br>
-<div class="achievement-container">
-    <h2>Achievements</h2>
-    <hr>
+        <main>
+            <section id="about">
+                <h2 class="section-header">About</h2>
+                <div class="about-content">
+                    <p>
+                        I'm a computational biologist specializing in diffusion models for molecular dynamics simulations. My work bridges machine learning, statistical physics, and computational chemistry to solve complex problems in biomolecular modeling.
+                    </p>
+                    <p>
+                        Currently seeking opportunities in computational biology, machine learning research, or bioinformatics where I can apply generative models to accelerate scientific discovery. I'm passionate about developing AI systems that enhance our understanding of molecular systems and enable rational design of therapeutics and materials.
+                    </p>
+                    <div class="keywords">
+                        <span class="keyword">Diffusion Models</span>
+                        <span class="keyword">Molecular Dynamics</span>
+                        <span class="keyword">Generative AI</span>
+                        <span class="keyword">Protein Modeling</span>
+                        <span class="keyword">PyTorch</span>
+                        <span class="keyword">Statistical Physics</span>
+                    </div>
+                </div>
+            </section>
 
-    <h4>Cell and Molecular Biology Olympiad</h4>
-    <p class="text">
-        I ranked 11th in the final stage of the <a href="https://github.com/LoqmanSamani/certificates/blob/systembiology/uni/olympiad.pdf" target="_blank">Cell and Molecular Biology Olympiad</a> at Iran's national scientific competition.
-    </p>
+            <section id="projects">
+                <h2 class="section-header">Projects</h2>
+                <div class="research-grid">
+                    <div class="research-card">
+                        <h3>MolDiff: Diffusion Models for MD</h3>
+                        <p>
+                            PyTorch implementation of score-based diffusion models for sampling molecular conformations. Includes pre-trained models for protein structures and small molecules with thermodynamic consistency guarantees.
+                        </p>
+                        <p class="research-meta">Python • PyTorch • MDAnalysis</p>
+                        <a href="https://github.com/yourusername/moldiff" class="project-link" target="_blank">
+                            View on GitHub →
+                        </a>
+                    </div>
+                    <div class="research-card">
+                        <h3>Trajectory Prediction Networks</h3>
+                        <p>
+                            Neural network architectures for learning coarse-grained molecular dynamics. Accelerates long-timescale simulations by 100x while preserving ensemble properties and physical constraints.
+                        </p>
+                        <p class="research-meta">JAX • Haiku • OpenMM</p>
+                        <a href="https://github.com/yourusername/trajectory-pred" class="project-link" target="_blank">
+                            View on GitHub →
+                        </a>
+                    </div>
+                    <div class="research-card">
+                        <h3>ProteinFlow: Generative Design</h3>
+                        <p>
+                            Conditional flow matching models for inverse protein design. Generate protein sequences and structures optimized for target functions, with applications in enzyme design and therapeutic development.
+                        </p>
+                        <p class="research-meta">Python • PyTorch • AlphaFold</p>
+                        <a href="https://github.com/yourusername/proteinflow" class="project-link" target="_blank">
+                            View on GitHub →
+                        </a>
+                    </div>
+                </div>
+            </section>
 
-  
-    
-    <h4>Member of the Elite Foundation</h4>
-    <p class="text">
-        In 2018, after achieving 14th place in the national Master's exam in Biophysics and 11th in the Cell and Molecular Biology Olympiad, I had the honor of being inducted as a member of the <a href="https://github.com/LoqmanSamani/certificates/blob/systembiology/uni/talent.pdf" target="_blank">Elite Students Foundation</a> at the University of Kurdistan.
-    </p>
-</div>
-         
-  <div class="project-container">
+            <section id="writing">
+                <h2 class="section-header">Writing</h2>
+                
+                <div class="publication">
+                    <div class="publication-title">
+                        Understanding Diffusion Models: From Physics to Molecular Dynamics
+                    </div>
+                    <div class="publication-authors">
+                        A deep dive into score-based generative models and their applications in computational biology
+                    </div>
+                    <div class="publication-venue">
+                        Medium • 12 min read • 
+                        <a href="https://medium.com/@yourusername/diffusion-models-md" class="blog-link" target="_blank">Read on Medium →</a>
+                    </div>
+                </div>
 
-    <h2>Projects</h2>
-    <hr>
+                <div class="publication">
+                    <div class="publication-title">
+                        Why Machine Learning Will Transform Drug Discovery
+                    </div>
+                    <div class="publication-authors">
+                        Exploring how generative AI accelerates molecular design and reduces time-to-market for therapeutics
+                    </div>
+                    <div class="publication-venue">
+                        Medium • 8 min read • 
+                        <a href="https://medium.com/@yourusername/ml-drug-discovery" class="blog-link" target="_blank">Read on Medium →</a>
+                    </div>
+                </div>
 
+                <div class="publication">
+                    <div class="publication-title">
+                        From AlphaFold to Flow Matching: The Evolution of Protein Structure Prediction
+                    </div>
+                    <div class="publication-authors">
+                        Tracing the development of AI methods for understanding protein structures and their biological functions
+                    </div>
+                    <div class="publication-venue">
+                        Medium • 10 min read • 
+                        <a href="https://medium.com/@yourusername/alphafold-evolution" class="blog-link" target="_blank">Read on Medium →</a>
+                    </div>
+                </div>
+            </section>
+        </main>
 
-
-
-  <div class="project-content">
-    <p class="text">
-        <span class="highlight-text" style="margin-left: 5em; font-size: 1.1em;">A high-performance C++ deep learning library for building and training neural networks</span> <br>
-        <span class="sub-text" style="margin-left: 22em;">June 2025 - Present</span> <br>
-    </p>
-
-<div class="flex-row">
-    <div class="flex-item flex-item-stretch flex-column">
-        <img class="image" src="images/cppnet-logo-.png" alt="CppNet Logo" style="max-width: 300px; width: 60%; height: auto; display: block; margin: 0 auto;">
-        <figcaption style="margin-top: 0.5em; text-align: center; font-size: 0.9em; color: #555;">
-            CppNet Logo
-        </figcaption>
+        <footer id="contact">
+            <div class="container">
+                <div class="footer-content">
+                    <div>
+                        <h3>Get in Touch</h3>
+                        <div class="contact-links">
+                            <a href="mailto:your.email@domain.com">✉ your.email@domain.com</a>
+                            <a href="https://github.com/yourusername" target="_blank">💻 GitHub</a>
+                            <a href="https://medium.com/@yourusername" target="_blank">✍️ Medium</a>
+                            <a href="https://linkedin.com/in/yourprofile" target="_blank">💼 LinkedIn</a>
+                            <a href="https://twitter.com/yourusername" target="_blank">🐦 Twitter/X</a>
+                        </div>
+                    </div>
+                    <div>
+                        <h3>Open to Opportunities</h3>
+                        <p style="color: var(--text-secondary); line-height: 1.8;">
+                            Seeking positions in:<br>
+                            • Computational Biology<br>
+                            • ML Research (Drug Discovery)<br>
+                            • Bioinformatics<br>
+                            • AI for Science
+                        </p>
+                    </div>
+                    <div class="footer-note">
+                        © 2025 Your Name | Built with passion for science and code
+                    </div>
+                </div>
+            </div>
+        </footer>
     </div>
-</div>
-<br>
 
+    <script>
+        // Smooth scrolling for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
 
-<p class="text">
-    CppNet is a high-performance C++ deep learning library for building and training neural networks from scratch.
-    Designed for speed and flexibility, CppNet combines Eigen for efficient tensor operations, OpenMP for CPU parallelism, and CUDA for GPU acceleration.
-    The library features a clean modular API with clearly separated components for layers, losses, optimizers, metrics, and regularizations, making it easy to extend with custom modules.
+        // Scroll reveal animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
 
-    The project follows a clear structure with <code>include/</code> headers (public API), <code>src/</code> implementations, and <code>examples/</code> for practical demonstrations.
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
 
-    <p class="text no-wrap">
-        Explore the project on <a href="https://github.com/LoqmanSamani/CppNet" target="_blank"><strong>GitHub</strong></a>.
-    </p>
-</p>
-
-
-
-
-
-
-  <div class="project-content">
-    <p class="text">
-        <span class="highlight-text" style="margin-left: 13em; font-size: 1.1em;">A PyTorch-based library for diffusion models</span> <br>
-        <span class="sub-text" style="margin-left: 22em;">May 2025 - Present</span> <br>
-    </p>
-
-<div class="flex-row">
-    <div class="flex-item flex-item-stretch flex-column">
-        <img class="image" src="images/torchdiff-logo-.png" alt="torchdiff logo" style="max-width: 300px; width: 60%; height: auto; display: block; margin: 0 auto;">
-        <figcaption style="margin-top: 0.5em; text-align: center; font-size: 0.9em; color: #555;">
-            TorchDiff Logo
-        </figcaption>
-    </div>
-</div>
-<br>
-
-
-<p class="text">
-    In TorchDiff, I developed a comprehensive PyTorch-based library for building, experimenting with, and deploying diffusion models, drawing inspiration from recent advancements in generative AI.
-    The library currently implements five major diffusion model families:
-      </p>
-
-    <ul style="margin: 0; padding-left: 20px; font-size: 1em;">
-    <li>Denoising Diffusion Probabilistic Models (DDPM)</li>
-    <li>Denoising Diffusion Implicit Models (DDIM)</li>
-    <li>Score-based / SDE-driven diffusion processes</li>
-    <li>Latent Diffusion Models (LDM)</li>
-    <li>UnCLIP, the hierarchical text-conditional image-generation framework</li>
-</ul>
-
-    TorchDiff supports both conditional (e.g. text-to-image) and unconditional generation. It is built with modular components such as forward and reverse diffusion pipelines, variance schedulers, U-Net-style noise predictors with attention and time embedding, transformer-based encoders for text conditioning, and a rich evaluation suite (MSE, PSNR, SSIM, FID, LPIPS) for assessing output quality.
-
-    Designed for researcher and practitioner use, the library includes example notebooks demonstrating training & sampling workflows, utilities to customize model components, and infrastructure for efficient experimentation. The project emphasizes clarity, extensibility, and reproducibility.
-
-    <p class="text no-wrap">
-        For more details, visit the <a href="https://loqmansamani.github.io/torchdiff/" target="_blank"><strong>project homepage</strong></a><br>
-        See the full implementation on <a href="https://github.com/LoqmanSamani/TorchDiff" target="_blank"><strong>GitHub</strong></a>.
-    </p>
-</p>
-
-
-
-
-
-
-    <div class="project-content">
-    <p class="text">
-        <span class="highlight-text" style="margin-left: 10em; font-size: 1.1em;">Automated Design and Analysis of Gene Regulatory Networks (GRNs)</span> <br>
-        <span class="sub-text" style="margin-left: 22em;">March 2024 - February 2025</span> <br>
-    </p>
-    
-<div class="flex-row">
-    <div class="flex-item flex-item-stretch flex-column">
-        <img class="image" src="images/grn-designer.png" alt="Workflow of the Algorithm" style="max-width: 1000px; width: 80%; height: auto; display: block; margin: 0 auto;">
-        <figcaption style="margin-top: 0.5em; text-align: center; font-size: 0.9em; color: #555;">
-            Workflow of the GRN-Designer Algorithm.
-        </figcaption>
-    </div>
-</div>
-<br>
-
-<p class="text">
-    As part of my master’s thesis at the <a href="https://www.uni-stuttgart.de/en/" target="_blank">University of Stuttgart</a>—<a href="https://www.isa.uni-stuttgart.de/en/" target="_blank">Institute for Stochastics and Applications</a>, I developed the GRN-Designer algorithm, a novel computational framework for designing and analyzing Gene Regulatory Networks (GRNs). GRNs serve as blueprints for understanding how genes interact and regulate each other in biological systems. While traditional GRN models often assume uniform spatial distributions of genes, this assumption does not always reflect real-world scenarios.
-    
-    The GRN-Designer algorithm addresses this limitation by employing a hybrid optimization approach that combines evolutionary algorithms (inspired by natural selection) with gradient-based methods (for fine-tuning). This enables the algorithm to design GRNs capable of recreating predefined spatial patterns. A key innovation of this framework is its ability to simultaneously optimize both the initial gene expression levels and the spatial activation potential of genes, simulating how gene activity propagates across a two-dimensional space.
-    
-    To validate the designs, I utilized partial differential equations (PDEs) to model the dynamics of gene expression accurately. The algorithm successfully generated GRNs for a range of spatial patterns, from simple gradients to complex shapes, while dynamically adjusting the complexity of the network to match the intricacy of the target pattern.
-    
-    This work has significant implications for synthetic biology and tissue engineering, where precise spatial patterning is crucial. Future developments could extend the framework to three-dimensional environments, incorporate stochastic elements to better mimic biological variability, and address even more sophisticated systems.
-</p>
-
-<p class="text">
-    For more details, visit the <a href="https://loqmansamani.github.io/grn-designer/" target="_blank"><strong>project homepage</strong></a>.
-</p></div>
-
-
- 
-    
-   <div class="project-content">
-    <p class="text">
-        <span class="highlight-text" style="margin-left: 17em; font-size: 1.1em;">Deep-Learning Models From Scratch</span> <br>
-        <span class="sub-text" style="margin-left: 22em;">Feb 2024 - Sep 2024</span> <br>
-    </p>
-    
-<div class="flex-row">
-    <div class="flex-item flex-item-stretch flex-column">
-        <img class="image" src="images/deep-learning.jpg" alt="Deep Learning logo" style="max-width: 1000px; width: 80%; height: auto; display: block; margin: 0 auto;">
-        <figcaption style="margin-top: 0.5em; margin-left: 7em; font-size: 0.9em; color: #555;">
-            Image source: <a href="https://online.york.ac.uk/the-next-step-in-machine-learning-deep-learning/" target="_blank">University of York</a>
-        </figcaption>
-    </div>
-</div>
-<br>
-
-<p class="text">
-    Over eight months, I completed the <a href="https://www.coursera.org/specializations/deep-learning" target="_blank"><strong>Deep Learning Specialization</strong></a> by <a href="https://www.deeplearning.ai/" target="_blank"><strong>deeplearning.ai</strong></a> on Coursera, implementing over 15 neural networks from scratch. This hands-on approach deepened my understanding of fundamental models such as Multi-Layer Perceptrons (MLPs), Convolutional Neural Networks (CNNs), Recurrent Neural Networks (RNNs) with LSTMs, and Transformers. I also explored regularization techniques like L2 regularization and dropout, as well as optimization algorithms including Gradient Descent, SGD, and Adam. By building these models from the ground up, I gained practical insights into their inner workings and applications in tasks like image recognition, sequence prediction, and natural language processing. This project reflects my commitment to mastering deep learning through rigorous study and implementation.
-    
-    <p class="text no-wrap">
-        Explore the project on <a href="https://github.com/LoqmanSamani/deep-learning" target="_blank"><strong>GitHub</strong></a>.
-    </p>
-</p></div>
-      
-
-
-        <div class="project-content">
-    <p class="text">
-        <span class="highlight-text" style="margin-left: 11em; font-size: 1.1em;">Biostoch: A Python Library for Simulating Biological Systems</span> <br>
-        <span class="sub-text" style="margin-left: 21em;">2023 - Ongoing Development</span> <br>
-    </p>
-    
-<div class="flex-row">
-    <div class="flex-item flex-item-stretch flex-column">
-        <img class="image" src="images/biostoch.png" alt="Biostoch logo" style="max-width: 1000px; width: 80%; height: auto; display: block; margin: 0 auto;">
-        <figcaption style="margin-top: 0.5em; margin-left: 7em; font-size: 0.9em; color: #555;">
-            Comparison of Modeling and Simulation Methods Based on Accuracy versus Computational Difficulty.
-        </figcaption>
-    </div>
-</div>
-<br>
-
-<p class="text">
-    Biostoch is a Python library designed for simulating biological systems using both deterministic and stochastic methods, enabling researchers to model cellular processes and biochemical reactions with high accuracy. The library currently supports one-dimensional simulations and includes a range of algorithms: deterministic methods such as Euler's Method and the Runge-Kutta Method for solving ordinary differential equations, and stochastic methods like the Stochastic Simulation Algorithm (SSA), Tau-Leaping Algorithm, and Chemical Langevin Equation (CLE) for capturing random fluctuations in biochemical reactions. By combining these approaches, Biostoch provides flexibility in modeling systems with varying levels of complexity and computational demands. Future updates will expand its capabilities to support two-dimensional and three-dimensional simulations, further enhancing its utility for studying multi-scale biological phenomena.
-    
-    <p class="text no-wrap">
-        Explore the project on <a href="https://github.com/LoqmanSamani/biostoch" target="_blank"><strong>GitHub</strong></a>.
-    </p>
-</p></div>
-
-
-
-         <div class="project-content">
-    <p class="text">
-        <span class="highlight-text" style="margin-left: 21em; font-size: 1.1em;">SmartSolve</span> <br>
-        <span class="sub-text" style="margin-left: 22em;">Jan 2023 - Jan 2024</span> <br>
-    </p>
-    
-<div class="flex-row">
-    <div class="flex-item flex-item-stretch flex-column">
-        <img class="image" src="images/smartsolve.png" alt="SmartSolve logo" style="max-width: 1000px; width: 77%; height: auto; display: block; margin: 0 auto;">
-        <figcaption style="margin-top: 0.5em; margin-left: 7em; font-size: 0.9em; color: #555;">
-            Created by: <a href="https://www.freepik.com/ai/image-generator" target="_blank">FreePik’s AI Image Generator.</a>
-        </figcaption>
-    </div>
-</div>
-
-<p style="font-size: 1em; line-height: 1.6;">
-    SmartSolve is a Python library designed to simplify the implementation and evaluation of classical machine learning models. It provides a streamlined workflow for data preprocessing, model training, and performance assessment, making it an ideal tool for both beginners and experienced practitioners in the field of machine learning.
-</p>
-
-<p style="font-size: 1em; line-height: 1.6;">
-    The library is organized into three core components: preprocessing, models, and evaluation. These modules work seamlessly together to facilitate efficient experimentation with various algorithms. SmartSolve supports a wide range of machine learning techniques, including:
-</p>
-
-<ul style="margin: 0; padding-left: 20px; font-size: 1em;">
-    <li>Regression Models: Linear Regression, Logistic Regression</li>
-    <li>Tree-Based Models: Decision Trees, Random Forests</li>
-    <li>Clustering Algorithms: K-Means Clustering, Gaussian Mixture Models</li>
-    <li>Dimensionality Reduction Techniques: Principal Component Analysis, Singular Value Decomposition</li>
-    <li>Classification Algorithms: Support Vector Machines, Naive Bayes, K-Nearest Neighbors</li>
-    <li>Ensemble Methods: Gradient Boosting</li>
-</ul>
-
-<p style="font-size: 1em; line-height: 1.6;">
-    Beyond its extensive collection of algorithms, SmartSolve includes robust tools for data preprocessing (e.g., feature scaling, encoding categorical variables) and model evaluation (e.g., cross-validation, confusion matrices, ROC curves). These features empower users to focus on solving real-world problems without getting bogged down in tedious setup tasks.
-</p>
-
-<p style="font-size: 1em; line-height: 1.6;">
-    For a deeper dive into SmartSolve's capabilities, check out my article <a href="https://medium.com/@samaniloqman91/introducing-smartsolve-a-mini-machine-learning-package-a848e14cb07b" target="_blank"><strong>Introducing SmartSolve: A Mini Machine Learning Package</strong></a> on Medium. This article provides an overview of the library's design philosophy, key features, and practical use cases.
-</p>
-
-<p style="font-size: 1em; line-height: 1.6;">
-    Explore the project on <a href="https://github.com/LoqmanSamani/smartsolve" target="_blank"><strong>GitHub</strong></a>.
-</p></div>
-        
-
-    <div class="project-content">
-    <p class="text">
-        <span class="highlight-text" style="margin-left: 19em; font-size: 1.1em;">MAPK Signaling Pathway</span> <br>
-        <span class="sub-text" style="margin-left: 22em;">Jun 2023 - Dec 2023</span> <br>
-    </p>
-    
-<div class="flex-row">
-    <div class="flex-item flex-item-stretch flex-column">
-        <img class="image" src="images/mapk.png" alt="MAPK Pathway logo" style="max-width: 1000px; width: 80%; height: auto; display: block; margin: 0 auto;">
-        <figcaption style="margin-top: 0.5em; margin-left: 7em; font-size: 0.9em; color: #555;">
-            Graphical abstract of the project.
-        </figcaption>
-    </div>
-</div>
-<br>
-
-<p style="font-size: 1em; line-height: 1.6;">
-    This project aimed to replicate and extend the study presented in the article <a href="https://www.nature.com/articles/ncb1543" target="_blank"><strong>Growth Factor-Induced MAPK Network Topology Shapes Erk Response Determining PC-12 Cell Fate</strong></a>, authored by Silvia D. M. Santos, Peter J. Verveer, and Philippe I. H. Bastiaens (2007). The MAPK signaling pathway plays a critical role in regulating cellular processes such as proliferation, differentiation, and apoptosis. Our work focused on reproducing the original findings while exploring new dimensions of this complex biological system.
-</p>
-
-<p style="font-size: 1em; line-height: 1.6;">
-    In addition to replicating the methodologies outlined in the original study, we redefined key aspects of the MAPK signaling pathway using advanced computational tools and parameter estimation techniques. By doing so, we uncovered previously unknown parameters and gained deeper insights into the dynamics of the Erk response and its influence on PC-12 cell fate. These efforts contribute to a better understanding of how network topology shapes signaling outcomes in biological systems.
-</p>
-
-<p style="font-size: 1em; line-height: 1.6;">
-    For a detailed exploration of our findings, you can read the paper <a href="https://github.com/LoqmanSamani/mapk-pathway/blob/systembiology/article/mapk_pathway.pdf" target="_blank"><strong>Unraveling the Complexity of MAPK Signaling Pathway</strong></a>. This document provides an in-depth analysis of our approach, results, and implications for future research.
-</p>
-
-<p style="font-size: 1em; line-height: 1.6;">
-    Explore the project on <a href="https://github.com/LoqmanSamani/mapk-pathway" target="_blank"><strong>GitHub</strong></a>.
-</p></div>
-
-          <!--End Projects-->
-        </div>
-      </div>
-    </div>
-  </div>
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
 </body>
-
 </html>
