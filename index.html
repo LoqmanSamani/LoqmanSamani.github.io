@@ -3,28 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Name | Computational Biologist</title>
-    <link rel="" href="https://fonts.googleapis.com">
+    <title>Loghman Samani | Computational Biologist</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;900&family=Roboto+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@300;400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* Matrix Palette */
-            --bg-dark: #000000;
-            --bg-card: #0a0a0a;
-            --bg-elevated: #121212;
-            --text-primary: #ffffff;
-            --text-secondary: #b0b0b0;
-            --text-muted: #666666;
-            --lime: #00ff41;
-            --lime-dark: #00cc33;
-            --lime-bright: #39ff14;
-            --blue: #00d9ff;
-            --blue-dark: #00a8cc;
-            --border-subtle: #1a1a1a;
-            --shadow-dark: rgba(0, 0, 0, 0.8);
-            --shadow-lime: rgba(0, 255, 65, 0.3);
-            --shadow-blue: rgba(0, 217, 255, 0.3);
+            /* Original Teal/Blue Theme */
+            --bg-dark: #0a0e14;
+            --bg-card: #151b26;
+            --bg-elevated: #1a2332;
+            --primary-teal: #4ecdc4;
+            --primary-blue: #5fb3d9;
+            --accent-cyan: #7ee8fa;
+            --accent-warm: #ff8b7b;
+            --text-primary: #e8edf4;
+            --text-secondary: #9ca9bc;
+            --text-muted: #6b7a90;
+            --border-subtle: #2a3648;
+            --shadow-dark: rgba(0, 0, 0, 0.4);
+            --glow-teal: rgba(78, 205, 196, 0.2);
+            --glow-blue: rgba(95, 179, 217, 0.2);
         }
 
         * {
@@ -34,13 +33,13 @@
         }
 
         body {
-            font-family: 'Roboto Mono', monospace;
+            font-family: 'Inter', sans-serif;
             color: var(--text-primary);
             background-color: var(--bg-dark);
             background-image: 
-                radial-gradient(circle at 20% 30%, rgba(0, 255, 65, 0.05) 0%, transparent 50%),
-                radial-gradient(circle at 80% 70%, rgba(0, 217, 255, 0.05) 0%, transparent 50%),
-                repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 255, 65, 0.02) 2px, rgba(0, 255, 65, 0.02) 4px);
+                radial-gradient(circle at 20% 30%, rgba(78, 205, 196, 0.04) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(95, 179, 217, 0.03) 0%, transparent 50%),
+                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><circle cx="10" cy="10" r="0.8" fill="rgba(78,205,196,0.08)"/><circle cx="30" cy="25" r="0.8" fill="rgba(95,179,217,0.08)"/><circle cx="50" cy="15" r="0.8" fill="rgba(78,205,196,0.06)"/><circle cx="70" cy="30" r="0.8" fill="rgba(95,179,217,0.06)"/><line x1="10" y1="10" x2="30" y2="25" stroke="rgba(78,205,196,0.04)" stroke-width="0.5"/><line x1="30" y1="25" x2="50" y2="15" stroke="rgba(95,179,217,0.04)" stroke-width="0.5"/></svg>');
             background-attachment: fixed;
             line-height: 1.7;
             overflow-x: hidden;
@@ -60,27 +59,27 @@
 
         .particle {
             position: absolute;
-            width: 2px;
-            height: 2px;
+            width: 3px;
+            height: 3px;
             border-radius: 50%;
-            opacity: 0.4;
+            opacity: 0.3;
             animation: float 25s infinite ease-in-out;
         }
 
         .particle:nth-child(odd) {
-            background: var(--lime);
-            box-shadow: 0 0 10px var(--lime);
+            background: var(--primary-teal);
+            box-shadow: 0 0 12px var(--primary-teal);
         }
 
         .particle:nth-child(even) {
-            background: var(--blue);
-            box-shadow: 0 0 10px var(--blue);
+            background: var(--primary-blue);
+            box-shadow: 0 0 12px var(--primary-blue);
         }
 
         @keyframes float {
-            0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.4; }
-            33% { transform: translate(40px, -40px) scale(1.5); opacity: 0.6; }
-            66% { transform: translate(-30px, 30px) scale(0.8); opacity: 0.3; }
+            0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.3; }
+            33% { transform: translate(40px, -40px) scale(1.3); opacity: 0.5; }
+            66% { transform: translate(-30px, 30px) scale(0.8); opacity: 0.2; }
         }
 
         .particle:nth-child(1) { left: 10%; top: 20%; animation-delay: 0s; }
@@ -122,9 +121,10 @@
             align-items: center;
             padding: 2.5rem;
             background: var(--bg-card);
-            border-radius: 0;
-            box-shadow: 0 4px 24px var(--shadow-dark), 0 0 30px var(--shadow-lime);
-            border: 1px solid var(--lime);
+            border-radius: 2px;
+            box-shadow: 0 4px 24px var(--shadow-dark), 0 0 30px var(--glow-teal);
+            border: 1px solid var(--border-subtle);
+            border-left: 4px solid var(--primary-teal);
             position: relative;
             overflow: hidden;
         }
@@ -135,40 +135,41 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 2px;
-            background: linear-gradient(90deg, var(--lime), var(--blue), var(--lime));
-            animation: scanline 3s linear infinite;
-        }
-
-        @keyframes scanline {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(100%); }
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--primary-teal), transparent);
+            opacity: 0.6;
         }
 
         .profile-photo {
             width: 140px;
             height: 140px;
-            border-radius: 0;
+            border-radius: 4px;
             overflow: hidden;
-            border: 2px solid var(--lime);
-            box-shadow: 0 0 30px var(--shadow-lime), inset 0 0 20px rgba(0, 255, 65, 0.1);
+            border: 2px solid var(--primary-teal);
+            box-shadow: 0 0 30px var(--glow-teal);
             position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .profile-photo:hover {
+            box-shadow: 0 0 40px var(--glow-teal);
+            transform: scale(1.02);
         }
 
         .profile-photo::after {
             content: '';
             position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(0, 255, 65, 0.4), transparent);
-            animation: photoScan 3s infinite;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent 30%, rgba(78, 205, 196, 0.2) 50%, transparent 70%);
+            animation: shimmer 4s infinite;
         }
 
-        @keyframes photoScan {
-            0% { left: -100%; }
-            100% { left: 100%; }
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
         }
 
         .profile-photo img {
@@ -176,40 +177,36 @@
             height: 100%;
             object-fit: cover;
             display: block;
-            filter: brightness(0.9) contrast(1.1);
         }
 
         .header-info h1 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 3.2rem;
-            font-weight: 700;
+            font-family: 'Crimson Pro', serif;
+            font-size: 3.5rem;
+            font-weight: 400;
             color: var(--text-primary);
-            letter-spacing: 0.05em;
+            letter-spacing: -0.02em;
             line-height: 1.1;
             margin-bottom: 0.5rem;
-            text-shadow: 0 0 20px var(--shadow-lime);
         }
 
         .header-info h1 .accent {
-            color: var(--lime);
-            text-shadow: 0 0 30px var(--lime);
+            color: var(--primary-teal);
+            font-weight: 600;
         }
 
         .subtitle {
-            font-size: 1rem;
-            color: var(--blue);
-            font-weight: 400;
-            letter-spacing: 0.2em;
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            font-weight: 300;
+            letter-spacing: 0.1em;
             text-transform: uppercase;
             margin-bottom: 1rem;
-            text-shadow: 0 0 10px var(--blue);
         }
 
         .affiliation {
-            font-size: 0.9rem;
-            color: var(--text-secondary);
+            font-size: 0.95rem;
+            color: var(--text-muted);
             font-weight: 300;
-            letter-spacing: 0.05em;
         }
 
         /* Navigation */
@@ -224,33 +221,30 @@
             color: var(--text-secondary);
             text-decoration: none;
             font-weight: 400;
-            font-size: 0.85rem;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 0.05em;
             transition: all 0.3s ease;
             position: relative;
-            padding: 0.5rem 1rem;
-            border: 1px solid transparent;
+            padding: 0.5rem 0;
         }
 
-        nav a::before {
-            content: '>';
+        nav a::after {
+            content: '';
             position: absolute;
+            bottom: 0;
             left: 0;
-            opacity: 0;
-            color: var(--lime);
-            transition: all 0.3s ease;
+            width: 0;
+            height: 2px;
+            background: var(--primary-teal);
+            transition: width 0.3s ease;
         }
 
         nav a:hover {
-            color: var(--lime);
-            text-shadow: 0 0 10px var(--lime);
-            border-color: var(--lime);
+            color: var(--primary-teal);
         }
 
-        nav a:hover::before {
-            opacity: 1;
-            left: 0.3rem;
+        nav a:hover::after {
+            width: 100%;
         }
 
         /* Main Content */
@@ -280,65 +274,42 @@
         }
 
         .section-header {
-            font-family: 'Orbitron', sans-serif;
+            font-family: 'Crimson Pro', serif;
             font-size: 2.8rem;
             font-weight: 600;
             color: var(--text-primary);
             margin-bottom: 2.5rem;
             position: relative;
             display: inline-block;
-            letter-spacing: 0.05em;
-            text-shadow: 0 0 20px var(--shadow-lime);
+            letter-spacing: -0.01em;
         }
 
         .section-header::after {
             content: '';
             position: absolute;
-            bottom: -12px;
+            bottom: -10px;
             left: 0;
             width: 60%;
-            height: 2px;
-            background: linear-gradient(90deg, var(--lime), var(--blue));
-            box-shadow: 0 0 15px var(--lime);
-        }
-
-        .section-header::before {
-            content: '//';
-            position: absolute;
-            left: -2.5rem;
-            color: var(--blue);
-            font-size: 1.5rem;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-teal), var(--primary-blue));
+            box-shadow: 0 0 15px var(--glow-teal);
         }
 
         /* About Section */
         .about-content {
             background: var(--bg-card);
             padding: 3rem;
-            border-radius: 0;
+            border-radius: 2px;
             box-shadow: 0 2px 16px var(--shadow-dark);
-            border: 1px solid var(--lime);
+            border: 1px solid var(--border-subtle);
             line-height: 1.9;
-            font-size: 1rem;
+            font-size: 1.05rem;
             position: relative;
-        }
-
-        .about-content::before {
-            content: '<>';
-            position: absolute;
-            top: 1rem;
-            left: 1.5rem;
-            font-family: 'Orbitron', sans-serif;
-            font-size: 5rem;
-            color: var(--lime);
-            opacity: 0.1;
-            line-height: 1;
         }
 
         .about-content p {
             margin-bottom: 1.5rem;
             color: var(--text-secondary);
-            position: relative;
-            z-index: 1;
         }
 
         .keywords {
@@ -351,17 +322,15 @@
         .keyword {
             padding: 0.6rem 1.5rem;
             background: transparent;
-            border: 1px solid var(--lime);
-            color: var(--lime);
-            border-radius: 0;
-            font-size: 0.75rem;
-            font-weight: 500;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
+            border: 1px solid var(--primary-teal);
+            color: var(--primary-teal);
+            border-radius: 25px;
+            font-size: 0.85rem;
+            font-weight: 400;
+            letter-spacing: 0.05em;
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
-            font-family: 'Orbitron', sans-serif;
         }
 
         .keyword::before {
@@ -371,7 +340,7 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: var(--lime);
+            background: var(--primary-teal);
             transition: left 0.3s ease;
             z-index: -1;
         }
@@ -379,8 +348,7 @@
         .keyword:hover {
             color: var(--bg-dark);
             transform: translateY(-2px);
-            box-shadow: 0 4px 20px var(--shadow-lime);
-            text-shadow: none;
+            box-shadow: 0 4px 15px var(--glow-teal);
         }
 
         .keyword:hover::before {
@@ -390,14 +358,14 @@
         /* Projects Grid */
         .research-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 2rem;
         }
 
         .research-card {
             background: var(--bg-card);
             padding: 2.5rem;
-            border-radius: 0;
+            border-radius: 2px;
             box-shadow: 0 2px 12px var(--shadow-dark);
             transition: all 0.4s ease;
             border: 1px solid var(--border-subtle);
@@ -411,46 +379,30 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, transparent, rgba(0, 255, 65, 0.05), transparent);
-            opacity: 0;
-            transition: opacity 0.4s ease;
-        }
-
-        .research-card::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 3px;
-            height: 100%;
-            background: linear-gradient(180deg, var(--lime), var(--blue));
-            transform: scaleY(0);
-            transform-origin: top;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-teal), var(--primary-blue));
+            transform: scaleX(0);
+            transform-origin: left;
             transition: transform 0.4s ease;
         }
 
         .research-card:hover {
             transform: translateY(-8px);
-            box-shadow: 0 12px 32px var(--shadow-dark), 0 0 40px var(--shadow-lime);
-            border-color: var(--lime);
+            box-shadow: 0 12px 32px var(--shadow-dark), 0 0 40px var(--glow-teal);
+            border-color: var(--primary-teal);
         }
 
         .research-card:hover::before {
-            opacity: 1;
-        }
-
-        .research-card:hover::after {
-            transform: scaleY(1);
+            transform: scaleX(1);
         }
 
         .research-card h3 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.5rem;
+            font-family: 'Crimson Pro', serif;
+            font-size: 1.6rem;
             font-weight: 600;
             color: var(--text-primary);
             margin-bottom: 1rem;
-            letter-spacing: 0.03em;
+            letter-spacing: -0.01em;
         }
 
         .research-card p {
@@ -461,11 +413,9 @@
         }
 
         .research-meta {
-            font-size: 0.75rem;
-            color: var(--blue);
+            font-size: 0.8rem;
+            color: var(--primary-blue);
             font-style: italic;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
             margin-top: 1.5rem;
         }
 
@@ -473,20 +423,17 @@
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            color: var(--lime);
+            color: var(--primary-teal);
             text-decoration: none;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             margin-top: 1rem;
             transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
             font-weight: 500;
-            font-family: 'Orbitron', sans-serif;
         }
 
         .project-link:hover {
             gap: 0.8rem;
-            text-shadow: 0 0 15px var(--lime);
+            text-shadow: 0 0 10px var(--glow-teal);
         }
 
         /* Blog Posts */
@@ -494,71 +441,51 @@
             background: var(--bg-card);
             padding: 2rem;
             margin-bottom: 1.5rem;
-            border-radius: 0;
-            border-left: 3px solid var(--lime);
+            border-radius: 2px;
+            border-left: 4px solid var(--primary-teal);
             box-shadow: 0 2px 8px var(--shadow-dark);
             border: 1px solid var(--border-subtle);
-            border-left: 3px solid var(--lime);
+            border-left: 4px solid var(--primary-teal);
             transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .publication::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 0;
-            height: 100%;
-            background: linear-gradient(90deg, rgba(0, 255, 65, 0.1), transparent);
-            transition: width 0.3s ease;
         }
 
         .publication:hover {
-            transform: translateX(12px);
-            box-shadow: 0 4px 20px var(--shadow-dark), -8px 0 20px var(--shadow-lime);
-            border-left-color: var(--blue);
-        }
-
-        .publication:hover::before {
-            width: 100%;
+            transform: translateX(10px);
+            box-shadow: 0 4px 20px var(--shadow-dark), -8px 0 20px var(--glow-teal);
         }
 
         .publication-title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.3rem;
+            font-family: 'Crimson Pro', serif;
+            font-size: 1.35rem;
             font-weight: 600;
             color: var(--text-primary);
             margin-bottom: 0.6rem;
-            letter-spacing: 0.02em;
+            letter-spacing: -0.01em;
         }
 
         .publication-authors {
             color: var(--text-secondary);
             margin-bottom: 0.5rem;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             line-height: 1.6;
         }
 
         .publication-venue {
             color: var(--text-muted);
             font-style: italic;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
         }
 
         .blog-link {
-            color: var(--lime);
+            color: var(--primary-teal);
             text-decoration: none;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
             font-weight: 500;
-            font-family: 'Orbitron', sans-serif;
         }
 
         .blog-link:hover {
-            text-shadow: 0 0 15px var(--lime);
+            text-shadow: 0 0 10px var(--glow-teal);
         }
 
         /* Footer */
@@ -567,19 +494,8 @@
             color: var(--text-primary);
             padding: 4rem 0;
             margin-top: 6rem;
-            border-top: 2px solid var(--lime);
+            border-top: 1px solid var(--primary-teal);
             box-shadow: 0 -4px 24px var(--shadow-dark);
-            position: relative;
-        }
-
-        footer::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: linear-gradient(90deg, var(--lime), var(--blue), var(--lime));
         }
 
         .footer-content {
@@ -589,13 +505,11 @@
         }
 
         footer h3 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.5rem;
+            font-family: 'Crimson Pro', serif;
+            font-size: 1.6rem;
             margin-bottom: 1.5rem;
-            color: var(--lime);
+            color: var(--primary-teal);
             font-weight: 600;
-            letter-spacing: 0.05em;
-            text-shadow: 0 0 15px var(--lime);
         }
 
         .contact-links {
@@ -608,29 +522,12 @@
             color: var(--text-secondary);
             text-decoration: none;
             transition: all 0.3s ease;
-            font-size: 0.9rem;
-            position: relative;
-            padding-left: 0;
-        }
-
-        .contact-links a::before {
-            content: '>';
-            position: absolute;
-            left: -15px;
-            opacity: 0;
-            color: var(--lime);
-            transition: all 0.3s ease;
+            font-size: 0.95rem;
         }
 
         .contact-links a:hover {
-            color: var(--lime);
-            padding-left: 10px;
-            text-shadow: 0 0 10px var(--lime);
-        }
-
-        .contact-links a:hover::before {
-            opacity: 1;
-            left: 0;
+            color: var(--primary-teal);
+            padding-left: 8px;
         }
 
         .footer-note {
@@ -640,8 +537,8 @@
             padding-top: 2rem;
             border-top: 1px solid var(--border-subtle);
             color: var(--text-muted);
-            font-size: 0.8rem;
-            letter-spacing: 0.08em;
+            font-size: 0.85rem;
+            letter-spacing: 0.05em;
         }
 
         /* Responsive */
@@ -662,10 +559,6 @@
                 flex-wrap: wrap;
             }
 
-            .section-header::before {
-                display: none;
-            }
-
             .footer-content {
                 grid-template-columns: 1fr;
             }
@@ -673,11 +566,11 @@
 
         @media (max-width: 768px) {
             .header-info h1 {
-                font-size: 2.2rem;
+                font-size: 2.5rem;
             }
 
             .section-header {
-                font-size: 2rem;
+                font-size: 2.2rem;
             }
 
             .research-grid {
@@ -686,40 +579,6 @@
 
             .about-content {
                 padding: 2rem;
-            }
-        }
-
-        /* Matrix rain effect (subtle) */
-        .matrix-char {
-            position: fixed;
-            top: -20px;
-            color: var(--lime);
-            opacity: 0.05;
-            font-family: 'Roboto Mono', monospace;
-            font-size: 14px;
-            animation: rain linear infinite;
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        @keyframes rain {
-            0% { transform: translateY(-20px); opacity: 0; }
-            10% { opacity: 0.05; }
-            90% { opacity: 0.05; }
-            100% { transform: translateY(100vh); opacity: 0; }
-        }
-
-        /* Scroll animations */
-        @media (prefers-reduced-motion: no-preference) {
-            .reveal {
-                opacity: 0;
-                transform: translateY(30px);
-                transition: all 0.6s ease-out;
-            }
-
-            .reveal.active {
-                opacity: 1;
-                transform: translateY(0);
             }
         }
     </style>
@@ -736,40 +595,34 @@
     </div>
 
     <div class="container">
-    <header>
-        <div class="header-content">
-            <div class="profile-photo">
-                <img src="https://raw.githubusercontent.com/LoqmanSamani/LoqmanSamani.github.io/systembiology/images/img__.jpg" alt="Loghman Samani">
+        <header>
+            <div class="header-content">
+                <div class="profile-photo">
+                    <img src="https://raw.githubusercontent.com/LoqmanSamani/LoqmanSamani.github.io/systembiology/images/img__.jpg" alt="Loghman Samani">
+                </div>
+                <div class="header-info">
+                    <h1>Loghman <span class="accent">Samani</span></h1>
+                    <p class="subtitle">Computational Biologist</p>
+                    <p class="affiliation">Diffusion Models • Molecular Dynamics • Machine Learning</p>
+                </div>
+                <nav>
+                    <a href="#about">About</a>
+                    <a href="#projects">Projects</a>
+                    <a href="#writing">Writing</a>
+                    <a href="#contact">Contact</a>
+                </nav>
             </div>
-            <div class="header-info">
-                <h1>Loghman <span class="accent">Samani</span></h1>
-                <p class="subtitle">Computational Biologist</p>
-                <p class="affiliation">Diffusion Models • Molecular Dynamics • Machine Learning</p>
-            </div>
-            <nav>
-                <a href="#about">About</a>
-                <a href="#projects">Projects</a>
-                <a href="#writing">Writing</a>
-                <a href="#contact">Contact</a>
-            </nav>
-        </div>
-    </header>
+        </header>
 
         <main>
             <section id="about">
                 <h2 class="section-header">About</h2>
                 <div class="about-content">
                     <p>
-                       I hold a master’s degree in computational biology from the University of Stuttgart and am currently seeking research or PhD positions that combine computational biology with machine learning.
-                       My academic training has focused on building quantitative and principled models for biological systems, with a strong emphasis on methodological clarity and reproducibility.
+                        I hold a master's degree in computational biology from the University of Stuttgart and am currently seeking research or PhD positions that combine computational biology with machine learning. My academic training has focused on building quantitative and principled models for biological systems, with a strong emphasis on methodological clarity and reproducibility.
                     </p>
                     <p>
-
-                       My research centers on computational structural biology, particularly generative modeling for protein structure design, structure prediction, and molecular dynamics.
-                       I am especially interested in physics aware and geometry aware generative models, including energy based and diffusion based approaches. 
-                       My goal is to develop models that respect the underlying physical constraints of biomolecular systems and contribute to a deeper, 
-                       mechanistic understanding of protein folding and conformational dynamics.
-
+                        My research centers on computational structural biology, particularly generative modeling for protein structure design, structure prediction, and molecular dynamics. I am especially interested in physics-aware and geometry-aware generative models, including energy-based and diffusion-based approaches. My goal is to develop models that respect the underlying physical constraints of biomolecular systems and contribute to a deeper, mechanistic understanding of protein folding and conformational dynamics.
                     </p>
                     
                     <div class="keywords">
@@ -785,48 +638,52 @@
             <section id="projects">
                 <h2 class="section-header">Projects</h2>
                 <div class="research-grid">
-                <div class="research-card">
-                    <h3>CppNet: High-Performance Deep Learning in C++</h3>
+                    <div class="research-card">
+                        <h3>CppNet: High-Performance Deep Learning</h3>
                         <p>
-                            CppNet is a C++ deep learning library for building and training neural networks with a focus on performance and transparency. It supports efficient tensor operations via Eigen, CPU parallelism with OpenMP, and GPU acceleration using CUDA.
+                            A C++ deep learning library built for performance and transparency. Features efficient tensor operations via Eigen, CPU parallelism with OpenMP, and GPU acceleration through CUDA for training neural networks at scale.
                         </p>
-                    <p class="research-meta">C++ • Eigen • OpenMP • CUDA</p>
-                    <a href="https://github.com/LoqmanSamani/CppNet" class="project-link" target="_blank">
-                        View on GitHub →
+                        <p class="research-meta">C++ • Eigen • OpenMP • CUDA</p>
+                        <a href="https://github.com/LoqmanSamani/CppNet" class="project-link" target="_blank">
+                            View on GitHub →
                         </a>
                     </div>
+                    
                     <div class="research-card">
                         <h3>TorchDiff: Diffusion Models in PyTorch</h3>
                         <p>
-                            A PyTorch library for building and experimenting with diffusion-based generative models. Implements DDPM, DDIM, score-based SDE models, latent diffusion, and UnCLIP, with support for both conditional and unconditional generation.
+                            PyTorch library for building and experimenting with diffusion-based generative models. Implements DDPM, DDIM, score-based SDE models, latent diffusion, and UnCLIP with support for conditional and unconditional generation.
                         </p>
                         <p class="research-meta">Python • PyTorch • Diffusion Models</p>
                         <a href="https://github.com/LoqmanSamani/TorchDiff" class="project-link" target="_blank">
                             View on GitHub →
                         </a>
                     </div>
+                    
                     <div class="research-card">
-                        <h3>GRN-Designer: Spatial Gene Regulatory Networks</h3>
+                        <h3>GRN-Designer: Spatial Gene Networks</h3>
                         <p>
-                            Computational framework for automated design and analysis of gene regulatory networks with spatial structure. Uses hybrid evolutionary and gradient-based optimization to generate GRNs that reproduce predefined spatial expression patterns.
+                            Computational framework for automated design and analysis of gene regulatory networks with spatial structure. Uses hybrid evolutionary and gradient-based optimization to generate networks reproducing predefined spatial expression patterns.
                         </p>
                         <p class="research-meta">Python • Optimization • PDEs</p>
-                        <a href="https://loqmansamani.github.io/grn-designer/" class="project-link">
-                            Master’s Thesis Project
+                        <a href="https://loqmansamani.github.io/grn-designer/" class="project-link" target="_blank">
+                            Master's Thesis Project →
                         </a>
                     </div>
+                    
                     <div class="research-card">
-                        <h3>Deep Learning Models From Scratch</h3>
+                        <h3>Deep Learning From Scratch</h3>
                         <p>
-                            Implementation of core deep learning architectures from first principles, including MLPs, CNNs, RNNs with LSTMs, and Transformers. Covers optimization methods and regularization techniques with a focus on conceptual clarity and correctness.
+                            Implementation of core architectures from first principles, including MLPs, CNNs, RNNs with LSTMs, and Transformers. Covers optimization methods and regularization with emphasis on conceptual clarity and mathematical correctness.
                         </p>
                         <p class="research-meta">Python • Neural Networks • Optimization</p>
-                        <a href="https://github.com/LoqmanSamani/deep-learning" class="project-link">
+                        <a href="https://github.com/LoqmanSamani/deep-learning" class="project-link" target="_blank">
                             View on GitHub →
                         </a>
                     </div>
+                    
                     <div class="research-card">
-                        <h3>Biostoch: Stochastic Biological Simulation</h3>
+                        <h3>Biostoch: Stochastic Simulation</h3>
                         <p>
                             Python library for simulating biological systems using deterministic and stochastic formulations. Implements ODE solvers and stochastic reaction models to study cellular and biochemical dynamics under intrinsic noise.
                         </p>
@@ -835,10 +692,11 @@
                             View on GitHub →
                         </a>
                     </div>
+                    
                     <div class="research-card">
-                        <h3>SmartSolve: Classical Machine Learning Toolkit</h3>
+                        <h3>SmartSolve: ML Toolkit</h3>
                         <p>
-                            Python library for implementing and evaluating classical machine learning models. Provides a unified workflow for preprocessing, training, and evaluation across a range of supervised and unsupervised methods.
+                            Unified framework for implementing and evaluating classical machine learning models. Provides consistent workflow for preprocessing, training, and evaluation across supervised and unsupervised methods.
                         </p>
                         <p class="research-meta">Python • Machine Learning • Model Evaluation</p>
                         <a href="https://github.com/LoqmanSamani/smartsolve" class="project-link" target="_blank">
@@ -856,43 +714,37 @@
                         Latent Diffusion Models and Their Implementation in TorchDiff
                     </div>
                     <div class="publication-authors">
-                        Overview of latent diffusion models and their practical implementation in PyTorch, with a focus on efficiency, scalability, and conditional generation using compressed latent spaces
+                        Comprehensive guide to latent diffusion models, covering theory, architecture, and practical PyTorch implementation for efficient high-resolution image generation
                     </div>
                     <div class="publication-venue">
-                        Medium • 11 min read •
-                        <a href="https://medium.com/@samaniloqman91/latent-diffusion-models-and-their-implementation-in-torchdiff-7dc04c33c4f7" class="blog-link" target="_blank">
-                            Read on Medium →
-                        </a>
+                        Medium • 11 min read • 
+                        <a href="https://medium.com/@samaniloqman91/latent-diffusion-models-and-their-implementation-in-torchdiff-7dc04c33c4f7" class="blog-link" target="_blank">Read on Medium →</a>
                     </div>
                 </div>
 
                 <div class="publication">
                     <div class="publication-title">
-                        Score-Based Generative Modeling with SDEs: Theory and Implementation in TorchDiff
+                        Score-Based Generative Modeling with SDEs
                     </div>
                     <div class="publication-authors">
                         Detailed exposition of score-based generative models defined via stochastic differential equations, covering VE, VP, and sub-VP formulations with practical PyTorch implementations
                     </div>
                     <div class="publication-venue">
-                        Medium • 17 min read •
-                        <a href="https://medium.com/@samaniloqman91/score-based-generative-modeling-with-sdes-theory-and-implementation-in-torchdiff-db9a20a84978" class="blog-link" target="_blank">
-                            Read on Medium →
-                        </a>
+                        Medium • 17 min read • 
+                        <a href="https://medium.com/@samaniloqman91/score-based-generative-modeling-with-sdes-theory-and-implementation-in-torchdiff-db9a20a84978" class="blog-link" target="_blank">Read on Medium →</a>
                     </div>
                 </div>
 
                 <div class="publication">
                     <div class="publication-title">
-                        TorchDiff: A PyTorch Library for Denoising Diffusion Probabilistic Models and Beyond
+                        TorchDiff: A PyTorch Library for Diffusion Models
                     </div>
                     <div class="publication-authors">
-                        Introduction to the theoretical foundations of diffusion models with practical PyTorch implementations, covering DDPM, DDIM, score-based SDE models, and latent diffusion
+                        Introduction to the theoretical foundations of diffusion models with practical implementations, covering DDPM, DDIM, score-based SDE models, and latent diffusion
                     </div>
                     <div class="publication-venue">
-                        Medium • 17 min read •
-                        <a href="https://medium.com/@samaniloqman91/torchdiff-a-pytorch-library-for-denoising-diffusion-probabilistic-models-and-beyond-d15156e9e3b5" class="blog-link" target="_blank">
-                            Read on Medium →
-                        </a>
+                        Medium • 17 min read • 
+                        <a href="https://medium.com/@samaniloqman91/torchdiff-a-pytorch-library-for-denoising-diffusion-probabilistic-models-and-beyond-d15156e9e3b5" class="blog-link" target="_blank">Read on Medium →</a>
                     </div>
                 </div>
 
@@ -901,57 +753,53 @@
                         From Biology to Computation: Exploring Genetic Algorithms
                     </div>
                     <div class="publication-authors">
-                        Step-by-step exploration of genetic algorithms, connecting principles of biological evolution to Python-based implementations for solving optimization problems
+                        Step-by-step exploration of genetic algorithms, connecting principles of biological evolution to Python-based implementations for optimization problems
                     </div>
                     <div class="publication-venue">
-                        Medium • 18 min read •
-                        <a href="https://medium.com/@samaniloqman91/from-biology-to-computation-exploring-genetic-algorithms-5b090213351f" class="blog-link" target="_blank">
-                            Read on Medium →
-                        </a>
+                        Medium • 18 min read • 
+                        <a href="https://medium.com/@samaniloqman91/from-biology-to-computation-exploring-genetic-algorithms-5b090213351f" class="blog-link" target="_blank">Read on Medium →</a>
                     </div>
                 </div>
+
                 <div class="publication">
                     <div class="publication-title">
-                        Adam Optimization Algorithm: Improving MLP Performance
+                        Adam Optimization: Enhancing MLP Performance
                     </div>
                     <div class="publication-authors">
                         Detailed explanation of the Adam optimizer and its application in training multiclass MLPs, highlighting techniques for faster convergence and robust performance
                     </div>
                     <div class="publication-venue">
-                        Medium • 21 min read •
-                        <a href="https://medium.com/@samaniloqman91/adam-optimization-demystified-enhancing-multiclass-mlp-performance-000827cfd5e1" class="blog-link" target="_blank">
-                            Read on Medium →
-                        </a>
+                        Medium • 21 min read • 
+                        <a href="https://medium.com/@samaniloqman91/adam-optimization-demystified-enhancing-multiclass-mlp-performance-000827cfd5e1" class="blog-link" target="_blank">Read on Medium →</a>
                     </div>
                 </div>
+
                 <div class="publication">
                     <div class="publication-title">
-                        From Theory to Practice: Building a Deep Feedforward Neural Network with Back Propagation in Python
+                        Building a Deep Feedforward Neural Network with Backpropagation
                     </div>
                     <div class="publication-authors">
-                        Step-by-step guide to constructing and training a deep feedforward neural network using backpropagation, with Python implementations for binary classification
+                        Step-by-step guide to constructing and training deep feedforward networks using backpropagation, with Python implementations for binary classification
                     </div>
                     <div class="publication-venue">
-                        Medium • 13 min read •
-                        <a href="https://medium.com/@samaniloqman91/from-theory-to-practice-building-a-deep-feedforward-neural-network-with-back-propagation-in-python-9edc39164a68" class="blog-link" target="_blank">
-                            Read on Medium →
-                        </a>
+                        Medium • 13 min read • 
+                        <a href="https://medium.com/@samaniloqman91/from-theory-to-practice-building-a-deep-feedforward-neural-network-with-back-propagation-in-python-9edc39164a68" class="blog-link" target="_blank">Read on Medium →</a>
                     </div>
                 </div>
+
                 <div class="publication">
                     <div class="publication-title">
-                        Introducing BioStoch: A Python Library for Simulating Biological Systems
+                        Introducing BioStoch: Simulating Biological Systems
                     </div>
                     <div class="publication-authors">
                         Overview of BioStoch, a Python library for deterministic and stochastic simulation of biological systems, including Euler, Runge-Kutta, SSA, Tau-Leaping, and Chemical Langevin methods
                     </div>
                     <div class="publication-venue">
-                        Medium • 13 min read •
-                        <a href="https://medium.com/@samaniloqman91/introducing-biostoch-a-python-library-for-simulating-biological-systems-5d38df9b6991" class="blog-link" target="_blank">
-                            Read on Medium →
-                        </a>
+                        Medium • 13 min read • 
+                        <a href="https://medium.com/@samaniloqman91/introducing-biostoch-a-python-library-for-simulating-biological-systems-5d38df9b6991" class="blog-link" target="_blank">Read on Medium →</a>
                     </div>
                 </div>
+
                 <div class="publication">
                     <div class="publication-title">
                         Highly Accurate Protein Structure Prediction with AlphaFold
@@ -960,12 +808,11 @@
                         Detailed explanation of AlphaFold, a machine learning system for predicting protein structures from amino acid sequences with atomic accuracy
                     </div>
                     <div class="publication-venue">
-                        Medium • 13 min read •
-                        <a href="https://medium.com/@samaniloqman91/highly-accurate-protein-structure-prediction-with-alphafold-9e4cc8b6c692" class="blog-link" target="_blank">
-                            Read on Medium →
-                        </a>
+                        Medium • 13 min read • 
+                        <a href="https://medium.com/@samaniloqman91/highly-accurate-protein-structure-prediction-with-alphafold-9e4cc8b6c692" class="blog-link" target="_blank">Read on Medium →</a>
                     </div>
                 </div>
+
                 <div class="publication">
                     <div class="publication-title">
                         Introduction to Nuclear Magnetic Resonance (NMR)
@@ -974,13 +821,10 @@
                         Overview of NMR spectroscopy and its applications in structural biology, including protein structure, dynamics, interactions, and intrinsically disordered proteins
                     </div>
                     <div class="publication-venue">
-                        Medium • 20 min read •
-                        <a href="https://medium.com/@samaniloqman91/introduction-to-nuclear-magnetic-resonance-nmr-997960e21048" class="blog-link" target="_blank">
-                            Read on Medium →
-                        </a>
+                        Medium • 20 min read • 
+                        <a href="https://medium.com/@samaniloqman91/introduction-to-nuclear-magnetic-resonance-nmr-997960e21048" class="blog-link" target="_blank">Read on Medium →</a>
                     </div>
                 </div>
-
             </section>
         </main>
 
