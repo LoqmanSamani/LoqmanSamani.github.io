@@ -3,27 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Loghman Samani | Computational Biologist</title>
+    <title>Loghman Samani | Computational Biology</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@300;400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Source+Sans+3:wght@300;400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* Original Teal/Blue Theme */
-            --bg-dark: #0a0e14;
-            --bg-card: #151b26;
-            --bg-elevated: #1a2332;
-            --primary-teal: #4ecdc4;
-            --primary-blue: #5fb3d9;
-            --accent-cyan: #7ee8fa;
-            --accent-warm: #ff8b7b;
-            --text-primary: #e8edf4;
-            --text-secondary: #9ca9bc;
-            --text-muted: #6b7a90;
-            --border-subtle: #2a3648;
-            --shadow-dark: rgba(0, 0, 0, 0.4);
-            --glow-teal: rgba(78, 205, 196, 0.2);
-            --glow-blue: rgba(95, 179, 217, 0.2);
+            --white: #ffffff;
+            --bg: #fafbfc;
+            --bg-alt: #f0f2f5;
+            --surface: #ffffff;
+            --navy: #1b2a4a;
+            --navy-light: #2d4a7a;
+            --accent: #3d6cb9;
+            --accent-hover: #2c5aa0;
+            --text: #2c3e50;
+            --text-secondary: #556677;
+            --text-muted: #8899aa;
+            --border: #e2e6ec;
+            --border-light: #eef1f5;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+            --shadow-md: 0 2px 8px rgba(0,0,0,0.08);
+            --shadow-lg: 0 4px 16px rgba(0,0,0,0.1);
+            --radius: 6px;
         }
 
         * {
@@ -32,876 +34,714 @@
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
-            font-family: 'Inter', sans-serif;
-            color: var(--text-primary);
-            background-color: var(--bg-dark);
-            background-image: 
-                radial-gradient(circle at 20% 30%, rgba(78, 205, 196, 0.04) 0%, transparent 50%),
-                radial-gradient(circle at 80% 70%, rgba(95, 179, 217, 0.03) 0%, transparent 50%),
-                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><circle cx="10" cy="10" r="0.8" fill="rgba(78,205,196,0.08)"/><circle cx="30" cy="25" r="0.8" fill="rgba(95,179,217,0.08)"/><circle cx="50" cy="15" r="0.8" fill="rgba(78,205,196,0.06)"/><circle cx="70" cy="30" r="0.8" fill="rgba(95,179,217,0.06)"/><line x1="10" y1="10" x2="30" y2="25" stroke="rgba(78,205,196,0.04)" stroke-width="0.5"/><line x1="30" y1="25" x2="50" y2="15" stroke="rgba(95,179,217,0.04)" stroke-width="0.5"/></svg>');
-            background-attachment: fixed;
+            font-family: 'Source Sans 3', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            color: var(--text);
+            background-color: var(--bg);
             line-height: 1.7;
-            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* Animated background particles */
-        .bg-particles {
-            position: fixed;
+        /* ── Navigation ── */
+        .top-nav {
+            position: sticky;
             top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 0;
-            overflow: hidden;
+            z-index: 100;
+            background: rgba(255,255,255,0.92);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
         }
 
-        .particle {
-            position: absolute;
-            width: 3px;
-            height: 3px;
-            border-radius: 50%;
-            opacity: 0.3;
-            animation: float 25s infinite ease-in-out;
-        }
-
-        .particle:nth-child(odd) {
-            background: var(--primary-teal);
-            box-shadow: 0 0 12px var(--primary-teal);
-        }
-
-        .particle:nth-child(even) {
-            background: var(--primary-blue);
-            box-shadow: 0 0 12px var(--primary-blue);
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.3; }
-            33% { transform: translate(40px, -40px) scale(1.3); opacity: 0.5; }
-            66% { transform: translate(-30px, 30px) scale(0.8); opacity: 0.2; }
-        }
-
-        .particle:nth-child(1) { left: 10%; top: 20%; animation-delay: 0s; }
-        .particle:nth-child(2) { left: 70%; top: 30%; animation-delay: -8s; }
-        .particle:nth-child(3) { left: 30%; top: 60%; animation-delay: -15s; }
-        .particle:nth-child(4) { left: 85%; top: 75%; animation-delay: -20s; }
-        .particle:nth-child(5) { left: 50%; top: 40%; animation-delay: -5s; }
-        .particle:nth-child(6) { left: 15%; top: 80%; animation-delay: -12s; }
-
-        .container {
-            max-width: 1200px;
+        .top-nav .nav-inner {
+            max-width: 900px;
             margin: 0 auto;
             padding: 0 2rem;
-            position: relative;
-            z-index: 1;
-        }
-
-        /* Header */
-        header {
-            padding: 4rem 0 2rem;
-            animation: fadeInDown 0.8s ease-out;
-        }
-
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .header-content {
-            display: grid;
-            grid-template-columns: auto 1fr auto;
-            gap: 2.5rem;
+            display: flex;
+            justify-content: space-between;
             align-items: center;
-            padding: 2.5rem;
-            background: var(--bg-card);
-            border-radius: 2px;
-            box-shadow: 0 4px 24px var(--shadow-dark), 0 0 30px var(--glow-teal);
-            border: 1px solid var(--border-subtle);
-            border-left: 4px solid var(--primary-teal);
-            position: relative;
-            overflow: hidden;
+            height: 56px;
         }
 
-        .header-content::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--primary-teal), transparent);
-            opacity: 0.6;
-        }
-
-        .profile-photo {
-            width: 140px;
-            height: 140px;
-            border-radius: 4px;
-            overflow: hidden;
-            border: 2px solid var(--primary-teal);
-            box-shadow: 0 0 30px var(--glow-teal);
-            position: relative;
-            transition: all 0.3s ease;
-        }
-
-        .profile-photo:hover {
-            box-shadow: 0 0 40px var(--glow-teal);
-            transform: scale(1.02);
-        }
-
-        .profile-photo::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent 30%, rgba(78, 205, 196, 0.2) 50%, transparent 70%);
-            animation: shimmer 4s infinite;
-        }
-
-        @keyframes shimmer {
-            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
-            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
-        }
-
-        .profile-photo img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-
-        .header-info h1 {
-            font-family: 'Crimson Pro', serif;
-            font-size: 3.5rem;
-            font-weight: 400;
-            color: var(--text-primary);
-            letter-spacing: -0.02em;
-            line-height: 1.1;
-            margin-bottom: 0.5rem;
-        }
-
-        .header-info h1 .accent {
-            color: var(--primary-teal);
+        .nav-name {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 1.1rem;
             font-weight: 600;
-        }
-
-        .subtitle {
-            font-size: 1.05rem;
-            color: var(--text-secondary);
-            font-weight: 300;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            margin-bottom: 1rem;
-        }
-
-        .affiliation {
-            font-size: 0.95rem;
-            color: var(--text-muted);
-            font-weight: 300;
-        }
-
-        /* Navigation */
-        nav {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-            align-items: flex-end;
-        }
-
-        nav a {
-            color: var(--text-secondary);
+            color: var(--navy);
             text-decoration: none;
-            font-weight: 400;
-            font-size: 0.9rem;
-            letter-spacing: 0.05em;
-            transition: all 0.3s ease;
-            position: relative;
-            padding: 0.5rem 0;
         }
 
-        nav a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--primary-teal);
-            transition: width 0.3s ease;
-        }
-
-        nav a:hover {
-            color: var(--primary-teal);
-        }
-
-        nav a:hover::after {
-            width: 100%;
-        }
-
-        /* Main Content */
-        main {
-            padding: 3rem 0;
-        }
-
-        section {
-            margin-bottom: 5rem;
-            animation: fadeInUp 0.8s ease-out;
-            animation-fill-mode: both;
-        }
-
-        section:nth-child(1) { animation-delay: 0.1s; }
-        section:nth-child(2) { animation-delay: 0.2s; }
-        section:nth-child(3) { animation-delay: 0.3s; }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .section-header {
-            font-family: 'Crimson Pro', serif;
-            font-size: 2.8rem;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 2.5rem;
-            position: relative;
-            display: inline-block;
-            letter-spacing: -0.01em;
-        }
-
-        .section-header::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 0;
-            width: 60%;
-            height: 3px;
-            background: linear-gradient(90deg, var(--primary-teal), var(--primary-blue));
-            box-shadow: 0 0 15px var(--glow-teal);
-        }
-
-        /* About Section */
-        .about-content {
-            background: var(--bg-card);
-            padding: 3rem;
-            border-radius: 2px;
-            box-shadow: 0 2px 16px var(--shadow-dark);
-            border: 1px solid var(--border-subtle);
-            line-height: 1.9;
-            font-size: 1.05rem;
-            position: relative;
-        }
-
-        .about-content p {
-            margin-bottom: 1.5rem;
-            color: var(--text-secondary);
-        }
-
-        .keywords {
+        .nav-links {
             display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-            margin-top: 2rem;
-        }
-
-        .keyword {
-            padding: 0.6rem 1.5rem;
-            background: transparent;
-            border: 1px solid var(--primary-teal);
-            color: var(--primary-teal);
-            border-radius: 25px;
-            font-size: 0.85rem;
-            font-weight: 400;
-            letter-spacing: 0.05em;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .keyword::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: var(--primary-teal);
-            transition: left 0.3s ease;
-            z-index: -1;
-        }
-
-        .keyword:hover {
-            color: var(--bg-dark);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px var(--glow-teal);
-        }
-
-        .keyword:hover::before {
-            left: 0;
-        }
-
-        /* Projects Grid */
-        .research-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 2rem;
         }
 
-        .research-card {
-            background: var(--bg-card);
-            padding: 2.5rem;
-            border-radius: 2px;
-            box-shadow: 0 2px 12px var(--shadow-dark);
-            transition: all 0.4s ease;
-            border: 1px solid var(--border-subtle);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .research-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background: linear-gradient(90deg, var(--primary-teal), var(--primary-blue));
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 0.4s ease;
-        }
-
-        .research-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 32px var(--shadow-dark), 0 0 40px var(--glow-teal);
-            border-color: var(--primary-teal);
-        }
-
-        .research-card:hover::before {
-            transform: scaleX(1);
-        }
-
-        .research-card h3 {
-            font-family: 'Crimson Pro', serif;
-            font-size: 1.6rem;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 1rem;
-            letter-spacing: -0.01em;
-        }
-
-        .research-card p {
+        .nav-links a {
             color: var(--text-secondary);
-            line-height: 1.8;
-            margin-bottom: 1rem;
-            font-size: 0.95rem;
+            text-decoration: none;
+            font-size: 0.88rem;
+            font-weight: 500;
+            letter-spacing: 0.01em;
+            transition: color 0.2s;
         }
 
-        .research-meta {
-            font-size: 0.8rem;
-            color: var(--primary-blue);
-            font-style: italic;
-            margin-top: 1.5rem;
+        .nav-links a:hover {
+            color: var(--accent);
         }
 
-        .project-link {
+        /* ── Layout ── */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* ── Hero / Header ── */
+        .hero {
+            padding: 4rem 0 3rem;
+            display: flex;
+            gap: 2.5rem;
+            align-items: flex-start;
+        }
+
+        .hero-photo {
+            flex-shrink: 0;
+        }
+
+        .hero-photo img {
+            width: 160px;
+            height: 160px;
+            border-radius: var(--radius);
+            object-fit: cover;
+            display: block;
+            border: 1px solid var(--border);
+        }
+
+        .hero-text h1 {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--navy);
+            line-height: 1.2;
+            margin-bottom: 0.35rem;
+        }
+
+        .hero-role {
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.25rem;
+        }
+
+        .hero-affiliation {
+            font-size: 0.92rem;
+            color: var(--text-muted);
+            margin-bottom: 1.2rem;
+        }
+
+        .hero-links {
+            display: flex;
+            gap: 1.2rem;
+            flex-wrap: wrap;
+        }
+
+        .hero-links a {
             display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
-            color: var(--primary-teal);
+            gap: 0.35rem;
+            color: var(--accent);
             text-decoration: none;
-            font-size: 0.85rem;
-            margin-top: 1rem;
-            transition: all 0.3s ease;
+            font-size: 0.88rem;
             font-weight: 500;
+            transition: color 0.2s;
         }
 
-        .project-link:hover {
-            gap: 0.8rem;
-            text-shadow: 0 0 10px var(--glow-teal);
+        .hero-links a:hover {
+            color: var(--accent-hover);
+            text-decoration: underline;
         }
 
-        /* Blog Posts */
-        .publication {
-            background: var(--bg-card);
-            padding: 2rem;
-            margin-bottom: 1.5rem;
-            border-radius: 2px;
-            border-left: 4px solid var(--primary-teal);
-            box-shadow: 0 2px 8px var(--shadow-dark);
-            border: 1px solid var(--border-subtle);
-            border-left: 4px solid var(--primary-teal);
-            transition: all 0.3s ease;
+        /* ── Sections ── */
+        section {
+            padding: 2.5rem 0;
         }
 
-        .publication:hover {
-            transform: translateX(10px);
-            box-shadow: 0 4px 20px var(--shadow-dark), -8px 0 20px var(--glow-teal);
+        section + section {
+            border-top: 1px solid var(--border-light);
         }
 
-        .publication-title {
-            font-family: 'Crimson Pro', serif;
-            font-size: 1.35rem;
+        .section-title {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 1.5rem;
             font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 0.6rem;
+            color: var(--navy);
+            margin-bottom: 1.2rem;
             letter-spacing: -0.01em;
         }
 
-        .publication-authors {
-            color: var(--text-secondary);
-            margin-bottom: 0.5rem;
-            font-size: 0.95rem;
-            line-height: 1.6;
+        /* ── About ── */
+        .about-text {
+            font-size: 1rem;
+            color: var(--text);
+            line-height: 1.85;
+            max-width: 780px;
         }
 
-        .publication-venue {
-            color: var(--text-muted);
-            font-style: italic;
-            font-size: 0.85rem;
+        .about-text p + p {
+            margin-top: 1rem;
         }
 
-        .blog-link {
-            color: var(--primary-teal);
-            text-decoration: none;
-            font-size: 0.85rem;
-            transition: all 0.3s ease;
-            font-weight: 500;
-        }
-
-        .blog-link:hover {
-            text-shadow: 0 0 10px var(--glow-teal);
-        }
-
-        /* Footer */
-        footer {
-            background: var(--bg-elevated);
-            color: var(--text-primary);
-            padding: 4rem 0;
-            margin-top: 6rem;
-            border-top: 1px solid var(--primary-teal);
-            box-shadow: 0 -4px 24px var(--shadow-dark);
-        }
-
-        .footer-content {
+        /* ── Research Interests ── */
+        .interests-grid {
             display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 4rem;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1rem;
         }
 
-        footer h3 {
-            font-family: 'Crimson Pro', serif;
-            font-size: 1.6rem;
-            margin-bottom: 1.5rem;
-            color: var(--primary-teal);
+        .interest-item {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.2rem 1.4rem;
+        }
+
+        .interest-item h4 {
+            font-size: 0.95rem;
             font-weight: 600;
+            color: var(--navy);
+            margin-bottom: 0.3rem;
         }
 
-        .contact-links {
+        .interest-item p {
+            font-size: 0.87rem;
+            color: var(--text-secondary);
+            line-height: 1.55;
+        }
+
+        /* ── Education ── */
+        .edu-item {
+            display: flex;
+            gap: 1.2rem;
+            align-items: baseline;
+            padding: 0.6rem 0;
+        }
+
+        .edu-item + .edu-item {
+            border-top: 1px solid var(--border-light);
+        }
+
+        .edu-year {
+            flex-shrink: 0;
+            width: 100px;
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 400;
+        }
+
+        .edu-details strong {
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .edu-details span {
+            color: var(--text-secondary);
+            font-size: 0.92rem;
+        }
+
+        /* ── Projects ── */
+        .project-list {
             display: flex;
             flex-direction: column;
             gap: 1rem;
         }
 
-        .contact-links a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            transition: all 0.3s ease;
-            font-size: 0.95rem;
+        .project-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.5rem 1.8rem;
+            transition: box-shadow 0.2s, border-color 0.2s;
         }
 
-        .contact-links a:hover {
-            color: var(--primary-teal);
-            padding-left: 8px;
+        .project-card:hover {
+            box-shadow: var(--shadow-md);
+            border-color: #ccd5e0;
         }
 
-        .footer-note {
-            grid-column: 1 / -1;
-            text-align: center;
-            margin-top: 3rem;
-            padding-top: 2rem;
-            border-top: 1px solid var(--border-subtle);
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 0.5rem;
+            gap: 1rem;
+        }
+
+        .project-card h3 {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--navy);
+        }
+
+        .project-tech {
+            font-size: 0.78rem;
             color: var(--text-muted);
-            font-size: 0.85rem;
-            letter-spacing: 0.05em;
+            font-family: 'JetBrains Mono', monospace;
+            white-space: nowrap;
         }
 
-        /* Responsive */
-        @media (max-width: 968px) {
-            .header-content {
-                grid-template-columns: 1fr;
+        .project-card p {
+            color: var(--text-secondary);
+            line-height: 1.65;
+            font-size: 0.93rem;
+            margin-bottom: 0.6rem;
+        }
+
+        .project-card a.project-link {
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .project-card a.project-link:hover {
+            color: var(--accent-hover);
+            text-decoration: underline;
+        }
+
+        /* ── Writing ── */
+        .writing-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .writing-item {
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .writing-item:last-child {
+            border-bottom: none;
+        }
+
+        .writing-title {
+            font-weight: 600;
+            color: var(--text);
+            font-size: 1rem;
+            margin-bottom: 0.25rem;
+            line-height: 1.4;
+        }
+
+        .writing-title a {
+            color: var(--text);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .writing-title a:hover {
+            color: var(--accent);
+        }
+
+        .writing-desc {
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+            margin-bottom: 0.3rem;
+        }
+
+        .writing-meta {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        /* ── Footer / Contact ── */
+        footer {
+            margin-top: 1rem;
+            padding: 2.5rem 0;
+            background: var(--navy);
+            color: rgba(255,255,255,0.85);
+        }
+
+        .footer-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 3rem;
+        }
+
+        footer h3 {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.55rem;
+        }
+
+        .footer-links a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: #ffffff;
+        }
+
+        .footer-positions p {
+            color: rgba(255,255,255,0.65);
+            font-size: 0.9rem;
+            line-height: 1.7;
+        }
+
+        .footer-bottom {
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255,255,255,0.12);
+            text-align: center;
+            font-size: 0.82rem;
+            color: rgba(255,255,255,0.4);
+        }
+
+        /* ── Responsive ── */
+        @media (max-width: 768px) {
+            .hero {
+                flex-direction: column;
+                align-items: center;
                 text-align: center;
             }
 
-            .profile-photo {
-                margin: 0 auto;
-            }
-
-            nav {
-                flex-direction: row;
+            .hero-links {
                 justify-content: center;
-                align-items: center;
-                flex-wrap: wrap;
             }
 
-            .footer-content {
+            .hero-text h1 {
+                font-size: 1.8rem;
+            }
+
+            .nav-links {
+                gap: 1.2rem;
+            }
+
+            .nav-links a {
+                font-size: 0.82rem;
+            }
+
+            .project-header {
+                flex-direction: column;
+                gap: 0.3rem;
+            }
+
+            .footer-inner {
+                flex-direction: column;
+                gap: 2rem;
+            }
+
+            .interests-grid {
                 grid-template-columns: 1fr;
             }
-        }
 
-        @media (max-width: 768px) {
-            .header-info h1 {
-                font-size: 2.5rem;
+            .edu-item {
+                flex-direction: column;
+                gap: 0.2rem;
             }
 
-            .section-header {
-                font-size: 2.2rem;
-            }
-
-            .research-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .about-content {
-                padding: 2rem;
+            .edu-year {
+                width: auto;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Background particles -->
-    <div class="bg-particles">
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-    </div>
+    <!-- Navigation -->
+    <nav class="top-nav">
+        <div class="nav-inner">
+            <a href="#" class="nav-name">Loghman Samani</a>
+            <div class="nav-links">
+                <a href="#about">About</a>
+                <a href="#research">Research</a>
+                <a href="#projects">Projects</a>
+                <a href="#writing">Writing</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </div>
+    </nav>
 
+    <!-- Hero -->
     <div class="container">
-        <header>
-            <div class="header-content">
-                <div class="profile-photo">
-                    <img src="https://raw.githubusercontent.com/LoqmanSamani/LoqmanSamani.github.io/systembiology/images/img_.png" alt="Loghman Samani">
-                </div>
-                <div class="header-info">
-                    <h1>Loghman <span class="accent">Samani</span></h1>
-                    <p class="subtitle">Computational Biologist</p>
-                    <p class="affiliation">Diffusion Models • Molecular Dynamics • Machine Learning</p>
-                </div>
-                <nav>
-                    <a href="#about">About</a>
-                    <a href="#projects">Projects</a>
-                    <a href="#writing">Writing</a>
-                    <a href="#contact">Contact</a>
-                </nav>
+        <div class="hero">
+            <div class="hero-photo">
+                <img src="https://raw.githubusercontent.com/LoqmanSamani/LoqmanSamani.github.io/systembiology/images/img_.png" alt="Loghman Samani">
             </div>
-        </header>
-
-        <main>
-            <section id="about">
-                <h2 class="section-header">About</h2>
-                <div class="about-content">
-                    <p>
-                        I hold a master's degree in computational biology from the University of Stuttgart and am currently seeking research or PhD positions that combine computational biology with machine learning. My academic training has focused on building quantitative and principled models for biological systems, with a strong emphasis on methodological clarity and reproducibility.
-                    </p>
-                    <p>
-                        My research centers on computational structural biology, particularly generative modeling for protein structure design, structure prediction, and molecular dynamics. I am especially interested in physics-aware and geometry-aware generative models, including energy-based and diffusion-based approaches. My goal is to develop models that respect the underlying physical constraints of biomolecular systems and contribute to a deeper, mechanistic understanding of protein folding and conformational dynamics.
-                    </p>
-                    
-                    <div class="keywords">
-                        <span class="keyword">Computational Structural Biology</span>
-                        <span class="keyword">Molecular Dynamics</span>
-                        <span class="keyword">Generative AI</span>
-                        <span class="keyword">Protein Modeling</span>
-                        <span class="keyword">Statistical Physics</span>
-                    </div>
-                </div>
-            </section>
-
-            <section id="projects">
-                <h2 class="section-header">Projects</h2>
-                <div class="research-grid">
-                    <div class="research-card">
-                        <h3>CppNet: High-Performance Deep Learning</h3>
-                        <p>
-                            A C++ deep learning library built for performance and transparency. Features efficient tensor operations via Eigen, CPU parallelism with OpenMP, and GPU acceleration through CUDA for training neural networks at scale.
-                        </p>
-                        <p class="research-meta">C++ • Eigen • OpenMP • CUDA</p>
-                        <a href="https://github.com/LoqmanSamani/CppNet" class="project-link" target="_blank">
-                            View on GitHub →
-                        </a>
-                    </div>
-                    
-                    <div class="research-card">
-                        <h3>TorchDiff: Diffusion Models in PyTorch</h3>
-                        <p>
-                            PyTorch library for building and experimenting with diffusion-based generative models. Implements DDPM, DDIM, score-based SDE models, latent diffusion, and UnCLIP with support for conditional and unconditional generation.
-                        </p>
-                        <p class="research-meta">Python • PyTorch • Diffusion Models</p>
-                        <a href="https://github.com/LoqmanSamani/TorchDiff" class="project-link" target="_blank">
-                            View on GitHub →
-                        </a>
-                    </div>
-                    
-                    <div class="research-card">
-                        <h3>GRN-Designer: Spatial Gene Networks</h3>
-                        <p>
-                            Computational framework for automated design and analysis of gene regulatory networks with spatial structure. Uses hybrid evolutionary and gradient-based optimization to generate networks reproducing predefined spatial expression patterns.
-                        </p>
-                        <p class="research-meta">Python • Optimization • PDEs</p>
-                        <a href="https://loqmansamani.github.io/grn-designer/" class="project-link" target="_blank">
-                            Master's Thesis Project →
-                        </a>
-                    </div>
-                    
-                    <div class="research-card">
-                        <h3>Deep Learning From Scratch</h3>
-                        <p>
-                            Implementation of core architectures from first principles, including MLPs, CNNs, RNNs with LSTMs, and Transformers. Covers optimization methods and regularization with emphasis on conceptual clarity and mathematical correctness.
-                        </p>
-                        <p class="research-meta">Python • Neural Networks • Optimization</p>
-                        <a href="https://github.com/LoqmanSamani/deep-learning" class="project-link" target="_blank">
-                            View on GitHub →
-                        </a>
-                    </div>
-                    
-                    <div class="research-card">
-                        <h3>Biostoch: Stochastic Simulation</h3>
-                        <p>
-                            Python library for simulating biological systems using deterministic and stochastic formulations. Implements ODE solvers and stochastic reaction models to study cellular and biochemical dynamics under intrinsic noise.
-                        </p>
-                        <p class="research-meta">Python • ODEs • Stochastic Simulation</p>
-                        <a href="https://github.com/LoqmanSamani/biostoch" class="project-link" target="_blank">
-                            View on GitHub →
-                        </a>
-                    </div>
-                    
-                    <div class="research-card">
-                        <h3>SmartSolve: ML Toolkit</h3>
-                        <p>
-                            Unified framework for implementing and evaluating classical machine learning models. Provides consistent workflow for preprocessing, training, and evaluation across supervised and unsupervised methods.
-                        </p>
-                        <p class="research-meta">Python • Machine Learning • Model Evaluation</p>
-                        <a href="https://github.com/LoqmanSamani/smartsolve" class="project-link" target="_blank">
-                            View on GitHub →
-                        </a>
-                    </div>
-                </div>
-            </section>
-
-            <section id="writing">
-                <h2 class="section-header">Writing</h2>
-
-                <div class="publication">
-                    <div class="publication-title">
-                        When Diffusion Models Learn the Wrong Physics
-                    </div>
-                    <div class="publication-authors">
-                        A deep dive into adaptive Fokker-Planck regularization and physics-informed distillation for efficient molecular dynamics with energy-based diffusion models
-                    </div>
-                    <div class="publication-venue">
-                        Medium • 14 min read • 
-                        <a href="https://medium.com/@samaniloqman91/when-diffusion-models-learn-the-wrong-physics-fa66a8fea0f2" class="blog-link" target="_blank">Read on Medium →</a>
-                    </div>
-                </div>
-                
-                <div class="publication">
-                    <div class="publication-title">
-                        Latent Diffusion Models and Their Implementation in TorchDiff
-                    </div>
-                    <div class="publication-authors">
-                        Comprehensive guide to latent diffusion models, covering theory, architecture, and practical PyTorch implementation for efficient high-resolution image generation
-                    </div>
-                    <div class="publication-venue">
-                        Medium • 11 min read • 
-                        <a href="https://medium.com/@samaniloqman91/latent-diffusion-models-and-their-implementation-in-torchdiff-7dc04c33c4f7" class="blog-link" target="_blank">Read on Medium →</a>
-                    </div>
-                </div>
-
-                <div class="publication">
-                    <div class="publication-title">
-                        Score-Based Generative Modeling with SDEs
-                    </div>
-                    <div class="publication-authors">
-                        Detailed exposition of score-based generative models defined via stochastic differential equations, covering VE, VP, and sub-VP formulations with practical PyTorch implementations
-                    </div>
-                    <div class="publication-venue">
-                        Medium • 17 min read • 
-                        <a href="https://medium.com/@samaniloqman91/score-based-generative-modeling-with-sdes-theory-and-implementation-in-torchdiff-db9a20a84978" class="blog-link" target="_blank">Read on Medium →</a>
-                    </div>
-                </div>
-
-                <div class="publication">
-                    <div class="publication-title">
-                        TorchDiff: A PyTorch Library for Diffusion Models
-                    </div>
-                    <div class="publication-authors">
-                        Introduction to the theoretical foundations of diffusion models with practical implementations, covering DDPM, DDIM, score-based SDE models, and latent diffusion
-                    </div>
-                    <div class="publication-venue">
-                        Medium • 17 min read • 
-                        <a href="https://medium.com/@samaniloqman91/torchdiff-a-pytorch-library-for-denoising-diffusion-probabilistic-models-and-beyond-d15156e9e3b5" class="blog-link" target="_blank">Read on Medium →</a>
-                    </div>
-                </div>
-
-                <div class="publication">
-                    <div class="publication-title">
-                        From Biology to Computation: Exploring Genetic Algorithms
-                    </div>
-                    <div class="publication-authors">
-                        Step-by-step exploration of genetic algorithms, connecting principles of biological evolution to Python-based implementations for optimization problems
-                    </div>
-                    <div class="publication-venue">
-                        Medium • 18 min read • 
-                        <a href="https://medium.com/@samaniloqman91/from-biology-to-computation-exploring-genetic-algorithms-5b090213351f" class="blog-link" target="_blank">Read on Medium →</a>
-                    </div>
-                </div>
-
-                <div class="publication">
-                    <div class="publication-title">
-                        Adam Optimization: Enhancing MLP Performance
-                    </div>
-                    <div class="publication-authors">
-                        Detailed explanation of the Adam optimizer and its application in training multiclass MLPs, highlighting techniques for faster convergence and robust performance
-                    </div>
-                    <div class="publication-venue">
-                        Medium • 21 min read • 
-                        <a href="https://medium.com/@samaniloqman91/adam-optimization-demystified-enhancing-multiclass-mlp-performance-000827cfd5e1" class="blog-link" target="_blank">Read on Medium →</a>
-                    </div>
-                </div>
-
-                <div class="publication">
-                    <div class="publication-title">
-                        Building a Deep Feedforward Neural Network with Backpropagation
-                    </div>
-                    <div class="publication-authors">
-                        Step-by-step guide to constructing and training deep feedforward networks using backpropagation, with Python implementations for binary classification
-                    </div>
-                    <div class="publication-venue">
-                        Medium • 13 min read • 
-                        <a href="https://medium.com/@samaniloqman91/from-theory-to-practice-building-a-deep-feedforward-neural-network-with-back-propagation-in-python-9edc39164a68" class="blog-link" target="_blank">Read on Medium →</a>
-                    </div>
-                </div>
-
-                <div class="publication">
-                    <div class="publication-title">
-                        Introducing BioStoch: Simulating Biological Systems
-                    </div>
-                    <div class="publication-authors">
-                        Overview of BioStoch, a Python library for deterministic and stochastic simulation of biological systems, including Euler, Runge-Kutta, SSA, Tau-Leaping, and Chemical Langevin methods
-                    </div>
-                    <div class="publication-venue">
-                        Medium • 13 min read • 
-                        <a href="https://medium.com/@samaniloqman91/introducing-biostoch-a-python-library-for-simulating-biological-systems-5d38df9b6991" class="blog-link" target="_blank">Read on Medium →</a>
-                    </div>
-                </div>
-
-                <div class="publication">
-                    <div class="publication-title">
-                        Highly Accurate Protein Structure Prediction with AlphaFold
-                    </div>
-                    <div class="publication-authors">
-                        Detailed explanation of AlphaFold, a machine learning system for predicting protein structures from amino acid sequences with atomic accuracy
-                    </div>
-                    <div class="publication-venue">
-                        Medium • 13 min read • 
-                        <a href="https://medium.com/@samaniloqman91/highly-accurate-protein-structure-prediction-with-alphafold-9e4cc8b6c692" class="blog-link" target="_blank">Read on Medium →</a>
-                    </div>
-                </div>
-
-                <div class="publication">
-                    <div class="publication-title">
-                        Introduction to Nuclear Magnetic Resonance (NMR)
-                    </div>
-                    <div class="publication-authors">
-                        Overview of NMR spectroscopy and its applications in structural biology, including protein structure, dynamics, interactions, and intrinsically disordered proteins
-                    </div>
-                    <div class="publication-venue">
-                        Medium • 20 min read • 
-                        <a href="https://medium.com/@samaniloqman91/introduction-to-nuclear-magnetic-resonance-nmr-997960e21048" class="blog-link" target="_blank">Read on Medium →</a>
-                    </div>
-                </div>
-            </section>
-        </main>
-
-        <footer id="contact">
-            <div class="container">
-                <div class="footer-content">
-                    <div>
-                        <h3>Get in Touch</h3>
-                        <div class="contact-links">
-                            <a href="mailto:samaniloqman91@gmail.com">✉ samaniloqman91@gmail.com</a>
-                            <a href="https://github.com/LoqmanSamani" target="_blank">💻 GitHub</a>
-                            <a href="https://medium.com/@samaniloqman91" target="_blank">✍️ Medium</a>
-                            <a href="https://www.linkedin.com/in/loghman-samani-8a5208199/" target="_blank">💼 LinkedIn</a>
-                            <a href="https://x.com/Loqman_Samani" target="_blank">🐦 Twitter/X</a>
-                        </div>
-                    </div>
-                    <div>
-                        <h3>Open to Opportunities</h3>
-                        <p style="color: var(--text-secondary); line-height: 1.8;">
-                            Seeking positions in:<br>
-                            • Computational Biology<br>
-                            • ML Research (Drug Discovery)<br>
-                            • Bioinformatics<br>
-                            • AI for Science
-                        </p>
-                    </div>
-                    <div class="footer-note">
-                        © 2026 Loghman Samani | Built with passion for science and code
-                    </div>
+            <div class="hero-text">
+                <h1>Loghman Samani</h1>
+                <p class="hero-role">Computational Biologist</p>
+                <p class="hero-affiliation">M.Sc. Computational Biology, University of Stuttgart</p>
+                <div class="hero-links">
+                    <a href="mailto:samaniloqman91@gmail.com">Email</a>
+                    <a href="https://github.com/LoqmanSamani" target="_blank">GitHub</a>
+                    <a href="https://scholar.google.com" target="_blank">Google Scholar</a>
+                    <a href="https://www.linkedin.com/in/loghman-samani-8a5208199/" target="_blank">LinkedIn</a>
+                    <a href="https://medium.com/@samaniloqman91" target="_blank">Medium</a>
+                    <a href="https://x.com/Loqman_Samani" target="_blank">Twitter/X</a>
                 </div>
             </div>
-        </footer>
+        </div>
     </div>
 
-    <script>
-        // Smooth scrolling for navigation
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
+    <main class="container">
+        <!-- About -->
+        <section id="about">
+            <h2 class="section-title">About</h2>
+            <div class="about-text">
+                <p>
+                    I hold a master's degree in computational biology from the University of Stuttgart and am currently seeking research or PhD positions that combine computational biology with machine learning. My academic training has focused on building quantitative and principled models for biological systems, with a strong emphasis on methodological clarity and reproducibility.
+                </p>
+                <p>
+                    My research centers on computational structural biology, particularly generative modeling for protein structure design, structure prediction, and molecular dynamics. I am especially interested in physics-aware and geometry-aware generative models, including energy-based and diffusion-based approaches. My goal is to develop models that respect the underlying physical constraints of biomolecular systems and contribute to a deeper, mechanistic understanding of protein folding and conformational dynamics.
+                </p>
+            </div>
+        </section>
 
-        // Scroll reveal animation
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
+        <!-- Research Interests -->
+        <section id="research">
+            <h2 class="section-title">Research Interests</h2>
+            <div class="interests-grid">
+                <div class="interest-item">
+                    <h4>Protein Structure &amp; Design</h4>
+                    <p>Generative models for protein structure prediction, design, and conformational sampling.</p>
+                </div>
+                <div class="interest-item">
+                    <h4>Molecular Dynamics</h4>
+                    <p>Physics-informed approaches to simulating and learning biomolecular dynamics at scale.</p>
+                </div>
+                <div class="interest-item">
+                    <h4>Diffusion &amp; Score-Based Models</h4>
+                    <p>Theory and application of diffusion processes and score matching to generative modeling in biology.</p>
+                </div>
+                <div class="interest-item">
+                    <h4>Statistical Physics &amp; ML</h4>
+                    <p>Energy-based models, Boltzmann distributions, and the intersection of statistical mechanics with deep learning.</p>
+                </div>
+                <div class="interest-item">
+                    <h4>Gene Regulatory Networks</h4>
+                    <p>Computational design of spatial gene networks using hybrid optimization methods.</p>
+                </div>
+                <div class="interest-item">
+                    <h4>Scientific Computing</h4>
+                    <p>High-performance implementations for numerical simulation and deep learning in C++ and Python.</p>
+                </div>
+            </div>
+        </section>
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                }
-            });
-        }, observerOptions);
+        <!-- Education -->
+        <section id="education">
+            <h2 class="section-title">Education</h2>
+            <div class="edu-item">
+                <span class="edu-year">2022 – 2024</span>
+                <div class="edu-details">
+                    <strong>M.Sc. Computational Biology</strong><br>
+                    <span>University of Stuttgart, Germany</span>
+                </div>
+            </div>
+        </section>
 
-        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-    </script>
+        <!-- Projects -->
+        <section id="projects">
+            <h2 class="section-title">Projects</h2>
+            <div class="project-list">
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3>CppNet: High-Performance Deep Learning</h3>
+                        <span class="project-tech">C++ · Eigen · OpenMP · CUDA</span>
+                    </div>
+                    <p>
+                        A C++ deep learning library built for performance and transparency. Features efficient tensor operations via Eigen, CPU parallelism with OpenMP, and GPU acceleration through CUDA for training neural networks at scale.
+                    </p>
+                    <a href="https://github.com/LoqmanSamani/CppNet" class="project-link" target="_blank">GitHub &rarr;</a>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3>TorchDiff: Diffusion Models in PyTorch</h3>
+                        <span class="project-tech">Python · PyTorch</span>
+                    </div>
+                    <p>
+                        PyTorch library for building and experimenting with diffusion-based generative models. Implements DDPM, DDIM, score-based SDE models, latent diffusion, and UnCLIP with support for conditional and unconditional generation.
+                    </p>
+                    <a href="https://github.com/LoqmanSamani/TorchDiff" class="project-link" target="_blank">GitHub &rarr;</a>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3>GRN-Designer: Spatial Gene Regulatory Networks</h3>
+                        <span class="project-tech">Python · Optimization · PDEs</span>
+                    </div>
+                    <p>
+                        Computational framework for automated design and analysis of gene regulatory networks with spatial structure. Uses hybrid evolutionary and gradient-based optimization to generate networks reproducing predefined spatial expression patterns.
+                    </p>
+                    <a href="https://loqmansamani.github.io/grn-designer/" class="project-link" target="_blank">Master's Thesis &rarr;</a>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3>Deep Learning From Scratch</h3>
+                        <span class="project-tech">Python · NumPy</span>
+                    </div>
+                    <p>
+                        Implementation of core architectures from first principles, including MLPs, CNNs, RNNs with LSTMs, and Transformers. Covers optimization methods and regularization with emphasis on conceptual clarity and mathematical correctness.
+                    </p>
+                    <a href="https://github.com/LoqmanSamani/deep-learning" class="project-link" target="_blank">GitHub &rarr;</a>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3>BioStoch: Stochastic Simulation Library</h3>
+                        <span class="project-tech">Python · ODEs · SSA</span>
+                    </div>
+                    <p>
+                        Python library for simulating biological systems using deterministic and stochastic formulations. Implements ODE solvers and stochastic reaction models to study cellular and biochemical dynamics under intrinsic noise.
+                    </p>
+                    <a href="https://github.com/LoqmanSamani/biostoch" class="project-link" target="_blank">GitHub &rarr;</a>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3>SmartSolve: Classical ML Toolkit</h3>
+                        <span class="project-tech">Python · scikit-learn</span>
+                    </div>
+                    <p>
+                        Unified framework for implementing and evaluating classical machine learning models. Provides consistent workflow for preprocessing, training, and evaluation across supervised and unsupervised methods.
+                    </p>
+                    <a href="https://github.com/LoqmanSamani/smartsolve" class="project-link" target="_blank">GitHub &rarr;</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Writing -->
+        <section id="writing">
+            <h2 class="section-title">Writing</h2>
+            <div class="writing-list">
+                <div class="writing-item">
+                    <div class="writing-title">
+                        <a href="https://medium.com/@samaniloqman91/when-diffusion-models-learn-the-wrong-physics-fa66a8fea0f2" target="_blank">When Diffusion Models Learn the Wrong Physics</a>
+                    </div>
+                    <div class="writing-desc">Adaptive Fokker-Planck regularization and physics-informed distillation for molecular dynamics with energy-based diffusion models.</div>
+                    <div class="writing-meta">Medium &middot; 14 min read</div>
+                </div>
+
+                <div class="writing-item">
+                    <div class="writing-title">
+                        <a href="https://medium.com/@samaniloqman91/latent-diffusion-models-and-their-implementation-in-torchdiff-7dc04c33c4f7" target="_blank">Latent Diffusion Models and Their Implementation in TorchDiff</a>
+                    </div>
+                    <div class="writing-desc">Theory, architecture, and practical PyTorch implementation for efficient high-resolution image generation.</div>
+                    <div class="writing-meta">Medium &middot; 11 min read</div>
+                </div>
+
+                <div class="writing-item">
+                    <div class="writing-title">
+                        <a href="https://medium.com/@samaniloqman91/score-based-generative-modeling-with-sdes-theory-and-implementation-in-torchdiff-db9a20a84978" target="_blank">Score-Based Generative Modeling with SDEs</a>
+                    </div>
+                    <div class="writing-desc">Score-based generative models via stochastic differential equations: VE, VP, and sub-VP formulations with PyTorch implementations.</div>
+                    <div class="writing-meta">Medium &middot; 17 min read</div>
+                </div>
+
+                <div class="writing-item">
+                    <div class="writing-title">
+                        <a href="https://medium.com/@samaniloqman91/torchdiff-a-pytorch-library-for-denoising-diffusion-probabilistic-models-and-beyond-d15156e9e3b5" target="_blank">TorchDiff: A PyTorch Library for Diffusion Models</a>
+                    </div>
+                    <div class="writing-desc">Theoretical foundations and practical implementations covering DDPM, DDIM, score-based SDE models, and latent diffusion.</div>
+                    <div class="writing-meta">Medium &middot; 17 min read</div>
+                </div>
+
+                <div class="writing-item">
+                    <div class="writing-title">
+                        <a href="https://medium.com/@samaniloqman91/from-biology-to-computation-exploring-genetic-algorithms-5b090213351f" target="_blank">From Biology to Computation: Exploring Genetic Algorithms</a>
+                    </div>
+                    <div class="writing-desc">Connecting principles of biological evolution to Python-based implementations for optimization problems.</div>
+                    <div class="writing-meta">Medium &middot; 18 min read</div>
+                </div>
+
+                <div class="writing-item">
+                    <div class="writing-title">
+                        <a href="https://medium.com/@samaniloqman91/adam-optimization-demystified-enhancing-multiclass-mlp-performance-000827cfd5e1" target="_blank">Adam Optimization: Enhancing MLP Performance</a>
+                    </div>
+                    <div class="writing-desc">The Adam optimizer and its application in training multiclass MLPs for faster convergence and robust performance.</div>
+                    <div class="writing-meta">Medium &middot; 21 min read</div>
+                </div>
+
+                <div class="writing-item">
+                    <div class="writing-title">
+                        <a href="https://medium.com/@samaniloqman91/from-theory-to-practice-building-a-deep-feedforward-neural-network-with-back-propagation-in-python-9edc39164a68" target="_blank">Building a Deep Feedforward Neural Network with Backpropagation</a>
+                    </div>
+                    <div class="writing-desc">Constructing and training deep feedforward networks using backpropagation, with Python implementations for binary classification.</div>
+                    <div class="writing-meta">Medium &middot; 13 min read</div>
+                </div>
+
+                <div class="writing-item">
+                    <div class="writing-title">
+                        <a href="https://medium.com/@samaniloqman91/introducing-biostoch-a-python-library-for-simulating-biological-systems-5d38df9b6991" target="_blank">Introducing BioStoch: Simulating Biological Systems</a>
+                    </div>
+                    <div class="writing-desc">A Python library for deterministic and stochastic simulation including Euler, Runge-Kutta, SSA, Tau-Leaping, and Chemical Langevin methods.</div>
+                    <div class="writing-meta">Medium &middot; 13 min read</div>
+                </div>
+
+                <div class="writing-item">
+                    <div class="writing-title">
+                        <a href="https://medium.com/@samaniloqman91/highly-accurate-protein-structure-prediction-with-alphafold-9e4cc8b6c692" target="_blank">Highly Accurate Protein Structure Prediction with AlphaFold</a>
+                    </div>
+                    <div class="writing-desc">AlphaFold: a machine learning system for predicting protein structures from amino acid sequences with atomic accuracy.</div>
+                    <div class="writing-meta">Medium &middot; 13 min read</div>
+                </div>
+
+                <div class="writing-item">
+                    <div class="writing-title">
+                        <a href="https://medium.com/@samaniloqman91/introduction-to-nuclear-magnetic-resonance-nmr-997960e21048" target="_blank">Introduction to Nuclear Magnetic Resonance (NMR)</a>
+                    </div>
+                    <div class="writing-desc">NMR spectroscopy and its applications in structural biology: protein structure, dynamics, interactions, and intrinsically disordered proteins.</div>
+                    <div class="writing-meta">Medium &middot; 20 min read</div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer / Contact -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-inner">
+                <div>
+                    <h3>Contact</h3>
+                    <div class="footer-links">
+                        <a href="mailto:samaniloqman91@gmail.com">samaniloqman91@gmail.com</a>
+                        <a href="https://github.com/LoqmanSamani" target="_blank">GitHub</a>
+                        <a href="https://medium.com/@samaniloqman91" target="_blank">Medium</a>
+                        <a href="https://www.linkedin.com/in/loghman-samani-8a5208199/" target="_blank">LinkedIn</a>
+                        <a href="https://x.com/Loqman_Samani" target="_blank">Twitter/X</a>
+                    </div>
+                </div>
+                <div class="footer-positions">
+                    <h3>Open to Opportunities</h3>
+                    <p>
+                        Seeking PhD or research positions in computational biology, ML-driven drug discovery, bioinformatics, and AI for science.
+                    </p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; 2026 Loghman Samani
+            </div>
+        </div>
+    </footer>
 </body>
 </html>
