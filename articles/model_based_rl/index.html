@@ -138,14 +138,17 @@
             color: var(--navy);
             margin-top: 3rem;
             margin-bottom: 1rem;
-            padding-top: 1.5rem;
-            border-top: 1px solid var(--border-light);
+            padding-top: 0;
             letter-spacing: -0.01em;
         }
-        .prose h2:first-child {
-            border-top: none;
-            margin-top: 0;
-            padding-top: 0;
+        .prose h2::before {
+            content: "\00B7\2002\2002\00B7\2002\2002\00B7";
+            display: block;
+            text-align: center;
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+            opacity: 0.5;
         }
         .prose h3 {
             font-family: 'Source Serif 4', Georgia, serif;
@@ -250,6 +253,75 @@
             .nav-links a { font-size: 0.82rem; }
             .prose h2 { font-size: 1.3rem; }
         }
+
+        /* Table of Contents */
+        .toc {
+            margin: 0 0 2.5rem;
+            padding: 1.2rem 1.5rem 1.2rem 1.8rem;
+            background: var(--bg-alt);
+            border-left: 3px solid var(--accent);
+            border-radius: 0 var(--radius) var(--radius) 0;
+        }
+        .toc-title {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--navy);
+            margin-bottom: 0.6rem;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+        }
+        .toc-list {
+            padding-left: 1.2rem;
+            margin: 0;
+        }
+        .toc-list li {
+            font-size: 0.92rem;
+            line-height: 1.9;
+        }
+        .toc-list a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .toc-list a:hover {
+            color: var(--accent);
+        }
+
+        /* Inline reference links with hover tooltips */
+        .ref-num {
+            color: var(--accent);
+            text-decoration: none;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.82em;
+            position: relative;
+            cursor: pointer;
+            transition: color 0.15s;
+        }
+        .ref-num:hover {
+            color: var(--accent-hover);
+        }
+        .ref-num:hover::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: calc(100% + 10px);
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--surface);
+            color: var(--text);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 0.55rem 0.85rem;
+            font-family: 'Source Sans 3', sans-serif;
+            font-size: 0.78rem;
+            line-height: 1.5;
+            white-space: normal;
+            width: max-content;
+            max-width: 380px;
+            z-index: 50;
+            box-shadow: var(--shadow-md);
+            pointer-events: none;
+        }
     </style>
 </head>
 <body>
@@ -280,6 +352,21 @@
             </video>
         </div>
 
+
+        <nav class="toc">
+            <p class="toc-title">Contents</p>
+            <ol class="toc-list">
+                <li><a href="#planning">Planning from Experience</a></li>
+                <li><a href="#model-bias">Taming Model Bias</a></li>
+                <li><a href="#deep-dynamics">Deep Dynamics</a></li>
+                <li><a href="#dreaming">Learning to Dream</a></li>
+                <li><a href="#transformers">Transformers, Diffusion, and Foundation Models</a></li>
+                <li><a href="#imagination-reality">From Imagination to Reality</a></li>
+                <li><a href="#neural-engine">The Neural Engine Era</a></li>
+                <li><a href="#looking-ahead">Looking Ahead</a></li>
+            </ol>
+        </nav>
+
         <div class="prose">
 
             <p>
@@ -296,73 +383,73 @@
             </p>
 
             <!-- SECTION 1 -->
-            <h2>Planning from Experience</h2>
+            <h2 id="planning">Planning from Experience</h2>
 
             <p>
-                Richard Sutton's Dyna architecture [1] introduced one of the clearest formulations of model-based RL. The central idea is that an agent can plan by "trying things in its head," using an internal model of the environment. In Dyna, the agent learns an action model that predicts the consequences of actions. Given a state and an action, the model predicts the resulting reward and next state. This learned model then generates hypothetical experiences, which are treated identically to real interactions.
+                Richard Sutton's Dyna architecture <a href="#ref-1" class="ref-num" data-tooltip="Sutton, R. S. (1991). Dyna, an integrated architecture for learning, planning, and reacting. ACM SIGART Bulletin, 2(4), 160–163.">[1]</a> introduced one of the clearest formulations of model-based RL. The central idea is that an agent can plan by "trying things in its head," using an internal model of the environment. In Dyna, the agent learns an action model that predicts the consequences of actions. Given a state and an action, the model predicts the resulting reward and next state. This learned model then generates hypothetical experiences, which are treated identically to real interactions.
             </p>
             <p>
                 The Dyna algorithm is elegant. At each step, the agent observes the environment, updates its policy from the real transition, updates its dynamics model, and then performs K additional planning steps using model-generated transitions. By applying RL updates to both real and simulated experience, the agent extracts far more value from every real interaction than a purely model-free approach.
             </p>
             <p>
-                But uniform planning is wasteful in large state spaces. Most imagined transitions will not change the value function significantly. Moore and Atkeson [2] addressed this with prioritized sweeping, which maintains a priority queue that focuses computation on states whose values are most likely to change. When a real transition triggers a significant update, the algorithm traces backward through predecessor states in order of estimated impact, propagating information efficiently. Prioritized sweeping demonstrated faster convergence than both classical dynamic programming and model-free methods in large Markov decision processes. The core idea of prioritizing experience replay would later resurface in deep RL.
+                But uniform planning is wasteful in large state spaces. Most imagined transitions will not change the value function significantly. Moore and Atkeson <a href="#ref-2" class="ref-num" data-tooltip="Moore, A. W. &amp; Atkeson, C. G. (1993). Prioritized sweeping: Reinforcement learning with less data and less time. Machine Learning, 13(1), 103–130.">[2]</a> addressed this with prioritized sweeping, which maintains a priority queue that focuses computation on states whose values are most likely to change. When a real transition triggers a significant update, the algorithm traces backward through predecessor states in order of estimated impact, propagating information efficiently. Prioritized sweeping demonstrated faster convergence than both classical dynamic programming and model-free methods in large Markov decision processes. The core idea of prioritizing experience replay would later resurface in deep RL.
             </p>
 
             <!-- SECTION 2 -->
-            <h2>Taming Model Bias</h2>
+            <h2 id="model-bias">Taming Model Bias</h2>
 
             <p>
                 Moving from tabular methods to continuous domains revealed a fundamental challenge. When an agent plans using an imperfect learned dynamics model, errors compound over long rollouts. The policy may exploit inaccuracies in the model rather than learning genuinely useful behaviors. This problem, <strong>model bias</strong>, limited the practical applicability of model-based methods for years.
             </p>
             <p>
-                PILCO [3] confronted model bias directly. Rather than fitting a single deterministic dynamics model, PILCO learns a Gaussian process (GP) that maintains a full distribution over possible transition functions. The key insight is illustrated in Figure 1. With limited data, many different dynamics models could plausibly explain the observed transitions. A deterministic model picks one and commits to it with false confidence. Outside the training region, its predictions are essentially arbitrary, yet it claims them with certainty. A probabilistic model, by contrast, expresses honest uncertainty about what it doesn't know.
+                PILCO <a href="#ref-3" class="ref-num" data-tooltip="Deisenroth, M. P. &amp; Rasmussen, C. E. (2011). PILCO: A model-based and data-efficient approach to policy search. ICML 2011.">[3]</a> confronted model bias directly. Rather than fitting a single deterministic dynamics model, PILCO learns a Gaussian process (GP) that maintains a full distribution over possible transition functions. The key insight is illustrated in Figure 1. With limited data, many different dynamics models could plausibly explain the observed transitions. A deterministic model picks one and commits to it with false confidence. Outside the training region, its predictions are essentially arbitrary, yet it claims them with certainty. A probabilistic model, by contrast, expresses honest uncertainty about what it doesn't know.
             </p>
 
             <figure class="figure">
                 <img src="imgs/fig1.png" alt="PILCO model uncertainty illustration">
-                <figcaption><strong>Figure 1.</strong> With limited transition data (left), multiple dynamics models may plausibly explain observations (center). A deterministic model produces overconfident predictions outside the training region, while a probabilistic model maintains calibrated uncertainty (right). From Deisenroth and Rasmussen [3].</figcaption>
+                <figcaption><strong>Figure 1.</strong> With limited transition data (left), multiple dynamics models may plausibly explain observations (center). A deterministic model produces overconfident predictions outside the training region, while a probabilistic model maintains calibrated uncertainty (right). From Deisenroth and Rasmussen <a href="#ref-3" class="ref-num" data-tooltip="Deisenroth, M. P. &amp; Rasmussen, C. E. (2011). PILCO: A model-based and data-efficient approach to policy search. ICML 2011.">[3]</a>.</figcaption>
             </figure>
 
             <p>
                 PILCO propagates this uncertainty through the entire planning horizon using deterministic approximate inference over predicted state distributions. Policy gradients are computed analytically with respect to the policy parameters, without requiring an explicit value function. The result is extreme data efficiency, with control policies learned from scratch in a small number of real-world interactions.
             </p>
             <p>
-                Heess et al. introduced the Stochastic Value Gradient (SVG) framework [4], which found a way to backpropagate gradients through stochastic dynamics models. The re-parameterization trick expresses stochastic variables as deterministic functions of exogenous noise. A stochastic transition $s_{t+1} \sim p(s_{t+1}|s_t, a_t)$ is rewritten as $s_{t+1} = f(s_t, a_t, \xi)$ with $\xi \sim \rho(\xi)$, and similarly for stochastic policies. This allows gradients to flow through the model, policy, and value function along real trajectories rather than model-generated rollouts, reducing sensitivity to model inaccuracies while still exploiting the model for analytic gradient computation. SVG bridged model-based and model-free RL in a principled way.
+                Heess et al. introduced the Stochastic Value Gradient (SVG) framework <a href="#ref-4" class="ref-num" data-tooltip="Heess, N., Wayne, G., Silver, D., Lillicrap, T., Erez, T. &amp; Tassa, Y. (2015). Learning continuous control policies by stochastic value gradients. NeurIPS 2015.">[4]</a>, which found a way to backpropagate gradients through stochastic dynamics models. The re-parameterization trick expresses stochastic variables as deterministic functions of exogenous noise. A stochastic transition $s_{t+1} \sim p(s_{t+1}|s_t, a_t)$ is rewritten as $s_{t+1} = f(s_t, a_t, \xi)$ with $\xi \sim \rho(\xi)$, and similarly for stochastic policies. This allows gradients to flow through the model, policy, and value function along real trajectories rather than model-generated rollouts, reducing sensitivity to model inaccuracies while still exploiting the model for analytic gradient computation. SVG bridged model-based and model-free RL in a principled way.
             </p>
             <p>
-                On the representation side, Finn et al. [5] showed that deep spatial autoencoders could extract low-dimensional feature points from raw images, producing state representations specifically designed for control. By learning dynamics models in this compact spatial coordinate space and defining costs based on distances between current and target features extracted from goal images, robotic systems acquired complex visuomotor skills like pushing objects and scooping with a spatula, entirely from raw sensory input.
+                On the representation side, Finn et al. <a href="#ref-5" class="ref-num" data-tooltip="Finn, C., Tan, X. Y., Duan, Y., Darrell, T., Levine, S. &amp; Abbeel, P. (2016). Deep spatial autoencoders for visuomotor learning. ICRA 2016.">[5]</a> showed that deep spatial autoencoders could extract low-dimensional feature points from raw images, producing state representations specifically designed for control. By learning dynamics models in this compact spatial coordinate space and defining costs based on distances between current and target features extracted from goal images, robotic systems acquired complex visuomotor skills like pushing objects and scooping with a spatula, entirely from raw sensory input.
             </p>
 
             <!-- SECTION 3 -->
-            <h2>Deep Dynamics</h2>
+            <h2 id="deep-dynamics">Deep Dynamics</h2>
 
             <p>
-                As neural networks grew more capable, they became the natural choice for dynamics modeling. Nagabandi et al. [6] demonstrated that medium-sized neural networks, combined with model predictive control (MPC), could achieve strong sample efficiency on complex locomotion tasks. Their approach models transitions as $s_{t+1} = s_t + f_\theta(s_t, a_t)$, a residual formulation that simplifies learning when consecutive states are similar. The model is trained by minimizing squared prediction error on observed transitions, and control happens through MPC, which repeatedly solves a finite-horizon optimization, executes only the first action, and replans at the next step. This receding-horizon strategy compensates for modeling errors. They also proposed a hybrid strategy where a policy is first trained to imitate the MPC controller and then refined with model-free RL, combining the sample efficiency of model-based planning with the asymptotic performance of model-free optimization.
+                As neural networks grew more capable, they became the natural choice for dynamics modeling. Nagabandi et al. <a href="#ref-6" class="ref-num" data-tooltip="Nagabandi, A., Kahn, G., Fearing, R. S. &amp; Levine, S. (2018). Neural network dynamics for model-based deep reinforcement learning with model-free fine-tuning. ICRA 2018.">[6]</a> demonstrated that medium-sized neural networks, combined with model predictive control (MPC), could achieve strong sample efficiency on complex locomotion tasks. Their approach models transitions as $s_{t+1} = s_t + f_\theta(s_t, a_t)$, a residual formulation that simplifies learning when consecutive states are similar. The model is trained by minimizing squared prediction error on observed transitions, and control happens through MPC, which repeatedly solves a finite-horizon optimization, executes only the first action, and replans at the next step. This receding-horizon strategy compensates for modeling errors. They also proposed a hybrid strategy where a policy is first trained to imitate the MPC controller and then refined with model-free RL, combining the sample efficiency of model-based planning with the asymptotic performance of model-free optimization.
             </p>
             <p>
-                Ha and Schmidhuber's <em>World Models</em> [7] brought a conceptual shift that reframed the entire field. Their architecture decomposes the problem into three learnable components. A vision model (V), implemented as a variational autoencoder, compresses each observation frame into a compact latent vector $z_t$. A memory model (M), built as an MDN-RNN, predicts the distribution of the next latent state $P(z_{t+1}|a_t, z_t, h_t)$, where $h_t$ is the RNN's hidden state summarizing past information. A controller (C) selects actions from the current latent state and memory through a simple linear mapping $a_t = W_c[z_t, h_t] + b_c$.
+                Ha and Schmidhuber's <em>World Models</em> <a href="#ref-7" class="ref-num" data-tooltip="Ha, D. &amp; Schmidhuber, J. (2018). World models. NeurIPS 2018.">[7]</a> brought a conceptual shift that reframed the entire field. Their architecture decomposes the problem into three learnable components. A vision model (V), implemented as a variational autoencoder, compresses each observation frame into a compact latent vector $z_t$. A memory model (M), built as an MDN-RNN, predicts the distribution of the next latent state $P(z_{t+1}|a_t, z_t, h_t)$, where $h_t$ is the RNN's hidden state summarizing past information. A controller (C) selects actions from the current latent state and memory through a simple linear mapping $a_t = W_c[z_t, h_t] + b_c$.
             </p>
 
             <figure class="figure">
                 <img src="imgs/fig5.png" alt="World Models V-M-C architecture">
-                <figcaption><strong>Figure 2.</strong> World Models architecture. The vision model (V) compresses observations into a compact latent vector, the memory model (M) predicts temporal dynamics, and the controller (C) selects actions based on learned representations. From Ha and Schmidhuber [7].</figcaption>
+                <figcaption><strong>Figure 2.</strong> World Models architecture. The vision model (V) compresses observations into a compact latent vector, the memory model (M) predicts temporal dynamics, and the controller (C) selects actions based on learned representations. From Ha and Schmidhuber <a href="#ref-7" class="ref-num" data-tooltip="Ha, D. &amp; Schmidhuber, J. (2018). World models. NeurIPS 2018.">[7]</a>.</figcaption>
             </figure>
 
             <p>
                 The revolutionary idea was that once the world model is learned, policy training can happen entirely "inside the dream." The agent generates imagined trajectories using the learned model and optimizes the controller without touching the real environment. Policies trained in this compressed, hallucinated world transferred back to reality, establishing that model-based agents could learn through imagination.
             </p>
             <p>
-                But how far should you trust your learned model? Janner et al. gave a rigorous answer with MBPO [8]. They derived a bound relating the true return $\eta[\pi]$ of a policy in the real environment to its estimated return under the learned model $\hat{\eta}[\pi]$, showing that improvements under the model translate to real improvements only when $C(\epsilon_m, \epsilon_\pi)$, a term depending on model error $\epsilon_m$ and policy divergence $\epsilon_\pi$, is sufficiently small. Since long rollouts amplify model errors, the practical prescription is clear. Use <strong>short model rollouts</strong> branched from real environment states, and combine these synthetic transitions with real data for training a model-free optimizer like Soft Actor-Critic. By decoupling the task horizon from the model rollout horizon, MBPO avoids compounding errors while still gaining the data efficiency of model-based learning.
+                But how far should you trust your learned model? Janner et al. gave a rigorous answer with MBPO <a href="#ref-8" class="ref-num" data-tooltip="Janner, M., Fu, J., Zhang, M. &amp; Levine, S. (2019). When to trust your model: Model-based policy optimization. NeurIPS 2019.">[8]</a>. They derived a bound relating the true return $\eta[\pi]$ of a policy in the real environment to its estimated return under the learned model $\hat{\eta}[\pi]$, showing that improvements under the model translate to real improvements only when $C(\epsilon_m, \epsilon_\pi)$, a term depending on model error $\epsilon_m$ and policy divergence $\epsilon_\pi$, is sufficiently small. Since long rollouts amplify model errors, the practical prescription is clear. Use <strong>short model rollouts</strong> branched from real environment states, and combine these synthetic transitions with real data for training a model-free optimizer like Soft Actor-Critic. By decoupling the task horizon from the model rollout horizon, MBPO avoids compounding errors while still gaining the data efficiency of model-based learning.
             </p>
             <p>
-                PETS [9] attacked model uncertainty from a complementary angle, combining ensembles of bootstrapped probabilistic neural networks. Each network outputs a Gaussian distribution to capture aleatoric uncertainty (the inherent stochasticity of the environment), while ensemble disagreement captures epistemic uncertainty (what the model does not yet know). Trajectory sampling propagates this dual uncertainty through the planning horizon using particles, with each particle assigned to a bootstrap and re-sampled according to its probabilistic prediction at each timestep. The result was striking: model-free asymptotic performance with up to 125x fewer samples on complex continuous control tasks.
+                PETS <a href="#ref-9" class="ref-num" data-tooltip="Chua, K., Calandra, R., McAllister, R. &amp; Levine, S. (2018). Deep reinforcement learning in a handful of trials using probabilistic dynamics models. NeurIPS 2018.">[9]</a> attacked model uncertainty from a complementary angle, combining ensembles of bootstrapped probabilistic neural networks. Each network outputs a Gaussian distribution to capture aleatoric uncertainty (the inherent stochasticity of the environment), while ensemble disagreement captures epistemic uncertainty (what the model does not yet know). Trajectory sampling propagates this dual uncertainty through the planning horizon using particles, with each particle assigned to a bootstrap and re-sampled according to its probabilistic prediction at each timestep. The result was striking: model-free asymptotic performance with up to 125x fewer samples on complex continuous control tasks.
             </p>
 
             <!-- SECTION 4 -->
-            <h2>Learning to Dream</h2>
+            <h2 id="dreaming">Learning to Dream</h2>
 
             <p>
-                PlaNet [10] introduced the Recurrent State Space Model (RSSM), an architecture that became the foundation for the next generation of world models. The key design decision, shown in Figure 3, is splitting the latent state into <strong>deterministic</strong> and <strong>stochastic</strong> components. Purely deterministic transitions, as in a standard RNN, prevent the model from representing multiple possible futures and make it vulnerable to planner exploitation. Purely stochastic transitions struggle to maintain information over long horizons. The RSSM combines both:
+                PlaNet <a href="#ref-10" class="ref-num" data-tooltip="Hafner, D., Lillicrap, T., Fischer, I., Villegas, R., Ha, D. &amp; Lee, H. (2019). Learning latent dynamics for planning from pixels. ICML 2019.">[10]</a> introduced the Recurrent State Space Model (RSSM), an architecture that became the foundation for the next generation of world models. The key design decision, shown in Figure 3, is splitting the latent state into <strong>deterministic</strong> and <strong>stochastic</strong> components. Purely deterministic transitions, as in a standard RNN, prevent the model from representing multiple possible futures and make it vulnerable to planner exploitation. Purely stochastic transitions struggle to maintain information over long horizons. The RSSM combines both:
             </p>
 
             $$h_t = f(h_{t-1}, s_{t-1}, a_{t-1}), \quad s_t \sim p(s_t | h_t), \quad o_t \sim p(o_t | h_t, s_t)$$
@@ -373,25 +460,25 @@
 
             <figure class="figure">
                 <img src="imgs/fig8.png" alt="PlaNet RSSM designs">
-                <figcaption><strong>Figure 3.</strong> Latent dynamics designs. (a) Purely deterministic RNN transitions prevent modeling multiple futures. (b) Purely stochastic transitions lose long-term memory. (c) The RSSM splits the state into deterministic and stochastic parts. The model observes the first two timesteps and predicts the third. From Hafner et al. [10].</figcaption>
+                <figcaption><strong>Figure 3.</strong> Latent dynamics designs. (a) Purely deterministic RNN transitions prevent modeling multiple futures. (b) Purely stochastic transitions lose long-term memory. (c) The RSSM splits the state into deterministic and stochastic parts. The model observes the first two timesteps and predicts the third. From Hafner et al. <a href="#ref-10" class="ref-num" data-tooltip="Hafner, D., Lillicrap, T., Fischer, I., Villegas, R., Ha, D. &amp; Lee, H. (2019). Learning latent dynamics for planning from pixels. ICML 2019.">[10]</a>.</figcaption>
             </figure>
 
             <p>
-                But online planning at every step is computationally expensive. Dreamer [11] replaced it with learned behaviors. Instead of searching for action sequences at each decision point, Dreamer trains an actor-critic system entirely within the RSSM's latent world model. The agent imagines trajectories in latent space and backpropagates analytic gradients through the imagined dynamics to update the policy. The value function uses $\lambda$-returns to balance bias and variance across imagined horizons:
+                But online planning at every step is computationally expensive. Dreamer <a href="#ref-11" class="ref-num" data-tooltip="Hafner, D., Lillicrap, T., Ba, J. &amp; Norouzi, M. (2020). Dream to control: Learning behaviors by latent imagination. ICLR 2020.">[11]</a> replaced it with learned behaviors. Instead of searching for action sequences at each decision point, Dreamer trains an actor-critic system entirely within the RSSM's latent world model. The agent imagines trajectories in latent space and backpropagates analytic gradients through the imagined dynamics to update the policy. The value function uses $\lambda$-returns to balance bias and variance across imagined horizons:
             </p>
 
             $$V_\lambda(s_\tau) = (1-\lambda)\sum_{n=1}^{H-1}\lambda^{n-1}V_N^n(s_\tau) + \lambda^{H-1}V_N^H(s_\tau)$$
 
             <figure class="figure">
                 <img src="imgs/fig9.png" alt="Dreamer components">
-                <figcaption><strong>Figure 4.</strong> Dreamer operates in three interleaved phases. (a) Learning to encode observations and predict rewards from the dataset of past experience. (b) Learning state values and actions that maximize predicted returns by backpropagating through imagined trajectories. (c) Executing the policy in the environment. From Hafner et al. [11].</figcaption>
+                <figcaption><strong>Figure 4.</strong> Dreamer operates in three interleaved phases. (a) Learning to encode observations and predict rewards from the dataset of past experience. (b) Learning state values and actions that maximize predicted returns by backpropagating through imagined trajectories. (c) Executing the policy in the environment. From Hafner et al. <a href="#ref-11" class="ref-num" data-tooltip="Hafner, D., Lillicrap, T., Ba, J. &amp; Norouzi, M. (2020). Dream to control: Learning behaviors by latent imagination. ICLR 2020.">[11]</a>.</figcaption>
             </figure>
 
             <p>
                 Dreamer established the core pattern: learn a world model, then learn a policy inside it. It achieved model-free asymptotic performance with substantially better sample efficiency.
             </p>
             <p>
-                DreamerV2 [12] pushed this framework forward by replacing continuous Gaussian latents with <strong>discrete categorical variables</strong>: vectors of 32 variables with 32 classes each, optimized using straight-through gradients. Discrete representations capture the non-smooth, multi-modal transitions typical of complex visual environments better than continuous ones. To handle the bootstrap problem of regularizing representations toward an initially poor prior, DreamerV2 introduced <strong>KL balancing</strong>:
+                DreamerV2 <a href="#ref-12" class="ref-num" data-tooltip="Hafner, D., Lillicrap, T., Norouzi, M. &amp; Ba, J. (2021). Mastering Atari with discrete world models. ICLR 2021.">[12]</a> pushed this framework forward by replacing continuous Gaussian latents with <strong>discrete categorical variables</strong>: vectors of 32 variables with 32 classes each, optimized using straight-through gradients. Discrete representations capture the non-smooth, multi-modal transitions typical of complex visual environments better than continuous ones. To handle the bootstrap problem of regularizing representations toward an initially poor prior, DreamerV2 introduced <strong>KL balancing</strong>:
             </p>
 
             $$\mathcal{L}_{KL} = \alpha \, KL[\text{sg}(q) \| p] + (1-\alpha) \, KL[q \| \text{sg}(p)]$$
@@ -400,7 +487,7 @@
                 where $\text{sg}$ denotes stop-gradient. This applies asymmetric learning rates, pulling the prior toward the representations more aggressively than the reverse. DreamerV2 became the first model-based agent to achieve human-level performance across the Atari benchmark, surpassing model-free methods like Rainbow and IQN.
             </p>
             <p>
-                DreamerV3 [13] completed the trilogy by solving the generality problem. Using a single set of fixed hyperparameters, it mastered diverse domains from Atari to DMLab to Minecraft. The core innovation is <strong>symlog predictions</strong>, which compress targets to handle varying reward magnitudes:
+                DreamerV3 <a href="#ref-13" class="ref-num" data-tooltip="Hafner, D., Pasukonis, J., Ba, J. &amp; Lillicrap, T. (2023). Mastering diverse domains through world models. arXiv:2301.04104.">[13]</a> completed the trilogy by solving the generality problem. Using a single set of fixed hyperparameters, it mastered diverse domains from Atari to DMLab to Minecraft. The core innovation is <strong>symlog predictions</strong>, which compress targets to handle varying reward magnitudes:
             </p>
 
             $$\text{symlog}(x) = \text{sign}(x) \ln(|x| + 1)$$
@@ -411,33 +498,33 @@
 
             <figure class="figure">
                 <img src="imgs/fig11.png" alt="DreamerV3 training process">
-                <figcaption><strong>Figure 5.</strong> DreamerV3 training loop. The world model encodes sensory inputs into discrete representations $z_t$ predicted by a sequence model with recurrent state $h_t$ given actions $a_t$. Inputs are reconstructed to shape the representations. The actor and critic learn from imagined trajectories predicted by the world model. From Hafner et al. [13].</figcaption>
+                <figcaption><strong>Figure 5.</strong> DreamerV3 training loop. The world model encodes sensory inputs into discrete representations $z_t$ predicted by a sequence model with recurrent state $h_t$ given actions $a_t$. Inputs are reconstructed to shape the representations. The actor and critic learn from imagined trajectories predicted by the world model. From Hafner et al. <a href="#ref-13" class="ref-num" data-tooltip="Hafner, D., Pasukonis, J., Ba, J. &amp; Lillicrap, T. (2023). Mastering diverse domains through world models. arXiv:2301.04104.">[13]</a>.</figcaption>
             </figure>
 
             <!-- SECTION 5 -->
-            <h2>Transformers, Diffusion, and Foundation Models</h2>
+            <h2 id="transformers">Transformers, Diffusion, and Foundation Models</h2>
 
             <p>
-                IRIS [14] reframed world modeling as sequence prediction. A discrete autoencoder compresses raw images into a vocabulary of visual tokens. An autoregressive, GPT-like transformer then predicts future tokens conditioned on past observations and actions, generating rewards and termination signals alongside state predictions. The agent trains entirely within this transformer-simulated imagination, achieving human-level Atari 100k performance after just two hours of gameplay. The approach demonstrated that the same architectural principles driving progress in language modeling could power world models for RL.
+                IRIS <a href="#ref-14" class="ref-num" data-tooltip="Micheli, V., Alonso, E. &amp; Fleuret, F. (2023). Transformers are sample efficient world models. ICLR 2023.">[14]</a> reframed world modeling as sequence prediction. A discrete autoencoder compresses raw images into a vocabulary of visual tokens. An autoregressive, GPT-like transformer then predicts future tokens conditioned on past observations and actions, generating rewards and termination signals alongside state predictions. The agent trains entirely within this transformer-simulated imagination, achieving human-level Atari 100k performance after just two hours of gameplay. The approach demonstrated that the same architectural principles driving progress in language modeling could power world models for RL.
             </p>
 
             <figure class="figure">
                 <img src="imgs/fig12.png" alt="IRIS imagination unrolling">
-                <figcaption><strong>Figure 6.</strong> Imagination in IRIS. The policy (purple) selects actions while the transformer (blue) autoregressively simulates dynamics. The discrete autoencoder (green) provides the symbolic vocabulary for frames, enabling the agent to predict rewards and episode endings within the latent space. From Micheli et al. [14].</figcaption>
+                <figcaption><strong>Figure 6.</strong> Imagination in IRIS. The policy (purple) selects actions while the transformer (blue) autoregressively simulates dynamics. The discrete autoencoder (green) provides the symbolic vocabulary for frames, enabling the agent to predict rewards and episode endings within the latent space. From Micheli et al. <a href="#ref-14" class="ref-num" data-tooltip="Micheli, V., Alonso, E. &amp; Fleuret, F. (2023). Transformers are sample efficient world models. ICLR 2023.">[14]</a>.</figcaption>
             </figure>
 
             <p>
-                TD-MPC [15] took the opposite approach to representation. Rather than tokenizing observations, it learns a task-oriented latent dynamics (TOLD) model purely through reward and value signals. The representation $z_t = d_\theta(s_t)$ is trained via temporal difference learning, minimizing a multi-step prediction loss that ensures temporal consistency. At each step, the agent performs local trajectory optimization (MPC) over a short horizon using the learned model for immediate reward estimates and a terminal value function $V_\phi(z_{t+H})$ for long-term returns. No reconstruction. No pixel generation. Just a latent space shaped entirely by what matters for the task.
+                TD-MPC <a href="#ref-15" class="ref-num" data-tooltip="Hansen, N., Su, H. &amp; Wang, X. (2022). Temporal difference learning for model predictive control. ICML 2022.">[15]</a> took the opposite approach to representation. Rather than tokenizing observations, it learns a task-oriented latent dynamics (TOLD) model purely through reward and value signals. The representation $z_t = d_\theta(s_t)$ is trained via temporal difference learning, minimizing a multi-step prediction loss that ensures temporal consistency. At each step, the agent performs local trajectory optimization (MPC) over a short horizon using the learned model for immediate reward estimates and a terminal value function $V_\phi(z_{t+H})$ for long-term returns. No reconstruction. No pixel generation. Just a latent space shaped entirely by what matters for the task.
             </p>
             <p>
-                Perhaps the most significant architectural shift came with DIAMOND [16], which introduced diffusion models as world models. Rather than compressing observations into discrete tokens that might lose critical visual details like distant objects or small UI elements, DIAMOND models environment transitions $p(x_{t+1}|x_{\leq t}, a_{\leq t})$ directly in pixel space. The core is a score-based diffusion model trained to denoise a perturbed observation conditioned on the history of past frames and actions:
+                Perhaps the most significant architectural shift came with DIAMOND <a href="#ref-16" class="ref-num" data-tooltip="Alonso, E., Jelley, A., Micheli, V., Kanervisto, A., Storkey, A. &amp; Fleuret, F. (2024). Diffusion for world modeling: Visual details matter in Atari. NeurIPS 2024.">[16]</a>, which introduced diffusion models as world models. Rather than compressing observations into discrete tokens that might lose critical visual details like distant objects or small UI elements, DIAMOND models environment transitions $p(x_{t+1}|x_{\leq t}, a_{\leq t})$ directly in pixel space. The core is a score-based diffusion model trained to denoise a perturbed observation conditioned on the history of past frames and actions:
             </p>
 
             $$\mathcal{L}(\theta) = \mathbb{E}\left[\|D_\theta(x_{t+1}^\tau, \tau, x_{0 \leq t}, a_{0 \leq t}) - x_{t+1}^0\|^2\right]$$
 
             <figure class="figure">
                 <img src="imgs/fig17.png" alt="DIAMOND imagination unrolling">
-                <figcaption><strong>Figure 7.</strong> DIAMOND imagination. Environment time flows horizontally while denoising steps ($\tau$) flow vertically, transforming noisy samples into clean next observations. The process is autoregressive: predicted frames become conditioning for subsequent steps. From Alonso et al. [16].</figcaption>
+                <figcaption><strong>Figure 7.</strong> DIAMOND imagination. Environment time flows horizontally while denoising steps ($\tau$) flow vertically, transforming noisy samples into clean next observations. The process is autoregressive: predicted frames become conditioning for subsequent steps. From Alonso et al. <a href="#ref-16" class="ref-num" data-tooltip="Alonso, E., Jelley, A., Micheli, V., Kanervisto, A., Storkey, A. &amp; Fleuret, F. (2024). Diffusion for world modeling: Visual details matter in Atari. NeurIPS 2024.">[16]</a>.</figcaption>
             </figure>
 
             <p>
@@ -448,26 +535,26 @@
                 <video autoplay loop muted playsinline>
                     <source src="imgs/gif3.mp4" type="video/mp4">
                 </video>
-                <figcaption><strong>Figure 8.</strong> DIAMOND's diffusion world model trained to simulate Counter-Strike: Global Offensive, replacing the game engine entirely with a neural network. From Alonso et al. [16].</figcaption>
+                <figcaption><strong>Figure 8.</strong> DIAMOND's diffusion world model trained to simulate Counter-Strike: Global Offensive, replacing the game engine entirely with a neural network. From Alonso et al. <a href="#ref-16" class="ref-num" data-tooltip="Alonso, E., Jelley, A., Micheli, V., Kanervisto, A., Storkey, A. &amp; Fleuret, F. (2024). Diffusion for world modeling: Visual details matter in Atari. NeurIPS 2024.">[16]</a>.</figcaption>
             </figure>
 
             <p>
-                UniSim [17] scaled the world model concept to real-world simulation. A conditional diffusion model, trained on diverse datasets spanning human activities, navigation, and robotics, learns to model the transition distribution $p(x_t|x_{&lt;t}, a_{t-1})$ where different action modalities (text instructions, motor torques, camera trajectories) are mapped into a unified continuous embedding space. The factorized trajectory distribution $p(x_{1:T}|a_{1:T-1}, x_0) = \prod_{t=1}^T p(x_t|x_{t-k:t-1}, a_{t-1})$ ensures temporal consistency by conditioning on a fixed window of recent frames. By training on a broad distribution of real-world data, UniSim bridges the sim-to-real gap: embodied planners and control policies trained in the simulator can be deployed in physical environments, with sparse robotics data benefiting from rich visual priors in internet video.
+                UniSim <a href="#ref-17" class="ref-num" data-tooltip="Yang, M., Du, Y., Ghasemipour, K., Tompson, J., Schuurmans, D. &amp; Abbeel, P. (2024). UniSim: Learning interactive real-world simulators. ICLR 2024.">[17]</a> scaled the world model concept to real-world simulation. A conditional diffusion model, trained on diverse datasets spanning human activities, navigation, and robotics, learns to model the transition distribution $p(x_t|x_{&lt;t}, a_{t-1})$ where different action modalities (text instructions, motor torques, camera trajectories) are mapped into a unified continuous embedding space. The factorized trajectory distribution $p(x_{1:T}|a_{1:T-1}, x_0) = \prod_{t=1}^T p(x_t|x_{t-k:t-1}, a_{t-1})$ ensures temporal consistency by conditioning on a fixed window of recent frames. By training on a broad distribution of real-world data, UniSim bridges the sim-to-real gap: embodied planners and control policies trained in the simulator can be deployed in physical environments, with sparse robotics data benefiting from rich visual priors in internet video.
             </p>
             <p>
-                The Genie series from Google DeepMind then pushed toward <strong>foundation world models</strong>. Genie [18] demonstrated that a controllable world model could be learned from over 200,000 hours of unlabeled internet gaming videos. The key innovation is learning a latent action space without ground-truth action annotations. A spatiotemporal video tokenizer maps frames to discrete tokens, a Latent Action Model discovers the structure of transitions between frames, and a MaskGIT-based dynamics model autoregressively predicts future states. At inference, the dynamics model predicts $z_{t+1} \sim p(z_{t+1}|z_{1:t}, a_{1:t})$ given past frame tokens and user-provided latent actions, generating a diverse range of interactive 2D environments from platformers to sketches.
+                The Genie series from Google DeepMind then pushed toward <strong>foundation world models</strong>. Genie <a href="#ref-18" class="ref-num" data-tooltip="Bruce, J., Dennis, M., Edwards, A., Parker-Holder, J., Shi, Y., Hughes, E. et al. (2024). Genie: Generative interactive environments. ICML 2024.">[18]</a> demonstrated that a controllable world model could be learned from over 200,000 hours of unlabeled internet gaming videos. The key innovation is learning a latent action space without ground-truth action annotations. A spatiotemporal video tokenizer maps frames to discrete tokens, a Latent Action Model discovers the structure of transitions between frames, and a MaskGIT-based dynamics model autoregressively predicts future states. At inference, the dynamics model predicts $z_{t+1} \sim p(z_{t+1}|z_{1:t}, a_{1:t})$ given past frame tokens and user-provided latent actions, generating a diverse range of interactive 2D environments from platformers to sketches.
             </p>
 
             <figure class="figure">
                 <img src="imgs/fig18.png" alt="Genie inference pipeline">
-                <figcaption><strong>Figure 9.</strong> Genie inference. The video tokenizer converts frames into discrete tokens while the dynamics model iteratively predicts future frames conditioned on tokens and user-defined latent actions, enabling real-time interaction within generated environments. From Bruce et al. [18].</figcaption>
+                <figcaption><strong>Figure 9.</strong> Genie inference. The video tokenizer converts frames into discrete tokens while the dynamics model iteratively predicts future frames conditioned on tokens and user-defined latent actions, enabling real-time interaction within generated environments. From Bruce et al. <a href="#ref-18" class="ref-num" data-tooltip="Bruce, J., Dennis, M., Edwards, A., Parker-Holder, J., Shi, Y., Hughes, E. et al. (2024). Genie: Generative interactive environments. ICML 2024.">[18]</a>.</figcaption>
             </figure>
 
             <p>
-                Genie 2 [19] marked the transition from 2D to rich 3D. Built as an autoregressive latent diffusion model with a causal transformer backbone, it generates interactive 3D environments from a single image prompt. A major technical advance is long-horizon memory: the model remembers and accurately re-renders parts of the environment that have temporarily left the agent's field of view, maintaining consistency for up to a minute. Genie 2 also demonstrated emergent capabilities including complex character animations, realistic physics (collisions, gravity, fluid dynamics), and NPC behavior, supporting diverse perspectives and keyboard-and-mouse control through classifier-free guidance.
+                Genie 2 <a href="#ref-19" class="ref-num" data-tooltip="Parker-Holder, J. et al. (2024). Genie 2: A large-scale foundation world model. Google DeepMind Technical Report.">[19]</a> marked the transition from 2D to rich 3D. Built as an autoregressive latent diffusion model with a causal transformer backbone, it generates interactive 3D environments from a single image prompt. A major technical advance is long-horizon memory: the model remembers and accurately re-renders parts of the environment that have temporarily left the agent's field of view, maintaining consistency for up to a minute. Genie 2 also demonstrated emergent capabilities including complex character animations, realistic physics (collisions, gravity, fluid dynamics), and NPC behavior, supporting diverse perspectives and keyboard-and-mouse control through classifier-free guidance.
             </p>
             <p>
-                Genie 3 [20] achieved what its predecessors could not: genuine real-time interactivity. Generating photorealistic 3D worlds at 720p resolution and 24 FPS, Genie 3 maintains spatial and visual consistency for several minutes, with visual memory extending as far as one minute into the past. It also introduced <strong>promptable world events</strong>, allowing users to alter the simulation mid-session through natural language, such as changing weather conditions or spawning new characters. The SIMA embodied agent was deployed inside Genie 3 worlds for goal-directed navigation, validating these AI-generated environments as practical training grounds.
+                Genie 3 <a href="#ref-20" class="ref-num" data-tooltip="Parker-Holder, J., Fruchter, S. et al. (2025). Genie 3: A new frontier for world models. Google DeepMind Technical Report.">[20]</a> achieved what its predecessors could not: genuine real-time interactivity. Generating photorealistic 3D worlds at 720p resolution and 24 FPS, Genie 3 maintains spatial and visual consistency for several minutes, with visual memory extending as far as one minute into the past. It also introduced <strong>promptable world events</strong>, allowing users to alter the simulation mid-session through natural language, such as changing weather conditions or spawning new characters. The SIMA embodied agent was deployed inside Genie 3 worlds for goal-directed navigation, validating these AI-generated environments as practical training grounds.
             </p>
 
             <figure class="figure">
@@ -478,45 +565,45 @@
             </figure>
 
             <!-- SECTION 6 -->
-            <h2>From Imagination to Reality</h2>
+            <h2 id="imagination-reality">From Imagination to Reality</h2>
 
             <p>
-                DayDreamer [21] proved that dream-based training works on physical hardware. Applying the Dreamer algorithm directly to real robots, the system uses an asynchronous architecture where one process collects experience in the real world while a separate process continuously updates the world model and policy through latent imagination. An A1 quadruped learned to roll, stand, and walk from scratch in one hour of real-time interaction. Compared to model-free methods that would require days, this demonstrated that world models can effectively sidestep the complexities of sim-to-real transfer by learning the dynamics of reality directly.
+                DayDreamer <a href="#ref-21" class="ref-num" data-tooltip="Wu, P., Escontrela, A., Hafner, D., Goldberg, K. &amp; Abbeel, P. (2023). Daydreamer: World models for physical robot learning. CoRL 2022.">[21]</a> proved that dream-based training works on physical hardware. Applying the Dreamer algorithm directly to real robots, the system uses an asynchronous architecture where one process collects experience in the real world while a separate process continuously updates the world model and policy through latent imagination. An A1 quadruped learned to roll, stand, and walk from scratch in one hour of real-time interaction. Compared to model-free methods that would require days, this demonstrated that world models can effectively sidestep the complexities of sim-to-real transfer by learning the dynamics of reality directly.
             </p>
 
             <figure class="figure">
                 <img src="imgs/fig20.png" alt="DayDreamer architecture">
-                <figcaption><strong>Figure 11.</strong> DayDreamer runs two processes in parallel. The environment process collects experience and populates a replay buffer, while the training process learns a world model and optimizes a policy through latent imagination. The robot learns continuously during interaction. From Wu et al. [21].</figcaption>
+                <figcaption><strong>Figure 11.</strong> DayDreamer runs two processes in parallel. The environment process collects experience and populates a replay buffer, while the training process learns a world model and optimizes a policy through latent imagination. The robot learns continuously during interaction. From Wu et al. <a href="#ref-21" class="ref-num" data-tooltip="Wu, P., Escontrela, A., Hafner, D., Goldberg, K. &amp; Abbeel, P. (2023). Daydreamer: World models for physical robot learning. CoRL 2022.">[21]</a>.</figcaption>
             </figure>
 
             <p>
-                UniPi [22] reimagined the control problem entirely, replacing the standard mapping from states to actions with text-conditioned video generation. A diffusion model acts as a high-level planner, synthesizing a video depicting the completion of a text-specified goal. A low-level inverse dynamics model then extracts the control actions needed to follow the generated trajectory. This "policy as video" formulation uses images as a universal interface to bridge different environments and robot embodiments. The framework achieves combinatorial generalization, solving novel tasks without additional fine-tuning, and bypasses manual reward design by using natural language as the primary goal specification.
+                UniPi <a href="#ref-22" class="ref-num" data-tooltip="Du, Y., Yang, M., Dai, B., Dai, H., Nachum, O., Tenenbaum, J. B. et al. (2024). Learning universal policies via text-guided video generation. NeurIPS 2023.">[22]</a> reimagined the control problem entirely, replacing the standard mapping from states to actions with text-conditioned video generation. A diffusion model acts as a high-level planner, synthesizing a video depicting the completion of a text-specified goal. A low-level inverse dynamics model then extracts the control actions needed to follow the generated trajectory. This "policy as video" formulation uses images as a universal interface to bridge different environments and robot embodiments. The framework achieves combinatorial generalization, solving novel tasks without additional fine-tuning, and bypasses manual reward design by using natural language as the primary goal specification.
             </p>
 
             <!-- SECTION 7 -->
-            <h2>The Neural Engine Era</h2>
+            <h2 id="neural-engine">The Neural Engine Era</h2>
 
             <p>
-                GameNGen [23] demonstrated that a neural model could replace a traditional game engine entirely. The pipeline has two phases. First, an RL agent plays DOOM and its gameplay trajectories are recorded. Second, a generative diffusion model (fine-tuned from Stable Diffusion v1.4) is trained to predict the next frame conditioned on a history of past frames and actions. To prevent sampling divergence during autoregressive generation, conditioning augmentations add varying noise levels to context frames during training. The result is a real-time neural simulation at 20 FPS on a single TPU, with human raters barely exceeding chance when distinguishing the neural simulation from the real game.
+                GameNGen <a href="#ref-23" class="ref-num" data-tooltip="Valevski, D., Leviathan, Y., Arar, M. &amp; Fruchter, S. (2024). Diffusion models are real-time game engines. arXiv:2408.14837.">[23]</a> demonstrated that a neural model could replace a traditional game engine entirely. The pipeline has two phases. First, an RL agent plays DOOM and its gameplay trajectories are recorded. Second, a generative diffusion model (fine-tuned from Stable Diffusion v1.4) is trained to predict the next frame conditioned on a history of past frames and actions. To prevent sampling divergence during autoregressive generation, conditioning augmentations add varying noise levels to context frames during training. The result is a real-time neural simulation at 20 FPS on a single TPU, with human raters barely exceeding chance when distinguishing the neural simulation from the real game.
             </p>
 
             <figure class="figure">
                 <img src="imgs/fig21.png" alt="GameNGen methodology">
-                <figcaption><strong>Figure 12.</strong> GameNGen pipeline. An RL agent generates gameplay trajectories (left) that train a diffusion model to predict next frames conditioned on past observations and actions (right). From Valevski et al. [23].</figcaption>
+                <figcaption><strong>Figure 12.</strong> GameNGen pipeline. An RL agent generates gameplay trajectories (left) that train a diffusion model to predict next frames conditioned on past observations and actions (right). From Valevski et al. <a href="#ref-23" class="ref-num" data-tooltip="Valevski, D., Leviathan, Y., Arar, M. &amp; Fruchter, S. (2024). Diffusion models are real-time game engines. arXiv:2408.14837.">[23]</a>.</figcaption>
             </figure>
 
             <p>
-                Oasis [24], developed by Decart and Etched, extended this to open-world 3D. Using a Diffusion Transformer (DiT) architecture, it generates Minecraft gameplay at 20 FPS directly from keyboard and mouse inputs. A spatial autoencoder compresses frames into latent space, and a latent diffusion backbone predicts subsequent frames autoregressively. Diffusion forcing, which allows varying noise levels across the context window, maintains temporal consistency. Oasis became the first publicly playable neural world model, demonstrating that transformer-based generation (without any game engine) can sustain 3D environment consistency.
+                Oasis <a href="#ref-24" class="ref-num" data-tooltip="Decart &amp; Etched. (2024). Oasis: A universe in a transformer. Technical Report.">[24]</a>, developed by Decart and Etched, extended this to open-world 3D. Using a Diffusion Transformer (DiT) architecture, it generates Minecraft gameplay at 20 FPS directly from keyboard and mouse inputs. A spatial autoencoder compresses frames into latent space, and a latent diffusion backbone predicts subsequent frames autoregressively. Diffusion forcing, which allows varying noise levels across the context window, maintains temporal consistency. Oasis became the first publicly playable neural world model, demonstrating that transformer-based generation (without any game engine) can sustain 3D environment consistency.
             </p>
             <p>
-                NVIDIA's Cosmos [25] addresses the broader infrastructure problem. As a world foundation model platform for physical AI, Cosmos is pre-trained on over 100 million high-quality video clips to internalize physical laws across a wide range of scenarios. Offering both transformer-based diffusion and autoregressive architectures, the platform is designed for post-training on task-specific datasets, whether for autonomous driving, robotic manipulation, or camera control. Released as open-weight and open-source, Cosmos provides the community with a general-purpose foundation for building specialized world models.
+                NVIDIA's Cosmos <a href="#ref-25" class="ref-num" data-tooltip="NVIDIA. (2025). Cosmos world foundation model platform for physical AI. arXiv:2501.12599.">[25]</a> addresses the broader infrastructure problem. As a world foundation model platform for physical AI, Cosmos is pre-trained on over 100 million high-quality video clips to internalize physical laws across a wide range of scenarios. Offering both transformer-based diffusion and autoregressive architectures, the platform is designed for post-training on task-specific datasets, whether for autonomous driving, robotic manipulation, or camera control. Released as open-weight and open-source, Cosmos provides the community with a general-purpose foundation for building specialized world models.
             </p>
             <p>
-                V-JEPA 2 [26] from Meta introduces a fundamentally different perspective. Rather than generating pixels, it predicts future states in a learned latent representation space using a Joint-Embedding Predictive Architecture. Pre-trained on over one million hours of internet video through self-supervised masking objectives, V-JEPA 2 captures physical dynamics without generating any visual output. By predicting abstract representations rather than reconstructing observations, the model filters out unpredictable visual noise and focuses on essential dynamics. Its action-conditioned variant, V-JEPA 2-AC, is post-trained on less than 62 hours of unlabeled robot video and enables zero-shot robotic planning for pick-and-place tasks in novel environments, without task-specific data, fine-tuning, or reward engineering. This validates an important hypothesis: world models do not need to be generative to be effective for planning and control.
+                V-JEPA 2 <a href="#ref-26" class="ref-num" data-tooltip="Assran, M., Bardes, A., Fan, D., Garrido, Q. et al. (2025). V-JEPA 2: Self-supervised video models enable understanding, prediction and planning. arXiv:2506.09985.">[26]</a> from Meta introduces a fundamentally different perspective. Rather than generating pixels, it predicts future states in a learned latent representation space using a Joint-Embedding Predictive Architecture. Pre-trained on over one million hours of internet video through self-supervised masking objectives, V-JEPA 2 captures physical dynamics without generating any visual output. By predicting abstract representations rather than reconstructing observations, the model filters out unpredictable visual noise and focuses on essential dynamics. Its action-conditioned variant, V-JEPA 2-AC, is post-trained on less than 62 hours of unlabeled robot video and enables zero-shot robotic planning for pick-and-place tasks in novel environments, without task-specific data, fine-tuning, or reward engineering. This validates an important hypothesis: world models do not need to be generative to be effective for planning and control.
             </p>
 
             <!-- CONCLUSION -->
-            <h2>Looking Ahead</h2>
+            <h2 id="looking-ahead">Looking Ahead</h2>
 
             <p>
                 The path from Dyna's tabular planning to Genie 3's real-time world generation spans more than three decades, but the foundational insight has not changed. An agent that can simulate the consequences of its actions internally gains a decisive advantage in sample efficiency, planning capability, and generalization.
@@ -537,32 +624,32 @@
         <section class="references">
             <h2>References</h2>
             <ol>
-                <li>Sutton, R. S. (1991). <em>Dyna, an integrated architecture for learning, planning, and reacting.</em> ACM SIGART Bulletin, 2(4), 160&ndash;163.</li>
-                <li>Moore, A. W. &amp; Atkeson, C. G. (1993). <em>Prioritized sweeping: Reinforcement learning with less data and less time.</em> Machine Learning, 13(1), 103&ndash;130.</li>
-                <li>Deisenroth, M. P. &amp; Rasmussen, C. E. (2011). <em>PILCO: A model-based and data-efficient approach to policy search.</em> ICML 2011.</li>
-                <li>Heess, N., Wayne, G., Silver, D., Lillicrap, T., Erez, T. &amp; Tassa, Y. (2015). <em>Learning continuous control policies by stochastic value gradients.</em> NeurIPS 2015.</li>
-                <li>Finn, C., Tan, X. Y., Duan, Y., Darrell, T., Levine, S. &amp; Abbeel, P. (2016). <em>Deep spatial autoencoders for visuomotor learning.</em> ICRA 2016.</li>
-                <li>Nagabandi, A., Kahn, G., Fearing, R. S. &amp; Levine, S. (2018). <em>Neural network dynamics for model-based deep reinforcement learning with model-free fine-tuning.</em> ICRA 2018.</li>
-                <li>Ha, D. &amp; Schmidhuber, J. (2018). <em>World models.</em> NeurIPS 2018.</li>
-                <li>Janner, M., Fu, J., Zhang, M. &amp; Levine, S. (2019). <em>When to trust your model: Model-based policy optimization.</em> NeurIPS 2019.</li>
-                <li>Chua, K., Calandra, R., McAllister, R. &amp; Levine, S. (2018). <em>Deep reinforcement learning in a handful of trials using probabilistic dynamics models.</em> NeurIPS 2018.</li>
-                <li>Hafner, D., Lillicrap, T., Fischer, I., Villegas, R., Ha, D. &amp; Lee, H. (2019). <em>Learning latent dynamics for planning from pixels.</em> ICML 2019.</li>
-                <li>Hafner, D., Lillicrap, T., Ba, J. &amp; Norouzi, M. (2020). <em>Dream to control: Learning behaviors by latent imagination.</em> ICLR 2020.</li>
-                <li>Hafner, D., Lillicrap, T., Norouzi, M. &amp; Ba, J. (2021). <em>Mastering Atari with discrete world models.</em> ICLR 2021.</li>
-                <li>Hafner, D., Pasukonis, J., Ba, J. &amp; Lillicrap, T. (2023). <em>Mastering diverse domains through world models.</em> arXiv:2301.04104.</li>
-                <li>Micheli, V., Alonso, E. &amp; Fleuret, F. (2023). <em>Transformers are sample efficient world models.</em> ICLR 2023.</li>
-                <li>Hansen, N., Su, H. &amp; Wang, X. (2022). <em>Temporal difference learning for model predictive control.</em> ICML 2022.</li>
-                <li>Alonso, E., Jelley, A., Micheli, V., Kanervisto, A., Storkey, A. &amp; Fleuret, F. (2024). <em>Diffusion for world modeling: Visual details matter in Atari.</em> NeurIPS 2024.</li>
-                <li>Yang, M., Du, Y., Ghasemipour, K., Tompson, J., Schuurmans, D. &amp; Abbeel, P. (2024). <em>UniSim: Learning interactive real-world simulators.</em> ICLR 2024.</li>
-                <li>Bruce, J., Dennis, M., Edwards, A., Parker-Holder, J., Shi, Y., Hughes, E. et al. (2024). <em>Genie: Generative interactive environments.</em> ICML 2024.</li>
-                <li>Parker-Holder, J. et al. (2024). <em>Genie 2: A large-scale foundation world model.</em> Google DeepMind Technical Report.</li>
-                <li>Parker-Holder, J., Fruchter, S. et al. (2025). <em>Genie 3: A new frontier for world models.</em> Google DeepMind Technical Report.</li>
-                <li>Wu, P., Escontrela, A., Hafner, D., Goldberg, K. &amp; Abbeel, P. (2023). <em>Daydreamer: World models for physical robot learning.</em> CoRL 2022.</li>
-                <li>Du, Y., Yang, M., Dai, B., Dai, H., Nachum, O., Tenenbaum, J. B. et al. (2024). <em>Learning universal policies via text-guided video generation.</em> NeurIPS 2023.</li>
-                <li>Valevski, D., Leviathan, Y., Arar, M. &amp; Fruchter, S. (2024). <em>Diffusion models are real-time game engines.</em> arXiv:2408.14837.</li>
-                <li>Decart &amp; Etched. (2024). <em>Oasis: A universe in a transformer.</em> Technical Report.</li>
-                <li>NVIDIA. (2025). <em>Cosmos world foundation model platform for physical AI.</em> arXiv:2501.12599.</li>
-                <li>Assran, M., Bardes, A., Fan, D., Garrido, Q. et al. (2025). <em>V-JEPA 2: Self-supervised video models enable understanding, prediction and planning.</em> arXiv:2506.09985.</li>
+                <li id="ref-1">Sutton, R. S. (1991). <em>Dyna, an integrated architecture for learning, planning, and reacting.</em> ACM SIGART Bulletin, 2(4), 160&ndash;163.</li>
+                <li id="ref-2">Moore, A. W. &amp; Atkeson, C. G. (1993). <em>Prioritized sweeping: Reinforcement learning with less data and less time.</em> Machine Learning, 13(1), 103&ndash;130.</li>
+                <li id="ref-3">Deisenroth, M. P. &amp; Rasmussen, C. E. (2011). <em>PILCO: A model-based and data-efficient approach to policy search.</em> ICML 2011.</li>
+                <li id="ref-4">Heess, N., Wayne, G., Silver, D., Lillicrap, T., Erez, T. &amp; Tassa, Y. (2015). <em>Learning continuous control policies by stochastic value gradients.</em> NeurIPS 2015.</li>
+                <li id="ref-5">Finn, C., Tan, X. Y., Duan, Y., Darrell, T., Levine, S. &amp; Abbeel, P. (2016). <em>Deep spatial autoencoders for visuomotor learning.</em> ICRA 2016.</li>
+                <li id="ref-6">Nagabandi, A., Kahn, G., Fearing, R. S. &amp; Levine, S. (2018). <em>Neural network dynamics for model-based deep reinforcement learning with model-free fine-tuning.</em> ICRA 2018.</li>
+                <li id="ref-7">Ha, D. &amp; Schmidhuber, J. (2018). <em>World models.</em> NeurIPS 2018.</li>
+                <li id="ref-8">Janner, M., Fu, J., Zhang, M. &amp; Levine, S. (2019). <em>When to trust your model: Model-based policy optimization.</em> NeurIPS 2019.</li>
+                <li id="ref-9">Chua, K., Calandra, R., McAllister, R. &amp; Levine, S. (2018). <em>Deep reinforcement learning in a handful of trials using probabilistic dynamics models.</em> NeurIPS 2018.</li>
+                <li id="ref-10">Hafner, D., Lillicrap, T., Fischer, I., Villegas, R., Ha, D. &amp; Lee, H. (2019). <em>Learning latent dynamics for planning from pixels.</em> ICML 2019.</li>
+                <li id="ref-11">Hafner, D., Lillicrap, T., Ba, J. &amp; Norouzi, M. (2020). <em>Dream to control: Learning behaviors by latent imagination.</em> ICLR 2020.</li>
+                <li id="ref-12">Hafner, D., Lillicrap, T., Norouzi, M. &amp; Ba, J. (2021). <em>Mastering Atari with discrete world models.</em> ICLR 2021.</li>
+                <li id="ref-13">Hafner, D., Pasukonis, J., Ba, J. &amp; Lillicrap, T. (2023). <em>Mastering diverse domains through world models.</em> arXiv:2301.04104.</li>
+                <li id="ref-14">Micheli, V., Alonso, E. &amp; Fleuret, F. (2023). <em>Transformers are sample efficient world models.</em> ICLR 2023.</li>
+                <li id="ref-15">Hansen, N., Su, H. &amp; Wang, X. (2022). <em>Temporal difference learning for model predictive control.</em> ICML 2022.</li>
+                <li id="ref-16">Alonso, E., Jelley, A., Micheli, V., Kanervisto, A., Storkey, A. &amp; Fleuret, F. (2024). <em>Diffusion for world modeling: Visual details matter in Atari.</em> NeurIPS 2024.</li>
+                <li id="ref-17">Yang, M., Du, Y., Ghasemipour, K., Tompson, J., Schuurmans, D. &amp; Abbeel, P. (2024). <em>UniSim: Learning interactive real-world simulators.</em> ICLR 2024.</li>
+                <li id="ref-18">Bruce, J., Dennis, M., Edwards, A., Parker-Holder, J., Shi, Y., Hughes, E. et al. (2024). <em>Genie: Generative interactive environments.</em> ICML 2024.</li>
+                <li id="ref-19">Parker-Holder, J. et al. (2024). <em>Genie 2: A large-scale foundation world model.</em> Google DeepMind Technical Report.</li>
+                <li id="ref-20">Parker-Holder, J., Fruchter, S. et al. (2025). <em>Genie 3: A new frontier for world models.</em> Google DeepMind Technical Report.</li>
+                <li id="ref-21">Wu, P., Escontrela, A., Hafner, D., Goldberg, K. &amp; Abbeel, P. (2023). <em>Daydreamer: World models for physical robot learning.</em> CoRL 2022.</li>
+                <li id="ref-22">Du, Y., Yang, M., Dai, B., Dai, H., Nachum, O., Tenenbaum, J. B. et al. (2024). <em>Learning universal policies via text-guided video generation.</em> NeurIPS 2023.</li>
+                <li id="ref-23">Valevski, D., Leviathan, Y., Arar, M. &amp; Fruchter, S. (2024). <em>Diffusion models are real-time game engines.</em> arXiv:2408.14837.</li>
+                <li id="ref-24">Decart &amp; Etched. (2024). <em>Oasis: A universe in a transformer.</em> Technical Report.</li>
+                <li id="ref-25">NVIDIA. (2025). <em>Cosmos world foundation model platform for physical AI.</em> arXiv:2501.12599.</li>
+                <li id="ref-26">Assran, M., Bardes, A., Fan, D., Garrido, Q. et al. (2025). <em>V-JEPA 2: Self-supervised video models enable understanding, prediction and planning.</em> arXiv:2506.09985.</li>
             </ol>
         </section>
     </article>
