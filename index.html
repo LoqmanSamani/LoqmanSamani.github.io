@@ -8,13 +8,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Source+Sans+3:wght@300;400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
     <style>
+        /* ── Dark theme (default) ── */
         :root {
-            --white: #e8ecf1;
             --bg: #0f1419;
             --bg-alt: #151b23;
             --surface: #1c2430;
             --navy: #e2e8f0;
-            --navy-light: #94a3b8;
             --accent: #6ba3e8;
             --accent-hover: #8ab8f0;
             --text: #cbd5e1;
@@ -24,8 +23,40 @@
             --border-light: #1e2832;
             --shadow-sm: 0 1px 3px rgba(0,0,0,0.3);
             --shadow-md: 0 2px 8px rgba(0,0,0,0.4);
-            --shadow-lg: 0 4px 16px rgba(0,0,0,0.5);
             --radius: 6px;
+            --nav-bg: rgba(15,20,25,0.92);
+            --footer-bg: #0a0e13;
+            --footer-text: rgba(255,255,255,0.85);
+            --footer-link: rgba(255,255,255,0.6);
+            --footer-link-hover: #ffffff;
+            --footer-muted: rgba(255,255,255,0.55);
+            --footer-border: rgba(255,255,255,0.12);
+            --footer-bottom: rgba(255,255,255,0.4);
+        }
+
+        /* ── Light theme ── */
+        [data-theme="light"] {
+            --bg: #ffffff;
+            --bg-alt: #f8f9fb;
+            --surface: #f1f3f6;
+            --navy: #1a2332;
+            --accent: #2563a8;
+            --accent-hover: #1d4f8a;
+            --text: #334155;
+            --text-secondary: #64748b;
+            --text-muted: #94a3b8;
+            --border: #e2e5ea;
+            --border-light: #ebeef2;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+            --shadow-md: 0 2px 8px rgba(0,0,0,0.08);
+            --nav-bg: rgba(255,255,255,0.92);
+            --footer-bg: #1a2332;
+            --footer-text: rgba(255,255,255,0.85);
+            --footer-link: rgba(255,255,255,0.6);
+            --footer-link-hover: #ffffff;
+            --footer-muted: rgba(255,255,255,0.55);
+            --footer-border: rgba(255,255,255,0.12);
+            --footer-bottom: rgba(255,255,255,0.4);
         }
 
         * {
@@ -44,6 +75,7 @@
             background-color: var(--bg);
             line-height: 1.7;
             -webkit-font-smoothing: antialiased;
+            transition: background-color 0.3s, color 0.3s;
         }
 
         /* ── Navigation ── */
@@ -51,10 +83,11 @@
             position: sticky;
             top: 0;
             z-index: 100;
-            background: rgba(15,20,25,0.92);
+            background: var(--nav-bg);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             border-bottom: 1px solid var(--border);
+            transition: background 0.3s, border-color 0.3s;
         }
 
         .top-nav .nav-inner {
@@ -75,6 +108,12 @@
             text-decoration: none;
         }
 
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
         .nav-links {
             display: flex;
             gap: 2rem;
@@ -92,6 +131,40 @@
         .nav-links a:hover {
             color: var(--accent);
         }
+
+        /* ── Theme Toggle ── */
+        .theme-toggle {
+            background: none;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            cursor: pointer;
+            padding: 0.35rem 0.5rem;
+            color: var(--text-secondary);
+            font-size: 1rem;
+            line-height: 1;
+            transition: color 0.2s, border-color 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .theme-toggle:hover {
+            color: var(--accent);
+            border-color: var(--accent);
+        }
+
+        .theme-toggle .icon-sun,
+        .theme-toggle .icon-moon {
+            width: 16px;
+            height: 16px;
+        }
+
+        [data-theme="light"] .theme-toggle .icon-sun { display: none; }
+        [data-theme="light"] .theme-toggle .icon-moon { display: block; }
+        :root .theme-toggle .icon-sun { display: block; }
+        :root .theme-toggle .icon-moon { display: none; }
+        [data-theme="dark"] .theme-toggle .icon-sun { display: block; }
+        [data-theme="dark"] .theme-toggle .icon-moon { display: none; }
 
         /* ── Layout ── */
         .container {
@@ -206,6 +279,7 @@
             border: 1px solid var(--border);
             border-radius: var(--radius);
             padding: 1.2rem 1.4rem;
+            transition: background 0.3s, border-color 0.3s;
         }
 
         .interest-item h4 {
@@ -264,12 +338,12 @@
             border: 1px solid var(--border);
             border-radius: var(--radius);
             padding: 1.5rem 1.8rem;
-            transition: box-shadow 0.2s, border-color 0.2s;
+            transition: box-shadow 0.2s, border-color 0.2s, background 0.3s;
         }
 
         .project-card:hover {
             box-shadow: var(--shadow-md);
-            border-color: #ccd5e0;
+            border-color: var(--accent);
         }
 
         .project-header {
@@ -301,7 +375,12 @@
             margin-bottom: 0.6rem;
         }
 
-        .project-card a.project-link {
+        .project-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .project-links a.project-link {
             color: var(--accent);
             text-decoration: none;
             font-size: 0.85rem;
@@ -309,7 +388,7 @@
             transition: color 0.2s;
         }
 
-        .project-card a.project-link:hover {
+        .project-links a.project-link:hover {
             color: var(--accent-hover);
             text-decoration: underline;
         }
@@ -364,8 +443,9 @@
         footer {
             margin-top: 1rem;
             padding: 2.5rem 0;
-            background: #0a0e13;
-            color: rgba(255,255,255,0.85);
+            background: var(--footer-bg);
+            color: var(--footer-text);
+            transition: background 0.3s;
         }
 
         .footer-inner {
@@ -379,7 +459,7 @@
             font-family: 'Source Serif 4', Georgia, serif;
             font-size: 1.15rem;
             font-weight: 600;
-            color: #ffffff;
+            color: var(--footer-link-hover);
             margin-bottom: 1rem;
         }
 
@@ -390,18 +470,18 @@
         }
 
         .footer-links a {
-            color: rgba(255,255,255,0.6);
+            color: var(--footer-link);
             text-decoration: none;
             font-size: 0.9rem;
             transition: color 0.2s;
         }
 
         .footer-links a:hover {
-            color: #ffffff;
+            color: var(--footer-link-hover);
         }
 
         .footer-positions p {
-            color: rgba(255,255,255,0.55);
+            color: var(--footer-muted);
             font-size: 0.9rem;
             line-height: 1.7;
         }
@@ -409,10 +489,10 @@
         .footer-bottom {
             margin-top: 2rem;
             padding-top: 1.5rem;
-            border-top: 1px solid rgba(255,255,255,0.12);
+            border-top: 1px solid var(--footer-border);
             text-align: center;
             font-size: 0.82rem;
-            color: rgba(255,255,255,0.4);
+            color: var(--footer-bottom);
         }
 
         /* ── Responsive ── */
@@ -437,6 +517,10 @@
 
             .nav-links a {
                 font-size: 0.82rem;
+            }
+
+            .nav-right {
+                gap: 1rem;
             }
 
             .project-header {
@@ -469,12 +553,18 @@
     <nav class="top-nav">
         <div class="nav-inner">
             <a href="#" class="nav-name">Loghman Samani</a>
-            <div class="nav-links">
-                <a href="#about">About</a>
-                <a href="#research">Research</a>
-                <a href="#projects">Projects</a>
-                <a href="#writing">Writing</a>
-                <a href="#contact">Contact</a>
+            <div class="nav-right">
+                <div class="nav-links">
+                    <a href="#about">About</a>
+                    <a href="#research">Research</a>
+                    <a href="#projects">Projects</a>
+                    <a href="#writing">Writing</a>
+                    <a href="#contact">Contact</a>
+                </div>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle light/dark mode">
+                    <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                    <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                </button>
             </div>
         </div>
     </nav>
@@ -492,7 +582,6 @@
                 <div class="hero-links">
                     <a href="mailto:samaniloqman91@gmail.com">Email</a>
                     <a href="https://github.com/LoqmanSamani" target="_blank">GitHub</a>
-                    <!-- <a href="https://scholar.google.com" target="_blank">Google Scholar</a> -->
                     <a href="https://www.linkedin.com/in/loghman-samani-8a5208199/" target="_blank">LinkedIn</a>
                     <a href="https://medium.com/@samaniloqman91" target="_blank">Medium</a>
                     <a href="https://x.com/Loqman_Samani" target="_blank">Twitter/X</a>
@@ -507,10 +596,10 @@
             <h2 class="section-title">About</h2>
             <div class="about-text">
                 <p>
-                    I hold a master's degree in computational biology from the University of Stuttgart and am currently seeking research or PhD positions that combine computational biology with machine learning. My academic training has focused on building quantitative and principled models for biological systems, with a strong emphasis on methodological clarity and reproducibility.
+                    I hold a master's degree in computational biology from the University of Stuttgart and am currently seeking PhD or research positions that combine computational structural biology with machine learning. My training has focused on building quantitative, principled models for biological systems, with an emphasis on methodological clarity and reproducibility.
                 </p>
                 <p>
-                    My research centers on computational structural biology, particularly generative modeling for protein structure design, structure prediction, and molecular dynamics. I am especially interested in physics-aware and geometry-aware generative models, including energy-based and diffusion-based approaches. My goal is to develop models that respect the underlying physical constraints of biomolecular systems and contribute to a deeper, mechanistic understanding of protein folding and conformational dynamics.
+                    My current research focuses on model-based reinforcement learning and world models for protein engineering. I am developing BioDreamer, an open-source framework where JEPA-based world models learn latent simulators of biological systems and plan optimal interventions in imagination, with a primary focus on multi-step protein design through the ProteinDreamer module. Methodologically, I work with diffusion models, energy-based models, and physics-aware generative architectures for protein structure prediction and design. I am also interested in how principles from biological neural computation can inform the design of more interpretable artificial learning systems.
                 </p>
             </div>
         </section>
@@ -520,28 +609,28 @@
             <h2 class="section-title">Research Interests</h2>
             <div class="interests-grid">
                 <div class="interest-item">
-                    <h4>Protein Structure &amp; Design</h4>
-                    <p>Generative models for protein structure prediction, design, and conformational sampling.</p>
+                    <h4>World Models &amp; Model-Based RL</h4>
+                    <p>JEPA-based world models and Active Inference for planning multi-step biological interventions in learned latent spaces.</p>
                 </div>
                 <div class="interest-item">
-                    <h4>Molecular Dynamics</h4>
-                    <p>Physics-informed approaches to simulating and learning biomolecular dynamics at scale.</p>
+                    <h4>Protein Structure &amp; Design</h4>
+                    <p>Generative models for protein structure prediction, fitness landscape navigation, and multi-step mutation planning.</p>
                 </div>
                 <div class="interest-item">
                     <h4>Diffusion &amp; Score-Based Models</h4>
-                    <p>Theory and application of diffusion processes and score matching to generative modeling in biology.</p>
+                    <p>Theory and application of denoising diffusion, score matching, and stochastic differential equations to generative modeling in biology.</p>
                 </div>
                 <div class="interest-item">
-                    <h4>Statistical Physics &amp; ML</h4>
-                    <p>Energy-based models, Boltzmann distributions, and the intersection of statistical mechanics with deep learning.</p>
+                    <h4>Energy-Based &amp; Physics-Aware Models</h4>
+                    <p>Energy-based models, Boltzmann distributions, and geometry-aware architectures that respect the physical constraints of biomolecular systems.</p>
                 </div>
                 <div class="interest-item">
-                    <h4>Gene Regulatory Networks</h4>
-                    <p>Computational design of spatial gene networks using hybrid optimization methods.</p>
+                    <h4>Molecular Dynamics</h4>
+                    <p>Learned latent-space simulators for molecular dynamics, replacing brute-force integration with amortized in-silico reasoning.</p>
                 </div>
                 <div class="interest-item">
-                    <h4>Scientific Computing</h4>
-                    <p>High-performance implementations for numerical simulation and deep learning in C++ and Python.</p>
+                    <h4>Neuroscience &amp; Computation</h4>
+                    <p>Connections between biological neural computation and artificial learning systems, particularly through the lens of the Free Energy Principle.</p>
                 </div>
             </div>
         </section>
@@ -571,13 +660,30 @@
             <div class="project-list">
                 <div class="project-card">
                     <div class="project-header">
-                        <h3>CppNet: High-Performance Deep Learning</h3>
+                        <h3>BioDreamer: World Models for Biological Design</h3>
+                        <span class="project-tech">Python · PyTorch · FastAPI · Docker</span>
+                    </div>
+                    <p>
+                        An open-source framework that applies JEPA-based world models and Active Inference to biological design across three scales: molecular dynamics (MolDreamer), protein fitness landscapes (ProteinDreamer), and gene regulatory network dynamics (CellDreamer). The core ProteinDreamer module learns a latent-space simulator and plans multi-step mutation trajectories in imagination before committing to expensive evaluations. Supports two world model backends, Latent Diffusion JEPA and Energy-Based JEPA, with a shared encoder, reward head, and policy interface.
+                    </p>
+                    <div class="project-links">
+                        <a href="https://loqmansamani.github.io/bio_dreamer/" class="project-link" target="_blank">Website &rarr;</a>
+                        <a href="https://github.com/LoqmanSamani/bio_dreamer" class="project-link" target="_blank">GitHub &rarr;</a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3>CppNet: High-Performance Deep Learning in C++</h3>
                         <span class="project-tech">C++ · Eigen · OpenMP · CUDA</span>
                     </div>
                     <p>
-                        A C++ deep learning library built for performance and transparency. Features efficient tensor operations via Eigen, CPU parallelism with OpenMP, and GPU acceleration through CUDA for training neural networks at scale.
+                        A C++17 deep learning library built from scratch with per-layer backend selection across Eigen (SIMD vectorization), OpenMP (CPU parallelism), and CUDA (GPU acceleration). Implements 41 CUDA kernels covering all layers, activations, losses, and optimizers, achieving up to 56x GPU speedup. Supports Linear, Conv2D, RNN, LSTM, GRU, Multi-Head Attention, BatchNorm, Dropout, Embedding, and Residual blocks with training utilities for scheduling, checkpointing, and early stopping.
                     </p>
-                    <a href="https://github.com/LoqmanSamani/CppNet" class="project-link" target="_blank">GitHub &rarr;</a>
+                    <div class="project-links">
+                        <a href="https://loqmansamani.github.io/CppNet/" class="project-link" target="_blank">Website &rarr;</a>
+                        <a href="https://github.com/LoqmanSamani/CppNet" class="project-link" target="_blank">GitHub &rarr;</a>
+                    </div>
                 </div>
 
                 <div class="project-card">
@@ -586,53 +692,26 @@
                         <span class="project-tech">Python · PyTorch</span>
                     </div>
                     <p>
-                        PyTorch library for building and experimenting with diffusion-based generative models. Implements DDPM, DDIM, score-based SDE models, latent diffusion, and UnCLIP with support for conditional and unconditional generation.
+                        A modular PyTorch library implementing five diffusion model families: DDPM, DDIM, score-based SDE (VE, VP, sub-VP variants), Latent Diffusion, and unCLIP, with Kandinsky under active development. Supports conditional text-to-image synthesis and unconditional generation with configurable noise schedules and sampling strategies. Each model shares reusable components for noise prediction, text encoding, and evaluation metrics.
                     </p>
-                    <a href="https://github.com/LoqmanSamani/TorchDiff" class="project-link" target="_blank">GitHub &rarr;</a>
+                    <div class="project-links">
+                        <a href="https://loqmansamani.github.io/torchdiff/" class="project-link" target="_blank">Website &rarr;</a>
+                        <a href="https://github.com/LoqmanSamani/TorchDiff" class="project-link" target="_blank">GitHub &rarr;</a>
+                    </div>
                 </div>
 
                 <div class="project-card">
                     <div class="project-header">
-                        <h3>GRN-Designer: Spatial Gene Regulatory Networks</h3>
+                        <h3>GRN-Designer: Automated Gene Regulatory Network Design</h3>
                         <span class="project-tech">Python · Optimization · PDEs</span>
                     </div>
                     <p>
-                        Computational framework for automated design and analysis of gene regulatory networks with spatial structure. Uses hybrid evolutionary and gradient-based optimization to generate networks reproducing predefined spatial expression patterns.
+                        A hybrid optimization framework developed as part of my Master's thesis. Combines evolutionary algorithms with gradient-based refinement to automatically construct gene regulatory networks that reproduce target spatial expression patterns. Models spatial gene expression dynamics through PDE-based reaction-diffusion equations with heterogeneous initial conditions. Successfully generated GRNs for patterns of increasing complexity, from simple gradients to intricate shapes such as chromosome symbols and DNA strands.
                     </p>
-                    <a href="https://loqmansamani.github.io/grn-designer/" class="project-link" target="_blank">Master's Thesis &rarr;</a>
-                </div>
-
-                <div class="project-card">
-                    <div class="project-header">
-                        <h3>Deep Learning From Scratch</h3>
-                        <span class="project-tech">Python · NumPy</span>
+                    <div class="project-links">
+                        <a href="https://loqmansamani.github.io/grn-designer/" class="project-link" target="_blank">Thesis &rarr;</a>
+                        <a href="https://github.com/LoqmanSamani/grn-designer" class="project-link" target="_blank">GitHub &rarr;</a>
                     </div>
-                    <p>
-                        Implementation of core architectures from first principles, including MLPs, CNNs, RNNs with LSTMs, and Transformers. Covers optimization methods and regularization with emphasis on conceptual clarity and mathematical correctness.
-                    </p>
-                    <a href="https://github.com/LoqmanSamani/deep-learning" class="project-link" target="_blank">GitHub &rarr;</a>
-                </div>
-
-                <div class="project-card">
-                    <div class="project-header">
-                        <h3>BioStoch: Stochastic Simulation Library</h3>
-                        <span class="project-tech">Python · ODEs · SSA</span>
-                    </div>
-                    <p>
-                        Python library for simulating biological systems using deterministic and stochastic formulations. Implements ODE solvers and stochastic reaction models to study cellular and biochemical dynamics under intrinsic noise.
-                    </p>
-                    <a href="https://github.com/LoqmanSamani/biostoch" class="project-link" target="_blank">GitHub &rarr;</a>
-                </div>
-
-                <div class="project-card">
-                    <div class="project-header">
-                        <h3>SmartSolve: Classical ML Toolkit</h3>
-                        <span class="project-tech">Python · scikit-learn</span>
-                    </div>
-                    <p>
-                        Unified framework for implementing and evaluating classical machine learning models. Provides consistent workflow for preprocessing, training, and evaluation across supervised and unsupervised methods.
-                    </p>
-                    <a href="https://github.com/LoqmanSamani/smartsolve" class="project-link" target="_blank">GitHub &rarr;</a>
                 </div>
             </div>
         </section>
@@ -669,7 +748,7 @@
                     <div class="writing-title">
                         <a href="https://medium.com/@samaniloqman91/score-based-generative-modeling-with-sdes-theory-and-implementation-in-torchdiff-db9a20a84978" target="_blank">Score-Based Generative Modeling with SDEs</a>
                     </div>
-                    <div class="writing-desc">Score-based generative models via stochastic differential equations: VE, VP, and sub-VP formulations with PyTorch implementations.</div>
+                    <div class="writing-desc">Score-based generative models via stochastic differential equations with VE, VP, and sub-VP formulations in PyTorch.</div>
                     <div class="writing-meta">Medium &middot; 17 min read</div>
                 </div>
 
@@ -717,7 +796,7 @@
                     <div class="writing-title">
                         <a href="https://medium.com/@samaniloqman91/highly-accurate-protein-structure-prediction-with-alphafold-9e4cc8b6c692" target="_blank">Highly Accurate Protein Structure Prediction with AlphaFold</a>
                     </div>
-                    <div class="writing-desc">AlphaFold: a machine learning system for predicting protein structures from amino acid sequences with atomic accuracy.</div>
+                    <div class="writing-desc">AlphaFold as a machine learning system for predicting protein structures from amino acid sequences with atomic accuracy.</div>
                     <div class="writing-meta">Medium &middot; 13 min read</div>
                 </div>
 
@@ -725,7 +804,7 @@
                     <div class="writing-title">
                         <a href="https://medium.com/@samaniloqman91/introduction-to-nuclear-magnetic-resonance-nmr-997960e21048" target="_blank">Introduction to Nuclear Magnetic Resonance (NMR)</a>
                     </div>
-                    <div class="writing-desc">NMR spectroscopy and its applications in structural biology: protein structure, dynamics, interactions, and intrinsically disordered proteins.</div>
+                    <div class="writing-desc">NMR spectroscopy and its applications in structural biology, covering protein structure, dynamics, interactions, and intrinsically disordered proteins.</div>
                     <div class="writing-meta">Medium &middot; 20 min read</div>
                 </div>
             </div>
@@ -749,7 +828,7 @@
                 <div class="footer-positions">
                     <h3>Open to Opportunities</h3>
                     <p>
-                        Seeking PhD or research positions in computational biology, ML-driven drug discovery, bioinformatics, and AI for science.
+                        Seeking PhD or research positions in computational structural biology, model-based RL for protein design, and AI for science.
                     </p>
                 </div>
             </div>
@@ -758,5 +837,21 @@
             </div>
         </div>
     </footer>
+
+    <script>
+        (function() {
+            var toggle = document.getElementById('themeToggle');
+            var stored = localStorage.getItem('theme');
+            if (stored) {
+                document.documentElement.setAttribute('data-theme', stored);
+            }
+            toggle.addEventListener('click', function() {
+                var current = document.documentElement.getAttribute('data-theme');
+                var next = current === 'light' ? 'dark' : 'light';
+                document.documentElement.setAttribute('data-theme', next);
+                localStorage.setItem('theme', next);
+            });
+        })();
+    </script>
 </body>
 </html>
