@@ -1,1 +1,1 @@
-webpage: [https://loqmansamani.github.io](https://loqmansamani.github.io/)
+webpage: [https://loghmansamani.ciyalabs.com](https://loghmansamani.ciyalabs.com/)
