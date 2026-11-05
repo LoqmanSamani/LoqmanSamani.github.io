@@ -249,6 +249,14 @@
             text-decoration: underline;
         }
 
+        .footer-positions a {
+            color: var(--footer-link);
+        }
+
+        .footer-positions a:hover {
+            color: var(--footer-link-hover);
+        }
+
         /* ── Sections ── */
         section {
             padding: 2.5rem 0;
@@ -492,6 +500,12 @@
             color: var(--footer-link-hover);
         }
 
+        .footer-positions p {
+            color: var(--footer-muted);
+            font-size: 0.9rem;
+            line-height: 1.7;
+        }
+
         .footer-bottom {
             margin-top: 2rem;
             padding-top: 1.5rem;
@@ -607,6 +621,9 @@
                 <p>
                     My current research focuses on model-based reinforcement learning and world models for protein engineering. I am developing BioDreamer, an open-source framework where JEPA-based world models learn latent simulators of biological systems and plan optimal interventions in imagination, with a primary focus on multi-step protein design through the ProteinDreamer module. Methodologically, I work with diffusion models, energy-based models, and physics-aware generative architectures for protein structure prediction and design. I am also interested in how principles from biological neural computation can inform the design of more interpretable artificial learning systems.
                 </p>
+                <p>
+                    I also work on Theseus, my favourite line of research: how much of a mind survives the scan? It works to close the distance to downloading a human mind and uploading it again.
+                </p>
             </div>
         </section>
 
@@ -614,6 +631,10 @@
         <section id="research">
             <h2 class="section-title">Research Interests</h2>
             <div class="interests-grid">
+                <div class="interest-item">
+                    <h4>Whole Brain Emulation</h4>
+                    <p>How much of a mind survives the scan, and what it would take to carry a mind over to a new substrate.</p>
+                </div>
                 <div class="interest-item">
                     <h4>World Models &amp; Model-Based RL</h4>
                     <p>JEPA-based world models and Active Inference for planning multi-step biological interventions in learned latent spaces.</p>
@@ -664,6 +685,18 @@
         <section id="projects">
             <h2 class="section-title">Projects</h2>
             <div class="project-list">
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3>Theseus: Whole Brain Emulation</h3>
+                    </div>
+                    <p>
+                        How much of a mind survives the scan? Theseus works to close the distance to downloading a human mind and uploading it again. The name comes from the Ship of Theseus: if every plank of a ship is replaced, one by one, is it still the same ship?
+                    </p>
+                    <div class="project-links">
+                        <a href="https://theseus.ciyalabs.com/" class="project-link" target="_blank">Website &rarr;</a>
+                    </div>
+                </div>
+
                 <div class="project-card">
                     <div class="project-header">
                         <h3>BioDreamer: World Models for Biological Design</h3>
@@ -830,6 +863,12 @@
                         <a href="https://www.linkedin.com/in/loghman-samani-8a5208199/" target="_blank">LinkedIn</a>
                         <a href="https://x.com/Loqman_Samani" target="_blank">Twitter/X</a>
                     </div>
+                </div>
+                <div class="footer-positions">
+                    <h3>Ciya Labs</h3>
+                    <p>
+                        Founder of Ciya Labs. <a href="https://ciyalabs.com" target="_blank">ciyalabs.com</a>
+                    </p>
                 </div>
             </div>
             <div class="footer-bottom">
