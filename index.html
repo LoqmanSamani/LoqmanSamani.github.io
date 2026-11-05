@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Loghman Samani</title>
+    <title>Loghman Samani | Computational Biology</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Source+Sans+3:wght@300;400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
@@ -206,19 +206,13 @@
         .hero-role {
             font-size: 1.05rem;
             color: var(--text-secondary);
+            margin-bottom: 0.25rem;
+        }
+
+        .hero-affiliation {
+            font-size: 0.92rem;
+            color: var(--text-muted);
             margin-bottom: 1.2rem;
-        }
-
-        .hero-role a,
-        .about-text a {
-            color: var(--accent);
-            text-decoration: none;
-        }
-
-        .hero-role a:hover,
-        .about-text a:hover {
-            color: var(--accent-hover);
-            text-decoration: underline;
         }
 
         .hero-links {
@@ -241,6 +235,26 @@
         .hero-links a:hover {
             color: var(--accent-hover);
             text-decoration: underline;
+        }
+
+        .hero-role a,
+        .about-text a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .hero-role a:hover,
+        .about-text a:hover {
+            color: var(--accent-hover);
+            text-decoration: underline;
+        }
+
+        .footer-positions a {
+            color: var(--footer-link);
+        }
+
+        .footer-positions a:hover {
+            color: var(--footer-link-hover);
         }
 
         /* ── Sections ── */
@@ -271,6 +285,34 @@
 
         .about-text p + p {
             margin-top: 1rem;
+        }
+
+        /* ── Research Interests ── */
+        .interests-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .interest-item {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.2rem 1.4rem;
+            transition: background 0.3s, border-color 0.3s;
+        }
+
+        .interest-item h4 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--navy);
+            margin-bottom: 0.3rem;
+        }
+
+        .interest-item p {
+            font-size: 0.87rem;
+            color: var(--text-secondary);
+            line-height: 1.55;
         }
 
         /* ── Education ── */
@@ -339,6 +381,13 @@
             color: var(--navy);
         }
 
+        .project-tech {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            font-family: 'JetBrains Mono', monospace;
+            white-space: nowrap;
+        }
+
         .project-card p {
             color: var(--text-secondary);
             line-height: 1.65;
@@ -372,7 +421,7 @@
         }
 
         .writing-item {
-            padding: 0.7rem 0;
+            padding: 1rem 0;
             border-bottom: 1px solid var(--border-light);
         }
 
@@ -384,6 +433,7 @@
             font-weight: 600;
             color: var(--text);
             font-size: 1rem;
+            margin-bottom: 0.25rem;
             line-height: 1.4;
         }
 
@@ -395,6 +445,18 @@
 
         .writing-title a:hover {
             color: var(--accent);
+        }
+
+        .writing-desc {
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+            margin-bottom: 0.3rem;
+        }
+
+        .writing-meta {
+            font-size: 0.8rem;
+            color: var(--text-muted);
         }
 
         /* ── Footer / Contact ── */
@@ -436,6 +498,12 @@
 
         .footer-links a:hover {
             color: var(--footer-link-hover);
+        }
+
+        .footer-positions p {
+            color: var(--footer-muted);
+            font-size: 0.9rem;
+            line-height: 1.7;
         }
 
         .footer-bottom {
@@ -485,6 +553,10 @@
                 gap: 2rem;
             }
 
+            .interests-grid {
+                grid-template-columns: 1fr;
+            }
+
             .edu-item {
                 flex-direction: column;
                 gap: 0.2rem;
@@ -504,6 +576,7 @@
             <div class="nav-right">
                 <div class="nav-links">
                     <a href="#about">About</a>
+                    <a href="#research">Research</a>
                     <a href="#projects">Projects</a>
                     <a href="#writing">Writing</a>
                     <a href="#contact">Contact</a>
@@ -524,7 +597,8 @@
             </div>
             <div class="hero-text">
                 <h1>Loghman Samani</h1>
-                <p class="hero-role">Founder of <a href="https://ciyalabs.com" target="_blank">Ciya Labs</a></p>
+                <p class="hero-role">Computational Biologist &middot; Founder of <a href="https://ciyalabs.com" target="_blank">Ciya Labs</a></p>
+                <p class="hero-affiliation">M.Sc. Computational Biology, University of Stuttgart</p>
                 <div class="hero-links">
                     <a href="mailto:loghmansamani@ciyalabs.com">Email</a>
                     <a href="https://github.com/LoqmanSamani" target="_blank">GitHub</a>
@@ -542,8 +616,49 @@
             <h2 class="section-title">About</h2>
             <div class="about-text">
                 <p>
-                    I'm a researcher in computational biology and machine learning, and the founder of <a href="https://ciyalabs.com" target="_blank">Ciya Labs</a>, my own research company.
+                    I hold a master's degree in computational biology from the University of Stuttgart and am the founder of <a href="https://ciyalabs.com" target="_blank">Ciya Labs</a>, my own research company. My training has focused on building quantitative, principled models for biological systems, with an emphasis on methodological clarity and reproducibility.
                 </p>
+                <p>
+                    My current research focuses on model-based reinforcement learning and world models for protein engineering. I am developing BioDreamer, an open-source framework where JEPA-based world models learn latent simulators of biological systems and plan optimal interventions in imagination, with a primary focus on multi-step protein design through the ProteinDreamer module. Methodologically, I work with diffusion models, energy-based models, and physics-aware generative architectures for protein structure prediction and design. I am also interested in how principles from biological neural computation can inform the design of more interpretable artificial learning systems.
+                </p>
+                <p>
+                    I also work on Theseus, my favourite line of research: how much of a mind survives the scan? It works to close the distance to downloading a human mind and uploading it again.
+                </p>
+            </div>
+        </section>
+
+        <!-- Research Interests -->
+        <section id="research">
+            <h2 class="section-title">Research Interests</h2>
+            <div class="interests-grid">
+                <div class="interest-item">
+                    <h4>Whole Brain Emulation</h4>
+                    <p>How much of a mind survives the scan, and what it would take to carry a mind over to a new substrate.</p>
+                </div>
+                <div class="interest-item">
+                    <h4>World Models &amp; Model-Based RL</h4>
+                    <p>JEPA-based world models and Active Inference for planning multi-step biological interventions in learned latent spaces.</p>
+                </div>
+                <div class="interest-item">
+                    <h4>Protein Structure &amp; Design</h4>
+                    <p>Generative models for protein structure prediction, fitness landscape navigation, and multi-step mutation planning.</p>
+                </div>
+                <div class="interest-item">
+                    <h4>Diffusion &amp; Score-Based Models</h4>
+                    <p>Theory and application of denoising diffusion, score matching, and stochastic differential equations to generative modeling in biology.</p>
+                </div>
+                <div class="interest-item">
+                    <h4>Energy-Based &amp; Physics-Aware Models</h4>
+                    <p>Energy-based models, Boltzmann distributions, and geometry-aware architectures that respect the physical constraints of biomolecular systems.</p>
+                </div>
+                <div class="interest-item">
+                    <h4>Molecular Dynamics</h4>
+                    <p>Learned latent-space simulators for molecular dynamics, replacing brute-force integration with amortized in-silico reasoning.</p>
+                </div>
+                <div class="interest-item">
+                    <h4>Neuroscience &amp; Computation</h4>
+                    <p>Connections between biological neural computation and artificial learning systems, particularly through the lens of the Free Energy Principle.</p>
+                </div>
             </div>
         </section>
 
@@ -572,9 +687,38 @@
             <div class="project-list">
                 <div class="project-card">
                     <div class="project-header">
-                        <h3>CppNet</h3>
+                        <h3>Theseus: Whole Brain Emulation</h3>
                     </div>
-                    <p>A deep learning library built from scratch in C++ with CPU and GPU (CUDA) backends.</p>
+                    <p>
+                        How much of a mind survives the scan? Theseus works to close the distance to downloading a human mind and uploading it again. The name comes from the Ship of Theseus: if every plank of a ship is replaced, one by one, is it still the same ship?
+                    </p>
+                    <div class="project-links">
+                        <a href="https://theseus.ciyalabs.com/" class="project-link" target="_blank">Website &rarr;</a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3>BioDreamer: World Models for Biological Design</h3>
+                        <span class="project-tech">Python · PyTorch · FastAPI · Docker</span>
+                    </div>
+                    <p>
+                        An open-source framework that applies JEPA-based world models and Active Inference to biological design across three scales: molecular dynamics (MolDreamer), protein fitness landscapes (ProteinDreamer), and gene regulatory network dynamics (CellDreamer). The core ProteinDreamer module learns a latent-space simulator and plans multi-step mutation trajectories in imagination before committing to expensive evaluations. Supports two world model backends, Latent Diffusion JEPA and Energy-Based JEPA, with a shared encoder, reward head, and policy interface.
+                    </p>
+                    <div class="project-links">
+                        <a href="https://biodreamer.ciyalabs.com/" class="project-link" target="_blank">Website &rarr;</a>
+                        <a href="https://github.com/ciyalabs/bio_dreamer" class="project-link" target="_blank">GitHub &rarr;</a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3>CppNet: High-Performance Deep Learning in C++</h3>
+                        <span class="project-tech">C++ · Eigen · OpenMP · CUDA</span>
+                    </div>
+                    <p>
+                        A C++17 deep learning library built from scratch with per-layer backend selection across Eigen (SIMD vectorization), OpenMP (CPU parallelism), and CUDA (GPU acceleration). Implements 41 CUDA kernels covering all layers, activations, losses, and optimizers, achieving up to 56x GPU speedup. Supports Linear, Conv2D, RNN, LSTM, GRU, Multi-Head Attention, BatchNorm, Dropout, Embedding, and Residual blocks with training utilities for scheduling, checkpointing, and early stopping.
+                    </p>
                     <div class="project-links">
                         <a href="https://loghmansamani.ciyalabs.com/CppNet/" class="project-link" target="_blank">Website &rarr;</a>
                         <a href="https://github.com/LoqmanSamani/CppNet" class="project-link" target="_blank">GitHub &rarr;</a>
@@ -583,12 +727,29 @@
 
                 <div class="project-card">
                     <div class="project-header">
-                        <h3>TorchDiff</h3>
+                        <h3>TorchDiff: Diffusion Models in PyTorch</h3>
+                        <span class="project-tech">Python · PyTorch</span>
                     </div>
-                    <p>An open-source PyTorch library for diffusion models.</p>
+                    <p>
+                        A modular PyTorch library implementing five diffusion model families: DDPM, DDIM, score-based SDE (VE, VP, sub-VP variants), Latent Diffusion, and unCLIP, with Kandinsky under active development. Supports conditional text-to-image synthesis and unconditional generation with configurable noise schedules and sampling strategies. Each model shares reusable components for noise prediction, text encoding, and evaluation metrics.
+                    </p>
                     <div class="project-links">
                         <a href="https://loghmansamani.ciyalabs.com/torchdiff/" class="project-link" target="_blank">Website &rarr;</a>
                         <a href="https://github.com/LoqmanSamani/TorchDiff" class="project-link" target="_blank">GitHub &rarr;</a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3>GRN-Designer: Automated Gene Regulatory Network Design</h3>
+                        <span class="project-tech">Python · Optimization · PDEs</span>
+                    </div>
+                    <p>
+                        A hybrid optimization framework developed as part of my Master's thesis. Combines evolutionary algorithms with gradient-based refinement to automatically construct gene regulatory networks that reproduce target spatial expression patterns. Models spatial gene expression dynamics through PDE-based reaction-diffusion equations with heterogeneous initial conditions. Successfully generated GRNs for patterns of increasing complexity, from simple gradients to intricate shapes such as chromosome symbols and DNA strands.
+                    </p>
+                    <div class="project-links">
+                        <a href="https://loghmansamani.ciyalabs.com/grn-designer/" class="project-link" target="_blank">Thesis &rarr;</a>
+                        <a href="https://github.com/LoqmanSamani/grn-designer" class="project-link" target="_blank">GitHub &rarr;</a>
                     </div>
                 </div>
             </div>
@@ -602,66 +763,88 @@
                     <div class="writing-title">
                         <a href="articles/model_based_rl/index.html">World Models</a>
                     </div>
+                    <div class="writing-desc">From tabular planning to real-time interactive world generation, three decades of model-based reinforcement learning.</div>
+                    <div class="writing-meta">March 2026</div>
                 </div>
 
                 <div class="writing-item">
                     <div class="writing-title">
                         <a href="https://medium.com/@samaniloqman91/when-diffusion-models-learn-the-wrong-physics-fa66a8fea0f2" target="_blank">When Diffusion Models Learn the Wrong Physics</a>
                     </div>
+                    <div class="writing-desc">Adaptive Fokker-Planck regularization and physics-informed distillation for molecular dynamics with energy-based diffusion models.</div>
+                    <div class="writing-meta">Medium &middot; 14 min read</div>
                 </div>
 
                 <div class="writing-item">
                     <div class="writing-title">
                         <a href="https://medium.com/@samaniloqman91/latent-diffusion-models-and-their-implementation-in-torchdiff-7dc04c33c4f7" target="_blank">Latent Diffusion Models and Their Implementation in TorchDiff</a>
                     </div>
+                    <div class="writing-desc">Theory, architecture, and practical PyTorch implementation for efficient high-resolution image generation.</div>
+                    <div class="writing-meta">Medium &middot; 11 min read</div>
                 </div>
 
                 <div class="writing-item">
                     <div class="writing-title">
                         <a href="https://medium.com/@samaniloqman91/score-based-generative-modeling-with-sdes-theory-and-implementation-in-torchdiff-db9a20a84978" target="_blank">Score-Based Generative Modeling with SDEs</a>
                     </div>
+                    <div class="writing-desc">Score-based generative models via stochastic differential equations with VE, VP, and sub-VP formulations in PyTorch.</div>
+                    <div class="writing-meta">Medium &middot; 17 min read</div>
                 </div>
 
                 <div class="writing-item">
                     <div class="writing-title">
                         <a href="https://medium.com/@samaniloqman91/torchdiff-a-pytorch-library-for-denoising-diffusion-probabilistic-models-and-beyond-d15156e9e3b5" target="_blank">TorchDiff: A PyTorch Library for Diffusion Models</a>
                     </div>
+                    <div class="writing-desc">Theoretical foundations and practical implementations covering DDPM, DDIM, score-based SDE models, and latent diffusion.</div>
+                    <div class="writing-meta">Medium &middot; 17 min read</div>
                 </div>
 
                 <div class="writing-item">
                     <div class="writing-title">
                         <a href="https://medium.com/@samaniloqman91/from-biology-to-computation-exploring-genetic-algorithms-5b090213351f" target="_blank">From Biology to Computation: Exploring Genetic Algorithms</a>
                     </div>
+                    <div class="writing-desc">Connecting principles of biological evolution to Python-based implementations for optimization problems.</div>
+                    <div class="writing-meta">Medium &middot; 18 min read</div>
                 </div>
 
                 <div class="writing-item">
                     <div class="writing-title">
                         <a href="https://medium.com/@samaniloqman91/adam-optimization-demystified-enhancing-multiclass-mlp-performance-000827cfd5e1" target="_blank">Adam Optimization: Enhancing MLP Performance</a>
                     </div>
+                    <div class="writing-desc">The Adam optimizer and its application in training multiclass MLPs for faster convergence and robust performance.</div>
+                    <div class="writing-meta">Medium &middot; 21 min read</div>
                 </div>
 
                 <div class="writing-item">
                     <div class="writing-title">
                         <a href="https://medium.com/@samaniloqman91/from-theory-to-practice-building-a-deep-feedforward-neural-network-with-back-propagation-in-python-9edc39164a68" target="_blank">Building a Deep Feedforward Neural Network with Backpropagation</a>
                     </div>
+                    <div class="writing-desc">Constructing and training deep feedforward networks using backpropagation, with Python implementations for binary classification.</div>
+                    <div class="writing-meta">Medium &middot; 13 min read</div>
                 </div>
 
                 <div class="writing-item">
                     <div class="writing-title">
                         <a href="https://medium.com/@samaniloqman91/introducing-biostoch-a-python-library-for-simulating-biological-systems-5d38df9b6991" target="_blank">Introducing BioStoch: Simulating Biological Systems</a>
                     </div>
+                    <div class="writing-desc">A Python library for deterministic and stochastic simulation including Euler, Runge-Kutta, SSA, Tau-Leaping, and Chemical Langevin methods.</div>
+                    <div class="writing-meta">Medium &middot; 13 min read</div>
                 </div>
 
                 <div class="writing-item">
                     <div class="writing-title">
                         <a href="https://medium.com/@samaniloqman91/highly-accurate-protein-structure-prediction-with-alphafold-9e4cc8b6c692" target="_blank">Highly Accurate Protein Structure Prediction with AlphaFold</a>
                     </div>
+                    <div class="writing-desc">AlphaFold as a machine learning system for predicting protein structures from amino acid sequences with atomic accuracy.</div>
+                    <div class="writing-meta">Medium &middot; 13 min read</div>
                 </div>
 
                 <div class="writing-item">
                     <div class="writing-title">
                         <a href="https://medium.com/@samaniloqman91/introduction-to-nuclear-magnetic-resonance-nmr-997960e21048" target="_blank">Introduction to Nuclear Magnetic Resonance (NMR)</a>
                     </div>
+                    <div class="writing-desc">NMR spectroscopy and its applications in structural biology, covering protein structure, dynamics, interactions, and intrinsically disordered proteins.</div>
+                    <div class="writing-meta">Medium &middot; 20 min read</div>
                 </div>
             </div>
         </section>
@@ -675,12 +858,17 @@
                     <h3>Contact</h3>
                     <div class="footer-links">
                         <a href="mailto:loghmansamani@ciyalabs.com">loghmansamani@ciyalabs.com</a>
-                        <a href="https://ciyalabs.com" target="_blank">Ciya Labs</a>
                         <a href="https://github.com/LoqmanSamani" target="_blank">GitHub</a>
                         <a href="https://medium.com/@samaniloqman91" target="_blank">Medium</a>
                         <a href="https://www.linkedin.com/in/loghman-samani-8a5208199/" target="_blank">LinkedIn</a>
                         <a href="https://x.com/Loqman_Samani" target="_blank">Twitter/X</a>
                     </div>
+                </div>
+                <div class="footer-positions">
+                    <h3>Ciya Labs</h3>
+                    <p>
+                        Founder of Ciya Labs, my own research company. <a href="https://ciyalabs.com" target="_blank">ciyalabs.com</a>
+                    </p>
                 </div>
             </div>
             <div class="footer-bottom">
